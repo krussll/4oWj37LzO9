@@ -1,0 +1,49 @@
+{
+    "name": "pragmarx/tracker",
+
+    "description": "A Laravel Visitor Tracker",
+
+    "keywords": ["tracker", "tracking", "visitor", "logging", "user agent", "mobile detection", "laravel", "pragmarx"],
+
+    "license": "MIT",
+
+    "authors": [
+        {
+            "name": "Antonio Carlos Ribeiro",
+            "email": "acr@antoniocarlosribeiro.com",
+            "role": "Creator & Designer"
+        }
+    ],
+
+    "require": {
+        "php": ">=5.3.7",
+        "laravel/framework": "~4|~5",
+        "pragmarx/support": "~0.6",
+        "rhumsaa/uuid": "~2.7",
+        "jenssegers/agent": "~2.1",
+        "pragmarx/ua-parser" : "0.3.4",
+        "pragmarx/datatables": "1.4.10"
+    },
+
+    "suggest": {
+        "geoip/geoip": "~1.14"
+    },
+
+    "require-dev": {
+        "mockery/mockery": "~0.8"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "PragmaRX\\Tracker\\": "src/"
+        }
+    },
+
+    "extra": {
+        "branch-alias": {
+            "dev-laravel5": "2.0.x-dev"
+        }
+    },
+
+    "minimum-stability": "dev"
+}
