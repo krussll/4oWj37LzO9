@@ -35,7 +35,7 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 <!-- Google fonts -->
-      <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Playfair+Display:400italic' rel='stylesheet' type='text/css' />
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Playfair+Display:400italic' rel='stylesheet' type='text/css' />
 
 </head>
 
@@ -174,8 +174,8 @@
 
     {!! Minify::javascript('/js/bootstrap.min.js') !!}
 
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-cookies.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-cookies.js"></script>
    <!-- PNotify -->
     {!! Minify::javascript('/js/notify/pnotify.core.js') !!}
     {!! Minify::javascript('/js/notify/pnotify.buttons.js') !!}
