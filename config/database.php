@@ -83,7 +83,7 @@ return [
             'password' => 'vZquJOViXYVS0_-Kg2HoXzY7qm',
             'charset'  => 'utf8',
             'prefix'   => '',
-            'schema'   => 'public',
+            'schema'   => 'tagQueue',
         ],
 
         'sqlsrv' => [

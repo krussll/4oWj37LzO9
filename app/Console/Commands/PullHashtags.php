@@ -49,7 +49,7 @@ class PullHashtags extends Command
         $now = Carbon::now();
         $min = 1;
         
-        $results = DB::select(DB::raw("SELECT LOWER(hashtag) as hashtag, COUNT(*) as count FROM tagqueue WHERE hashtag NOT LIKE '%?%' AND is_processed = 0 AND created < ':now' GROUP BY hashtag HAVING COUNT(*) > 1", 
+        $results = DB::connection('pgsql')->select(DB::raw("SELECT LOWER(hashtag) as hashtag, COUNT(*) as count FROM tagqueue WHERE hashtag NOT LIKE '%?%' AND is_processed = 0 AND created < ':now' GROUP BY hashtag HAVING COUNT(*) > 1", 
                         array('now' => $now, 'min' => $min)));
         
         $hashtags = [];
@@ -93,7 +93,7 @@ class PullHashtags extends Command
         }
 
         HashtagCount::insert($counts);
-        $results = DB::table('tagqueue')->where('is_processed' , false)->where('created', '<', $now)->update(array('is_processed' => true));
+        $results = DB::connection('pgsql')->table('tagqueue')->where('is_processed' , false)->where('created', '<', $now)->update(array('is_processed' => true));
         
         
     }
