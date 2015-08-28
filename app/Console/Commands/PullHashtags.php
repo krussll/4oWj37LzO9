@@ -94,7 +94,7 @@ class PullHashtags extends Command
 
         HashtagCount::insert($counts);
 
-        $results = DB::connection('pgsql')->update( DB::raw("UPDATE \"tagQueue\".\"tagQueue\" SET is_processed = B'1' WHERE is_processed = B'0' AND created < :now;",
+        $results = DB::connection('pgsql')->update( DB::raw("UPDATE \"tagQueue\".\"tagQueue\" SET is_processed = B'1' WHERE is_processed = B'0' AND created < ':now';",
             array('now' => $now)));
     }
 }
