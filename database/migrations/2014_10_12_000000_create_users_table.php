@@ -24,9 +24,7 @@ class CreateUsersTable extends Migration {
 		});
 
 		DB::table('users')->insert(['profile_image' => 'profile.jpg', 'firstname' => 'Dean', 'password' => bcrypt('passpass1'), 'surname' => 'Proffitt', 'email' => 'd.proffitt@test.com', 'created_at' => new DateTime, 'updated_at' => new DateTime]);
-		DB::table('users')->insert(['profile_image' => 'profile.jpg', 'firstname' => 'Eldon', 'password' => bcrypt('passpass1'), 'surname' => 'Perry', 'email' => 'e.perry@test.com', 'created_at' => new DateTime, 'updated_at' => new DateTime]);
-		DB::table('users')->insert(['profile_image' => 'profile.jpg', 'firstname' => 'Herb', 'password' => bcrypt('passpass1'), 'surname' => 'Brooks', 'email' => 'brooky@test.com', 'created_at' => new DateTime, 'updated_at' => new DateTime]);
-
+		
 	}
 
 	/**

@@ -25,9 +25,7 @@ class CreatePortfolioTable extends Migration
       });
 
         DB::table('portfolios')->insert(['user_id' => 1, 'league_id' => 1, 'balance' => 10700, 'is_active' => true, 'created_at' => new DateTime, 'updated_at' => new DateTime]);
-        DB::table('portfolios')->insert(['user_id' => 2, 'league_id' => 1, 'balance' => 9800, 'is_active' => true, 'created_at' => new DateTime, 'updated_at' => new DateTime]);
-        DB::table('portfolios')->insert(['user_id' => 3, 'league_id' => 1, 'balance' => 6100, 'is_active' => true, 'created_at' => new DateTime, 'updated_at' => new DateTime]);
-
+        
     }
 
     /**
