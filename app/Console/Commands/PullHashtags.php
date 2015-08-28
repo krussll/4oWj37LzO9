@@ -55,7 +55,10 @@ class PullHashtags extends Command
         $hashtags = [];
         foreach(Hashtag::get() as $hashtag)
         {
-            $hashtags[$hashtag->tag] = $hashtag->id;
+            if($hashtag)
+            {
+                $hashtags[$hashtag->tag] = $hashtag->id;
+            }
         }
 
         $newhashtags = [];
@@ -78,7 +81,10 @@ class PullHashtags extends Command
         {
             if (!array_key_exists($tag->hashtag,$hashtags))
             {
-               $hashtags[$hashtag->tag] = $hashtag->id; 
+                if($hashtag)
+                {
+                    $hashtags[$hashtag->tag] = $hashtag->id; 
+                }
            }
         }
 
@@ -97,14 +103,7 @@ class PullHashtags extends Command
         $results = DB::connection('pgsql')->update( DB::raw("UPDATE \"tagQueue\".\"tagQueue\" SET is_processed = B'1' WHERE is_processed = B'0' AND created < ':now';",
             array('now' => $now)));
 
-        PriceHashtags();
-        
-        $results = DB::connection('pgsql')->update( DB::raw("DELETE FROM \"tagQueue\".\"tagQueue\" WHERE is_processed = B'1'"));
-        $results = DB::update( DB::raw("DELETE FROM hashtag_count WHERE created_at < DATE_SUB(CURDATE(), INTERVAL 7 DAY)"));
-    }
-
-    public function PriceHashtags()
-    {        
+        print('pricing tags');
         $results = DB::select(
                 DB::raw("SELECT SUM(case when c.count > 0 then c.count else 0 end) as d, COUNT(c.id) as r, 
                 SUM(case when t.is_active = true then 1 else 0 end) as b, SUM(case when t.is_active = false then 1 else 0 end) as s, h.id as id 
@@ -114,6 +113,7 @@ class PullHashtags extends Command
                  GROUP BY h.id")
             );
 
+        print('collected tags');
         DB::transaction(function() use ($results)
         {
             $divider = 1;
@@ -131,5 +131,8 @@ class PullHashtags extends Command
                 DB::table('hashtag_price')->insert(['amount' => $price, 'hashtag_id' => $hashtag_data->id, 'created_at' => new \DateTime, 'updated_at' => new \DateTime]);
             }
         });
+
+        $results = DB::connection('pgsql')->update( DB::raw("DELETE FROM \"tagQueue\".\"tagQueue\" WHERE is_processed = B'1'"));
+        $results = DB::update( DB::raw("DELETE FROM hashtag_count WHERE created_at < DATE_SUB(CURDATE(), INTERVAL 7 DAY)"));
     }
 }
