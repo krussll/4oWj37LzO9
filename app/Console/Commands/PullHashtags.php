@@ -55,10 +55,8 @@ class PullHashtags extends Command
         $hashtags = [];
         foreach(Hashtag::get() as $hashtag)
         {
-            if($hashtag)
-            {
-                $hashtags[$hashtag->tag] = $hashtag->id;
-            }
+            $hashtags[$hashtag->tag] = $hashtag->id;
+            
         }
 
         $newhashtags = [];
@@ -81,10 +79,7 @@ class PullHashtags extends Command
         {
             if (!array_key_exists($tag->hashtag,$hashtags))
             {
-                if($hashtag)
-                {
-                    $hashtags[$hashtag->tag] = $hashtag->id; 
-                }
+                $hashtags[$hashtag->tag] = $hashtag->id; 
            }
         }
 
