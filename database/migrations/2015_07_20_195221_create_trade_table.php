@@ -36,6 +36,8 @@ class CreateTradeTable extends Migration
      */
     public function down()
     {
+        
+        Schema::drop('portfolios');
         Schema::drop('leagues');
     }
 }
