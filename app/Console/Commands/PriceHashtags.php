@@ -42,6 +42,8 @@ class PriceHashtags extends Command
      */
     public function handle()
     {        
+
+        print('getting results');
         $results = DB::select(
                 DB::raw("SELECT SUM(case when c.count > 0 then c.count else 0 end) as d, COUNT(c.id) as r, 
                 SUM(case when t.is_active = true then 1 else 0 end) as b, SUM(case when t.is_active = false then 1 else 0 end) as s, h.id as id 
@@ -51,25 +53,34 @@ class PriceHashtags extends Command
                  GROUP BY h.id")
             );
 
+        print('got results');
         //DB::transaction(function() use ($results)
         //{
             $divider = 1;
-            $rowsPerChunk = 300;
-            $resultChunks = array_chunk($results, $rowsPerChunk);
+            
+            $resultChunks = array_chunk($results, 150);
 
-            foreach ($resultChunks as $hashtag_data) 
+            foreach($resultChunks as $chunk)
             {
-                $m = rand(10, 14) / 10;
-                $price = 0;
-
-                if ($hashtag_data->r > 0)
+                print('chunk start');
+                foreach ($chunk as $hashtag_data) 
                 {
-                    $price = round(($hashtag_data->d / $hashtag_data->r) + ( (($hashtag_data->b - $hashtag_data->s) / $hashtag_data->r) * $m ));
+
+                    $m = rand(10, 14) / 10;
+                    $price = 0;
+
+                    if ($hashtag_data->r > 0)
+                    {
+                        $price = round(($hashtag_data->d / $hashtag_data->r) + ( (($hashtag_data->b - $hashtag_data->s) / $hashtag_data->r) * $m ));
+                    }
+                    
+            
+                    DB::table('hashtags')->where('id', $hashtag_data->id)->update(array('current_price' => $price));
+                    DB::table('hashtag_price')->insert(['amount' => $price, 'hashtag_id' => $hashtag_data->id, 'created_at' => new \DateTime, 'updated_at' => new \DateTime]);
                 }
-                
-                DB::table('hashtags')->where('id', $hashtag_data->id)->update(array('current_price' => $price));
-                DB::table('hashtag_price')->insert(['amount' => $price, 'hashtag_id' => $hashtag_data->id, 'created_at' => new \DateTime, 'updated_at' => new \DateTime]);
+                print('chunk end');
             }
+            
         //});
     }
 }
