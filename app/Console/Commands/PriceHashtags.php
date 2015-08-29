@@ -54,7 +54,10 @@ class PriceHashtags extends Command
         DB::transaction(function() use ($results)
         {
             $divider = 1;
-            foreach ($results as $hashtag_data) 
+            $rowsPerChunk = 100;
+            $resultChunks = array_chunk($results, $rowsPerChunk);
+            
+            foreach ($resultChunks as $hashtag_data) 
             {
                 $m = rand(10, 14) / 10;
                 $price = 0;
