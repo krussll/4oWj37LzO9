@@ -75,13 +75,22 @@ class PriceHashtags extends Command
 
 
 
-        print('chunk start');
+        print('insert chunk start');
+        DB::transaction(function() use ($hashtags)
+        {
+            foreach ($hashtags as $id => $price) 
+            {
+                DB::table('hashtag_price')->insert(['amount' => $price, 'hashtag_id' => $id, 'created_at' => new \DateTime, 'updated_at' => new \DateTime]);
+            }
+        });
+        print('chunk end');
+
+        print('update chunk start');
         DB::transaction(function() use ($hashtags)
         {
             foreach ($hashtags as $id => $price) 
             {
                 DB::table('hashtags')->where('id', $id)->update(array('current_price' => $price));
-                DB::table('hashtag_price')->insert(['amount' => $price, 'hashtag_id' => $id, 'created_at' => new \DateTime, 'updated_at' => new \DateTime]);
             }
         });
         print('chunk end');
