@@ -55,33 +55,37 @@ class PriceHashtags extends Command
 
         print('got results');
         
-            $divider = 1;
-            
-            $resultChunks = array_chunk($results, 150);
+        $divider = 1;
+        
+        print('start pricing');
+        $hashtags = [];
+        foreach($results as $hashtag_data)
+        {
+                $m = rand(10, 14) / 10;
+                $price = 0;
 
-            foreach($resultChunks as $chunk)
-            {
-                print('chunk start');
-                DB::transaction(function() use ($chunk)
+                if ($hashtag_data->r > 0)
                 {
-                    foreach ($chunk as $hashtag_data) 
-                    {
+                    $price = round(($hashtag_data->d / $hashtag_data->r) + ( (($hashtag_data->b - $hashtag_data->s) / $hashtag_data->r) * $m ));
+                }
 
-                        $m = rand(10, 14) / 10;
-                        $price = 0;
+                $hashtags[$hashtag_data->id] = $price;
+        }
 
-                        if ($hashtag_data->r > 0)
-                        {
-                            $price = round(($hashtag_data->d / $hashtag_data->r) + ( (($hashtag_data->b - $hashtag_data->s) / $hashtag_data->r) * $m ));
-                        }
-                        
-                
-                        DB::table('hashtags')->where('id', $hashtag_data->id)->update(array('current_price' => $price));
-                        DB::table('hashtag_price')->insert(['amount' => $price, 'hashtag_id' => $hashtag_data->id, 'created_at' => new \DateTime, 'updated_at' => new \DateTime]);
-                    }
-                });
-                print('chunk end');
+
+
+
+        print('chunk start');
+        DB::transaction(function() use ($hashtags)
+        {
+            foreach ($hashtags as $id => $price) 
+            {
+                DB::table('hashtags')->where('id', $id)->update(array('current_price' => $price));
+                DB::table('hashtag_price')->insert(['amount' => $price, 'hashtag_id' => $id, 'created_at' => new \DateTime, 'updated_at' => new \DateTime]);
             }
+        });
+        print('chunk end');
+            
             
         
     }
