@@ -51,12 +51,12 @@ class PriceHashtags extends Command
                  GROUP BY h.id")
             );
 
-        DB::transaction(function() use ($results)
-        {
+        //DB::transaction(function() use ($results)
+        //{
             $divider = 1;
-            $rowsPerChunk = 100;
+            $rowsPerChunk = 300;
             $resultChunks = array_chunk($results, $rowsPerChunk);
-            
+
             foreach ($resultChunks as $hashtag_data) 
             {
                 $m = rand(10, 14) / 10;
@@ -70,6 +70,6 @@ class PriceHashtags extends Command
                 DB::table('hashtags')->where('id', $hashtag_data->id)->update(array('current_price' => $price));
                 DB::table('hashtag_price')->insert(['amount' => $price, 'hashtag_id' => $hashtag_data->id, 'created_at' => new \DateTime, 'updated_at' => new \DateTime]);
             }
-        });
+        //});
     }
 }
