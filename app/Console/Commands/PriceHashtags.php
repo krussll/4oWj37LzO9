@@ -54,8 +54,7 @@ class PriceHashtags extends Command
             );
 
         print('got results');
-        //DB::transaction(function() use ($results)
-        //{
+        
             $divider = 1;
             
             $resultChunks = array_chunk($results, 150);
@@ -63,24 +62,27 @@ class PriceHashtags extends Command
             foreach($resultChunks as $chunk)
             {
                 print('chunk start');
-                foreach ($chunk as $hashtag_data) 
+                DB::transaction(function() use ($results)
                 {
-
-                    $m = rand(10, 14) / 10;
-                    $price = 0;
-
-                    if ($hashtag_data->r > 0)
+                    foreach ($chunk as $hashtag_data) 
                     {
-                        $price = round(($hashtag_data->d / $hashtag_data->r) + ( (($hashtag_data->b - $hashtag_data->s) / $hashtag_data->r) * $m ));
+
+                        $m = rand(10, 14) / 10;
+                        $price = 0;
+
+                        if ($hashtag_data->r > 0)
+                        {
+                            $price = round(($hashtag_data->d / $hashtag_data->r) + ( (($hashtag_data->b - $hashtag_data->s) / $hashtag_data->r) * $m ));
+                        }
+                        
+                
+                        DB::table('hashtags')->where('id', $hashtag_data->id)->update(array('current_price' => $price));
+                        DB::table('hashtag_price')->insert(['amount' => $price, 'hashtag_id' => $hashtag_data->id, 'created_at' => new \DateTime, 'updated_at' => new \DateTime]);
                     }
-                    
-            
-                    DB::table('hashtags')->where('id', $hashtag_data->id)->update(array('current_price' => $price));
-                    DB::table('hashtag_price')->insert(['amount' => $price, 'hashtag_id' => $hashtag_data->id, 'created_at' => new \DateTime, 'updated_at' => new \DateTime]);
-                }
+                });
                 print('chunk end');
             }
             
-        //});
+        
     }
 }
