@@ -62,7 +62,7 @@ class PriceHashtags extends Command
             foreach($resultChunks as $chunk)
             {
                 print('chunk start');
-                DB::transaction(function() use ($results)
+                DB::transaction(function() use ($chunk)
                 {
                     foreach ($chunk as $hashtag_data) 
                     {
