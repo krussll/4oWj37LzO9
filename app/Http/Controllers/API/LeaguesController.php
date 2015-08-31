@@ -13,6 +13,7 @@ use Illuminate\Routing\Controller as BaseController;
 //Define the required repositories
 use App\Repositories\HashtagsRepository as HashtagsRepository;
 use App\Repositories\UsersRepository as UsersRepository;
+use App\Repositories\LeaguesRepository as LeaguesRepository;
 
 class LeaguesController extends BaseController
 {
@@ -33,23 +34,10 @@ class LeaguesController extends BaseController
 
     public function createLeague()
     {
-        $league = League::create([
-            'name' => Input::get('name'),
-            'code' => '111111',
-            'initial_balance' => 10000,
-            'start_at' => Carbon::now(),
-            'end_at' => null
-        ]);
+        $rep = new LeaguesRepository();        
 
-        Portfolio::create([
-            'user_id' => Auth::user()->id,
-            'league_id' => $league->id,
-            'balance' => $league->initial_balance,
-            'is_active' => true
-        ]);
-
-
-
+        $rep->CreateLeague(Input::get('name'), 10000);
+        
         return response()->json(array('name' => Input::get('name'), 'success' => true));
     } 
 }

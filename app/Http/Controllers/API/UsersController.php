@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 //Define the required repositories
 use App\Repositories\UsersRepository as UsersRepository;
+use App\Repositories\LeaguesRepository as LeaguesRepository;
 
 class UsersController extends BaseController
 {
@@ -30,6 +31,10 @@ class UsersController extends BaseController
             'email' => Input::get('email'),
             'password' => bcrypt(Input::get('password'))
         ]);
+
+        $rep = new LeaguesRepository(); 
+
+        $rep->AddUserToGlobalLeagues($user->id);
 
         Auth::attempt(Input::only('email','password'));
     	return response()->json(array('user' => $user, 'success' => true));
