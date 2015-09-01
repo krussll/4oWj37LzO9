@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title ng-bind="layout.consts.siteName | uppercase"></title>
-
+<link rel="shortcut icon"  href="/favicon.ico"/>
     <!-- Bootstrap core CSS -->
 
     {!! Minify::stylesheet('/css/bootstrap.min.css') !!}
