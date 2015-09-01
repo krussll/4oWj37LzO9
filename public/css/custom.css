@@ -91,11 +91,10 @@ body.nav-sm .profile {
 .wide {
     text-align: center;
     top:58px;
-  width:100%;
-  height:400px;
-  background-image:url('/cdn/home_banner.jpg');
-  background-size:cover;
-  color: #FFF;
+    width:100%;
+    height:400px;
+    background-color: #2A3F54;
+    color: #FFF;
 }
 
 

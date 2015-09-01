@@ -36,7 +36,7 @@ angular.module('appMain')
                 {
                     if (data.success === true)
                     {
-                        window.location = '/leagues?r=true';
+                        window.location = '/league/' + data.id + '?r=true';
                     }
                 }); 
             }            

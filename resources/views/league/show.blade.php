@@ -1,7 +1,7 @@
 @extends('shared.sidebar')
 
 @section('content')
-<div ng-controller="leagueShowController" ng-init="leagueShow.init('[[$type]]', '[[$id]]')" ng-cloak>
+<div ng-controller="leagueShowController" ng-init="leagueShow.init('[[$id]]')" ng-cloak>
   <div class="page-title">
     <div class="title_left">
         <h3>League Detail</h3>

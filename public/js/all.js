@@ -588,14 +588,14 @@ angular.module('appMain')
         type: null,
         name: null,
         positions: [],
-    	init: function (type, id)
+    	init: function (id)
     	{
     		var leagueShow = this;
             leagueShow.control.isLoading = true;
             leagueShow.id = id;
-            leagueShow.type = type;
+            leagueShow.type = '';
 
-            $http.get('/api/leagues/' + leagueShow.type + '/' + leagueShow.id)
+            $http.get('/api/leagues/' + leagueShow.id + '/positions')
                 .success(function(data){
                     leagueShow.positions = data.positions;
                     leagueShow.name = data.name;
@@ -767,18 +767,80 @@ angular.module('appMain')
     $scope.sideNav =
     {
         userPortfolios: null,
-        portfolio: null
+        portfolio: null,
+        change: function () {
+            var sideNav = this;
+            selectedPortfolioService.setPortfolioId(sideNav.portfolio.id);
+        }
 	};
 
     portfoliosService.then(function(service)
     {
         $scope.sideNav.userPortfolios = service.data;
-        $scope.sideNav.portfolio = selectedPortfolioService.getPortfolioId();
+        $scope.sideNav.portfolio = selectedPortfolioService.getPortfolio();
     });
+
 });
 
 })();
 
+(function () {
+
+'use strict';
+
+angular.module('appMain')
+
+.controller('leaguesController', function($scope, $http, selectedPortfolioService) {
+    $scope.leagues = 
+    {
+        join: {
+            code: '',
+            message: '',
+            showMessage: false
+        },
+        globalLeagues: [],
+        privateLeagues: [],
+        init: function ()
+        {
+            var leagues = this;
+
+            $http.get('/api/leagues/user/positions')
+                .success(function(data){
+                    leagues.globalLeagues = data.global;
+                    leagues.privateLeagues = data.private;
+                    
+                });
+            
+        },
+        joinSubmit: function()
+        {
+           var leagues = this;
+           
+           leagues.join.showMessage = false;
+           if(leagues.join.code === '')
+           {
+                leagues.join.message = 'Please enter a code';
+                leagues.join.showMessage = true;
+           }else
+           {
+            $http.post('/api/leagues/join/' + leagues.join.code)
+                .success(function(data){
+                    if(data.success)
+                    {
+                        window.location = '/league/' + data.id;
+                    }else {
+                        leagues.join.message = data.message;
+                        leagues.join.showMessage = true;
+                    }
+                    
+                });
+           }
+        }
+	};
+
+});
+
+})();
 
 (function () {
 
@@ -817,7 +879,7 @@ angular.module('appMain')
                 {
                     if (data.success === true)
                     {
-                        window.location = '/leagues?r=true';
+                        window.location = '/league/' + data.id + '?r=true';
                     }
                 }); 
             }            
@@ -1212,31 +1274,52 @@ angular.module('appMain')
         var selectedPortfolio = {};
 
         selectedPortfolio.portfolioId = -1;
+        selectedPortfolio.portfolio = null;
 
         portfoliosService.then(function(service)
         {
             selectedPortfolio.portfolios = service.data;
-            
 
             if($cookies.tagdaqportfolio > 0)
             {
+                var useId = false;
                 var id = $cookies.tagdaqportfolio;
+
+                for (var i = 0; i < selectedPortfolio.portfolios.length; i++) {
+                    if (selectedPortfolio.portfolios[i].id == id)
+                    {
+                        selectedPortfolio.portfolio = selectedPortfolio.portfolios[i];
+                        useId = true;
+                        break;
+                    }
+                }
+
+                if (useId === false)
+                {
+                    selectedPortfolio.portfolio = selectedPortfolio.portfolios[i];
+                    id = selectedPortfolio.portfolios[0].id;
+                }
             }else
             {
+                selectedPortfolio.portfolio = selectedPortfolio.portfolios[i];
                 var id = selectedPortfolio.portfolios[0].id;
             }
-
-
+        
             selectedPortfolio.setPortfolioId(id);
         });
 
         selectedPortfolio.setPortfolioId = function(id)
         {
             selectedPortfolio.portfolioId = id;
-
+            
             $cookies.tagdaqportfolio = id;
         }
 
+        selectedPortfolio.getPortfolio = function()
+        {
+            return selectedPortfolio.portfolio;
+        }
+        
         selectedPortfolio.getPortfolioId = function()
         {
             return selectedPortfolio.portfolioId;

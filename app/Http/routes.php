@@ -35,8 +35,9 @@ Route::group(array('prefix'=>'/api'),function(){
 	Route::get('hashtags/counts', 'API\HashtagsController@getHashtagCountsById');
 
 	Route::get('leagues/user/positions', 'API\LeaguesController@getUserPositions');
-	Route::get('leagues/global/overall', 'API\LeaguesController@getGlobalLeaguePositions');
+	Route::get('leagues/{id}/positions', 'API\LeaguesController@getLeaguePositions');
 	Route::post('leagues/create', 'API\LeaguesController@createLeague');
+	Route::post('leagues/join/{code}', 'API\LeaguesController@joinLeague');
 });
 
 Route::get('/', function () {
@@ -60,7 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/hashtag/search/{term}', ['uses' =>'HashtagController@search']);
 	Route::get('/hashtag/{id}', ['uses' =>'HashtagController@show']);
 	Route::get('/leagues', ['uses' =>'LeagueController@index']);
-	Route::get('/leagues/standings/{id}', ['uses' =>'LeagueController@showPrivate']);
+	Route::get('/league/{id}', ['uses' =>'LeagueController@show']);
 	Route::get('/leagues/create', ['uses' =>'LeagueController@create']);
 });
 

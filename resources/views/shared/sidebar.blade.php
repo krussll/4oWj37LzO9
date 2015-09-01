@@ -64,12 +64,7 @@
                           <div class="profile_info">
                               <h2>[[Auth::user()->firstname]] [[Auth::user()->surname]]</h2>
                               <span>
-                                <select ng-model="sideNav.portfolio" class="form-control">
-                                    <option 
-                                            ng-repeat="portfolio in sideNav.userPortfolios"
-                                            value="{{portfolio.id}}">
-                                        {{portfolio.name}}
-                                    </option>
+                                <select ng-options="obj.name for obj in sideNav.userPortfolios" ng-model="sideNav.portfolio" class="form-control" ng-change="sideNav.change()">
                                 </select>
                               </span>
                           </div>
@@ -82,7 +77,7 @@
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
                         <div class="menu_section">
-                            <h3>General</h3>
+                            <h3>$10,630</h3>
                             <ul class="nav side-menu">
                                 <li>
                                     <a href="/dashboard"><i class="fa fa-bar-chart-o"></i>  Dashboard</a>

@@ -29,6 +29,7 @@ elixir(function(mix) {
         'app/controllers/leagueShowController.js',
         'app/controllers/buyController.js',
         'app/controllers/sideNavController.js',
+        'app/controllers/leaguesController.js',
         'app/controllers/leagueCreateController.js',
 
     	<!-- directives -->

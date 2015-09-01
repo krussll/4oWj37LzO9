@@ -97,7 +97,7 @@
                   </thead>
                   <tbody>
                     <tr ng-repeat="league in dashboard.globalLeagues">
-                      <td scope="row">{{league.position}}</td><td><a href="/league/global/{{league.name}}">{{league.name | titlecase}}</a></td>
+                      <td scope="row">{{league.position}}</td><td><a href="/league/{{league.id}}">{{league.name | titlecase}}</a></td>
                     </tr>
                   </tbody>
                   </table>
@@ -111,8 +111,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td scope="row">-</td><td></td>
+                    <tr ng-repeat="league in dashboard.privateLeagues">
+                      <td scope="row">{{league.position}}</td><td><a href="/league/{{league.id}}">{{league.name | titlecase}}</a></td>
                     </tr>
                   </tbody>
                   </table>

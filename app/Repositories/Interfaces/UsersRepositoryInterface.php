@@ -14,5 +14,4 @@ interface UsersRepositoryInterface
 
     public function GetUsersPositions();
 
-    public function GetUserGlobalPosition($id, $leagueId);
 }

@@ -9,4 +9,6 @@ interface PortfoliosRepositoryInterface
     public function IncreaseBalance($portfolio, $amount);
 
     public function GetByUserId($userId);
+
+    public function DoesLeaguePortfolioExist($userId, $leagueId);
 }

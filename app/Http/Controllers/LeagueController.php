@@ -13,10 +13,10 @@ class LeagueController extends BaseController
     	return View::make('league.index', array());
     }
 
-    public function showPrivate($id)
+    public function show($id)
     {
     	//do some checks here
-    	return View::make('league.show', array('type' => 'private', 'id' => $id));
+    	return View::make('league.show', array('id' => $id));
     }
 
     public function create()

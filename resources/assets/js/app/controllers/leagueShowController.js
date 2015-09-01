@@ -16,14 +16,14 @@ angular.module('appMain')
         type: null,
         name: null,
         positions: [],
-    	init: function (type, id)
+    	init: function (id)
     	{
     		var leagueShow = this;
             leagueShow.control.isLoading = true;
             leagueShow.id = id;
-            leagueShow.type = type;
+            leagueShow.type = '';
 
-            $http.get('/api/leagues/' + leagueShow.type + '/' + leagueShow.id)
+            $http.get('/api/leagues/' + leagueShow.id + '/positions')
                 .success(function(data){
                     leagueShow.positions = data.positions;
                     leagueShow.name = data.name;

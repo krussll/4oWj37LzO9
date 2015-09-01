@@ -27,4 +27,9 @@ class PortfoliosRepository implements PortfoliosRepositoryInterface
                     ->leftJoin('leagues', 'leagues.id', '=', 'portfolios.league_id')
                     ->where('user_id', $userId)->get();
 	}
+
+	public function DoesLeaguePortfolioExist($userId, $leagueId)
+	{
+		return (Portfolio::where('user_id', $userId)->where('league_id', $leagueId)->first() !== null);
+	}
 }
