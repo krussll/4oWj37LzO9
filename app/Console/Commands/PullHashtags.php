@@ -48,8 +48,8 @@ class PullHashtags extends Command
     {
         $now = Carbon::now();
         $min = 1;
-        
-        $results = DB::connection('pgsql')->select(DB::raw("SELECT LOWER(hashtag) as hashtag, COUNT(*) as count FROM  \"tagQueue\".\"tagQueue\" WHERE hashtag ~ E'[a-z0-9]' AND is_processed = B'0' AND created < ':now' GROUP BY hashtag HAVING COUNT(*) > 1", 
+        $ignoredWords = array('fuck');
+        $results = DB::connection('pgsql')->select(DB::raw("SELECT LOWER(hashtag) as hashtag, COUNT(*) as count FROM  \"tagQueue\".\"tagQueue\" WHERE hashtag ~ E'[a-z0-9]' AND is_processed = B'0' AND created < ':now' GROUP BY hashtag HAVING COUNT(*) > 5", 
                         array('now' => $now, 'min' => $min)));
         
         $hashtags = [];
@@ -64,12 +64,11 @@ class PullHashtags extends Command
         {
             if (!array_key_exists($tag->hashtag,$hashtags))
             {
-                $model = new Hashtag;
-
-                $model->tag = $tag->hashtag;
-
+                if (!in_array($model->tag, $ignoredWords))
+                {
+                    $newhashtags[] = array('tag' => $tag->hashtag, 'created_at' => $now, 'updated_at' => $now);
+                }
                 
-                $newhashtags[] = array('tag' => $tag->hashtag, 'created_at' => $now, 'updated_at' => $now);
             }
         }
 
