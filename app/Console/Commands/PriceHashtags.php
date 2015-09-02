@@ -61,12 +61,17 @@ class PriceHashtags extends Command
         $hashtags = [];
         foreach($results as $hashtag_data)
         {
-                $m = rand(10, 14) / 10;
+                $m = rand(10, 14) / 10;//multiplier
+                $q = rand(-5, 12);//random quirk
                 $price = 0;
 
                 if ($hashtag_data->r > 0)
                 {
-                    $price = round(($hashtag_data->d / $hashtag_data->r) + ( (($hashtag_data->b - $hashtag_data->s) / $hashtag_data->r) * $m ));
+                    $price = round((($hashtag_data->d / $hashtag_data->r) + ( (($hashtag_data->b - $hashtag_data->s) / $hashtag_data->r) * $m )) + $q);
+                    if($price < 0)
+                    {
+                        $price = 0;
+                    }
                 }
 
                 $hashtags[$hashtag_data->id] = $price;
