@@ -88,7 +88,7 @@
                                 </li>
                                 
                                 <li>
-                                    <a href="/hashtags"><i class="fa fa-line-chart"></i>  Find Hashtags</a>
+                                    <a href="/hashtags/list"><i class="fa fa-line-chart"></i>  Find Hashtags</a>
                                 </li>
                             </ul>
                         </div>

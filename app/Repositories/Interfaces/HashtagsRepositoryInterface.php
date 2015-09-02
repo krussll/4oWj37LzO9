@@ -13,4 +13,6 @@ interface HashtagsRepositoryInterface
     public function GetPopularHashtags($limit);
 
     public function GetHashtagPrices($id);
+
+    public function HashtagsList();
 }

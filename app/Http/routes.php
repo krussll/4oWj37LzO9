@@ -28,8 +28,9 @@ Route::group(array('prefix'=>'/api'),function(){
 	Route::post('trades/complete', 'API\TradesController@completeTrade');
 	Route::post('trades/create', 'API\TradesController@createTrade');
 
-	Route::get('hashtags/popular', 'API\HashtagsController@getPopularHashtags');
+	Route::get('hashtags/list', 'API\HashtagsController@getHashtagsList');
 	Route::get('hashtags/latest', 'API\HashtagsController@getLatestHashtags');
+	Route::get('hashtags/popular', 'API\HashtagsController@getPopularHashtags');
 	Route::get('hashtags/byname', 'API\HashtagsController@getHashtagsByName');
 	Route::get('hashtags/id', 'API\HashtagsController@getHashtagById');
 	Route::get('hashtags/counts', 'API\HashtagsController@getHashtagCountsById');
@@ -59,6 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', ['uses' =>'DashboardController@index']);
     Route::get('/settings', ['uses' =>'UserController@settings']);
 	Route::get('/hashtag/search/{term}', ['uses' =>'HashtagController@search']);
+	Route::get('/hashtags/list', ['uses' =>'HashtagController@listHashtags']);
 	Route::get('/hashtag/{id}', ['uses' =>'HashtagController@show']);
 	Route::get('/leagues', ['uses' =>'LeagueController@index']);
 	Route::get('/league/{id}', ['uses' =>'LeagueController@show']);

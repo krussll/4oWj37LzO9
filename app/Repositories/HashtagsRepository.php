@@ -11,7 +11,7 @@ class HashtagsRepository implements HashtagsRepositoryInterface
 {
 	public function GetLatestHashtags($limit)
 	{
-		return Hashtag::take($limit)->get();
+		return Hashtag::take($limit)->orderBy('created_at', 'DESC')->get();
 	}
 
 	public function GetHashtagsByNameLike($tag)
@@ -47,5 +47,10 @@ class HashtagsRepository implements HashtagsRepositoryInterface
                     ->where('created_at', '>', $date->toDateTimeString())
                     ->where('hashtag_id', $id)
                     ->get(['created_at', 'amount']);
+	}
+
+	public function HashtagsList()
+	{
+		return Hashtag::take(100)->orderBy('current_price', 'DESC')->get();
 	}
 }

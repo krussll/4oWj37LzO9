@@ -48,4 +48,11 @@ class HashtagsController extends BaseController
 
         return response()->json($rep->GetHashtagPrices(Input::get('id')));
     }
+
+    public function getHashtagsList()
+    {
+        $rep = new HashtagsRepository();
+
+        return response()->json($rep->HashtagsList());
+    } 
 }

@@ -17,4 +17,9 @@ class HashtagController extends BaseController
     {
     	return View::make('hashtag.show', array('id' => $id));
     }
+
+    public function listHashtags()
+    {
+    	return View::make('hashtag.list');
+    }
 }
