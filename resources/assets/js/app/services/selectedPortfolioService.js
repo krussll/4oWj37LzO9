@@ -31,11 +31,11 @@ angular.module('appMain')
                 if (useId === false)
                 {
                     selectedPortfolio.portfolio = selectedPortfolio.portfolios[i];
-                    if (selectedPortfolio.portfolio !== null)
+                    if (selectedPortfolio.portfolio)
                     {
                         id = selectedPortfolio.portfolio.id;
                     }else {
-                        id = -1;
+                        id = 0;
                     }
                         
                 }

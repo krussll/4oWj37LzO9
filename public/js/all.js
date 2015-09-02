@@ -620,7 +620,7 @@ angular.module('appMain')
     $scope.buy =
     {
     	control: {
-            isLoading: true,
+            isLoading: false,
             isSubmitted: false
         },
         userPortfolios: null,
@@ -1299,11 +1299,11 @@ angular.module('appMain')
                 if (useId === false)
                 {
                     selectedPortfolio.portfolio = selectedPortfolio.portfolios[i];
-                    if (selectedPortfolio.portfolio !== null)
+                    if (selectedPortfolio.portfolio)
                     {
                         id = selectedPortfolio.portfolio.id;
                     }else {
-                        id = -1;
+                        id = 0;
                     }
                         
                 }

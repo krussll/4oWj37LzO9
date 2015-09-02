@@ -9,7 +9,7 @@ angular.module('appMain')
     $scope.buy =
     {
     	control: {
-            isLoading: true,
+            isLoading: false,
             isSubmitted: false
         },
         userPortfolios: null,
