@@ -76,7 +76,7 @@
                             <span>
                                 <select ng-options="obj.name for obj in sideNav.userPortfolios" ng-model="sideNav.portfolio" class="form-control" ng-change="sideNav.change()">
                                 </select>
-                                <h3>$10,630</h3>
+                                <h3 ng-hide="sideNav.portfolio == null">${{sideNav.portfolio.balance}}</h3>
                             </span>
                             <ul class="nav side-menu">
                                 <li>
