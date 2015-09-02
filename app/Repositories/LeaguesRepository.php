@@ -24,6 +24,8 @@ class LeaguesRepository implements LeaguesRepositoryInterface
             'end_at' => null
         ]);
 
+        $league->code = rand(1000, 9999) . $league->id();
+        $league->save();
         $this->AddUserToLeague($owner, $league->id, $league->initial_balance);
 
         return $league->id;

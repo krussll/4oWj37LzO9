@@ -665,6 +665,7 @@ angular.module('appMain')
                         console.log(data);
                         if (data.success == true)
                         {
+                            $('#buy-modal').modal('hide');
                             pnotifyService.success('Trade Complete', 'Hashtag has been bought');
 
                             if(angular.isFunction(buyTagService.callback))
@@ -1274,6 +1275,7 @@ angular.module('appMain')
         var selectedPortfolio = {};
 
         selectedPortfolio.portfolioId = -1;
+        selectedPortfolio.portfolioValue = -1;
         selectedPortfolio.portfolio = null;
 
         portfoliosService.then(function(service)
@@ -1297,15 +1299,24 @@ angular.module('appMain')
                 if (useId === false)
                 {
                     selectedPortfolio.portfolio = selectedPortfolio.portfolios[i];
-                    id = selectedPortfolio.portfolios[0].id;
+                    if (selectedPortfolio.portfolio !== null)
+                    {
+                        id = selectedPortfolio.portfolio.id;
+                    }else {
+                        id = -1;
+                    }
+                        
                 }
             }else
             {
                 selectedPortfolio.portfolio = selectedPortfolio.portfolios[i];
                 var id = selectedPortfolio.portfolios[0].id;
             }
-        
-            selectedPortfolio.setPortfolioId(id);
+            
+            if(id > 0)
+            {
+               selectedPortfolio.setPortfolioId(id); 
+            }
         });
 
         selectedPortfolio.setPortfolioId = function(id)
@@ -1323,6 +1334,11 @@ angular.module('appMain')
         selectedPortfolio.getPortfolioId = function()
         {
             return selectedPortfolio.portfolioId;
+        }
+
+        selectedPortfolio.getPortfolioValue = function()
+        {
+            return selectedPortfolio.portfolioValue;
         }
 
         return selectedPortfolio;

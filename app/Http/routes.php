@@ -53,7 +53,7 @@ Route::get('register', function () {
 });
 
 
-	Route::post('logout','AccountController@Logout');
+Route::post('logout','AccountController@Logout');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', ['uses' =>'DashboardController@index']);

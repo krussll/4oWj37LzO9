@@ -18,16 +18,9 @@ class AuthController extends BaseController
 		}
 	}
 		 
-	public Function Logout(){
-
+	public Function Logout()
+	{
 		Auth::logout();
 		return response()->json(array('success' => true));
 	}
 }
-
-/*
-
-		
-
-		
-		*/

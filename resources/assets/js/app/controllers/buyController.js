@@ -54,6 +54,7 @@ angular.module('appMain')
                         console.log(data);
                         if (data.success == true)
                         {
+                            $('#buy-modal').modal('hide');
                             pnotifyService.success('Trade Complete', 'Hashtag has been bought');
 
                             if(angular.isFunction(buyTagService.callback))
