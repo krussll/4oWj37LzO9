@@ -20,7 +20,10 @@ body.nav-sm .navbar.nav_title {
     width: 70px;
 }
 
-
+circle[r|=4]
+{
+    display:none;
+}
 
 body.nav-sm .navbar.nav_title a i {
     font-size: 27px;
