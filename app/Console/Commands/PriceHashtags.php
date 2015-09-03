@@ -62,7 +62,7 @@ class PriceHashtags extends Command
         foreach($results as $hashtag_data)
         {
                 $m = rand(10, 14) / 10;//multiplier
-                $q = rand(-5, 12);//random quirk
+                $q = rand(-5, 7);//random quirk
                 $price = 0;
 
                 if ($hashtag_data->r > 0)
