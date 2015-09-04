@@ -14,19 +14,22 @@ class LeaguesRepository implements LeaguesRepositoryInterface
 		return League::where('is_default', true)->get();
 	}
 
-	public function CreateLeague($name, $initial_balance, $owner)
+	public function CreateLeague($name, $initial_balance, $userId)
 	{
 		$league = League::create([
             'name' => $name,
             'code' => 'aaaaa',
             'initial_balance' => $initial_balance,
             'start_at' => Carbon::now(),
-            'end_at' => null
+            'end_at' => null,
+            'user_id' => $userId
         ]);
 
-        $league->code = rand(1000, 9999) . $league->id();
+        $randomString = rand(1000, 9999);
+        $league->code = $randomString . $league->id;
+        $league->user_id = $userId;
         $league->save();
-        $this->AddUserToLeague($owner, $league->id, $league->initial_balance);
+        $this->AddUserToLeague($userId, $league->id, $league->initial_balance);
 
         return $league->id;
 	}
@@ -57,7 +60,7 @@ class LeaguesRepository implements LeaguesRepositoryInterface
     public function GetUserGlobalPosition($id)
     {
         $positions = array();
-        foreach(DB::table('portfolios')->join('leagues', 'leagues.id', '=', 'portfolios.league_id')->where('user_id', $id)->where('leagues.is_global', true)->select('portfolios.league_id', 'portfolios.user_id', 'leagues.name')->get() as $portfolio)
+        foreach(DB::table('portfolios')->join('leagues', 'leagues.id', '=', 'portfolios.league_id')->where('portfolios.user_id', $id)->where('leagues.is_global', true)->select('portfolios.league_id', 'portfolios.user_id', 'leagues.name')->get() as $portfolio)
         {
             $rank = $this->GetLeaguePosition($portfolio->user_id, $portfolio->league_id);
             $positions[] = array('name' => $portfolio->name, 'position' => $rank, 'id' => $portfolio->league_id);
@@ -68,7 +71,7 @@ class LeaguesRepository implements LeaguesRepositoryInterface
     public function GetUserPrivatePosition($id)
     {
         $positions = array();
-        foreach(DB::table('portfolios')->join('leagues', 'leagues.id', '=', 'portfolios.league_id')->where('user_id', $id)->where('leagues.is_global', false)->select('portfolios.league_id', 'portfolios.user_id', 'leagues.name')->get() as $portfolio)
+        foreach(DB::table('portfolios')->join('leagues', 'leagues.id', '=', 'portfolios.league_id')->where('portfolios.user_id', $id)->where('leagues.is_global', false)->select('portfolios.league_id', 'portfolios.user_id', 'leagues.name')->get() as $portfolio)
         {
             $rank = $this->GetLeaguePosition($portfolio->user_id, $portfolio->league_id);
             $positions[] = array('name' => $portfolio->name, 'position' => $rank, 'id' => $portfolio->league_id);
