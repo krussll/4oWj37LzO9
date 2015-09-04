@@ -68,9 +68,9 @@ class PriceHashtags extends Command
                 if ($hashtag_data->r > 0)
                 {
                     $price = round((($hashtag_data->d / $hashtag_data->r) + ( (($hashtag_data->b - $hashtag_data->s) / $hashtag_data->r) * $m )) + $q);
-                    if($price < 0)
+                    if($price < 1)
                     {
-                        $price = 0;
+                        $price = 1;
                     }
                 }
 

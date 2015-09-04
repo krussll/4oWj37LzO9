@@ -91,6 +91,38 @@ body.nav-sm .profile {
     display: none;
 }
 
+.home-container {
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 16px;
+}
+
+.home-container.light {
+    color: #808287;
+}
+
+@media (min-width: 768px) {
+    .home-container { width: 750px; } 
+}
+@media (min-width: 992px) {
+    .home-container { width: 970px; } 
+}
+@media (min-width: 1200px) {
+    .home-container { width: 1170px; } 
+}
+
+
+.home-container .row {
+    padding: 75px 0;
+}
+.home-container p {
+    max-width: 75%;
+    display: block;
+    margin: 0 auto 0;
+    text-align: center;
+    top:58px;
+}
+
 .wide {
     text-align: center;
     top:58px;
