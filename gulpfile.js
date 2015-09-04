@@ -39,6 +39,7 @@ elixir(function(mix) {
         'app/directives/cdnBuyButton.js',
         'app/directives/cdnSellButton.js',
         'app/directives/priceGraph.js',
+        'app/directives/paging.js',
 
         <!-- filters -->
         'app/filters/titlecaseFilter.js',

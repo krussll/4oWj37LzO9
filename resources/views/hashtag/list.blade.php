@@ -44,6 +44,12 @@
                     </tr>
                   </tbody>
                   </table>
+                  <paging
+                    page="list.paging.currentPage" 
+                    page-size="list.paging.pageLength" 
+                    total="list.paging.total"
+                    paging-action="list.listHashtags('hashtag', page)">
+                  </div> 
                 </div>
             </div>
         </div>

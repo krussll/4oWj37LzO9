@@ -14,5 +14,7 @@ interface HashtagsRepositoryInterface
 
     public function GetHashtagPrices($id);
 
-    public function HashtagsList();
+    public function HashtagsList($page, $length);
+
+    public function CountHashtags();
 }

@@ -53,6 +53,13 @@ class HashtagsController extends BaseController
     {
         $rep = new HashtagsRepository();
 
-        return response()->json($rep->HashtagsList());
+        return response()->json($rep->HashtagsList(Input::get('page'), Input::get('length')));
     } 
+
+    public function getHashtagInfo()
+    {
+        $rep = new HashtagsRepository();
+        $total = $rep->CountHashtags();
+        return response()->json(array('total' => $total));
+    }
 }

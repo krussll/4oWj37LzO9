@@ -49,8 +49,19 @@ class HashtagsRepository implements HashtagsRepositoryInterface
                     ->get(['created_at', 'amount']);
 	}
 
-	public function HashtagsList()
+	public function HashtagsList($page, $length)
 	{
-		return Hashtag::take(100)->orderBy('current_price', 'DESC')->get();
+		$skip = 0;
+		if($page > 1)
+		{
+			$skip = ($page--) * $length;
+		}
+		
+		return Hashtag::take($length)->skip($skip)->orderBy('current_price', 'DESC')->get();
+	}
+
+	public function CountHashtags()
+	{
+		return Hashtag::count();
 	}
 }

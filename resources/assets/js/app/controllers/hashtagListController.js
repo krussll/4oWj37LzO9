@@ -8,20 +8,31 @@ angular.module('appMain')
     $scope.list = 
     {
     	control: {
-            isLoading: true
+            isLoading: true,
+        },
+        paging: {
+            pageLength: 10,
+            currentPage: 1,
+            total: 50
         },
         hashtags:[],
         init: function ()
         {
             var list = this;
-            list.listHashtags();
+            $http.get('/api/hashtags/info')
+                .success(function(data){
+                    list.paging.total = data.total;
+                });
+               
+            list.listHashtags('hashtag', list.paging.currentPage);
         },
-        listHashtags: function()
+        listHashtags: function(objectName, newPage)
         {
             var list = this;
             list.control.isLoading = true;
+            list.paging.currentPage = newPage;
 
-            $http.get('/api/hashtags/list')
+            $http.get('/api/hashtags/list?page=' + list.paging.currentPage + '&length=' + list.paging.pageLength)
                 .success(function(data){
                     list.hashtags = data;
                     list.control.isLoading = false;

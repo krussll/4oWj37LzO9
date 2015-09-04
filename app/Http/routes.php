@@ -29,6 +29,7 @@ Route::group(array('prefix'=>'/api'),function(){
 	Route::post('trades/create', 'API\TradesController@createTrade');
 
 	Route::get('hashtags/list', 'API\HashtagsController@getHashtagsList');
+	Route::get('hashtags/info', 'API\HashtagsController@getHashtagInfo');
 	Route::get('hashtags/latest', 'API\HashtagsController@getLatestHashtags');
 	Route::get('hashtags/popular', 'API\HashtagsController@getPopularHashtags');
 	Route::get('hashtags/byname', 'API\HashtagsController@getHashtagsByName');

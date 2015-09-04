@@ -1,1 +1,1 @@
-var app = angular.module('appMain', ['ngCookies']);
+var app = angular.module('appMain', ['ngCookies', "bw.paging"]);
