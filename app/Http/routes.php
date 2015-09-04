@@ -20,6 +20,9 @@ Route::group(array('prefix'=>'/api'),function(){
 	Route::get('users/id', 'API\UsersController@getUserById');
 	Route::get('user/portfolios', 'API\PortfoliosController@getByUserId');
 
+
+	Route::post('beta/create','API\UsersController@createBeta');
+
 	Route::post('login/auth','API\AuthController@Login');
 	Route::post('login/destroy','API\AuthController@Logout');
 
@@ -51,9 +54,9 @@ Route::get('login', function () {
     return view('account.login');
 });
 
-Route::get('register', function () {
+/*Route::get('register', function () {
     return view('account.register');
-});
+});*/
 
 
 Route::post('logout','AccountController@Logout');

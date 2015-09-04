@@ -28,7 +28,7 @@
                                 </ul>
                             </li>
                             @else
-                                <li><a href="/register">Register</a></li>
+                                <!--<li><a href="/register">Register</a></li>-->
                                 <li><a  href="#login-modal" data-toggle="modal">Login</a></li>
                             @endif
                             

@@ -5,6 +5,7 @@ use App\User;
 use Input;
 use Auth;
 use Hash;
+use App\BetaRequest;
 use Illuminate\Routing\Controller as BaseController;
 
 //Define the required repositories
@@ -38,7 +39,17 @@ class UsersController extends BaseController
 
         Auth::attempt(Input::only('email','password'));
     	return response()->json(array('user' => $user, 'success' => true));
+    }   
+
+    public function createBeta()
+    {
+        $user = BetaRequest::create([
+            'email' => Input::get('email')
+        ]);
+
+        return response()->json(array('success' => true));
     }    
+ 
 
     public function changeUserDetails()
     {

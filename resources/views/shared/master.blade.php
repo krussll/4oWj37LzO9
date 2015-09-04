@@ -91,7 +91,6 @@
                             <div class="form-group item" ng-class="{bad: !buy.validation.portfolio.isValid}">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Portfolio <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">

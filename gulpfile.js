@@ -32,6 +32,7 @@ elixir(function(mix) {
         'app/controllers/leaguesController.js',
         'app/controllers/leagueCreateController.js',
         'app/controllers/hashtagListController.js',
+        'app/controllers/betaWaitController.js',
 
     	<!-- directives -->
     	'app/directives/autocompleteDirective.js',
