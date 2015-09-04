@@ -9,6 +9,11 @@ use App\Repositories\Interfaces\LeaguesRepositoryInterface as LeaguesRepositoryI
 
 class LeaguesRepository implements LeaguesRepositoryInterface
 {
+    public function GetLeagueById($id)
+    {
+        return League::find($id);
+    }
+    
 	public function GetDefaultLeagues()
 	{
 		return League::where('is_default', true)->get();

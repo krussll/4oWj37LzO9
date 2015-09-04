@@ -35,6 +35,7 @@ Route::group(array('prefix'=>'/api'),function(){
 	Route::get('hashtags/id', 'API\HashtagsController@getHashtagById');
 	Route::get('hashtags/counts', 'API\HashtagsController@getHashtagCountsById');
 
+	Route::get('leagues/{id}', 'API\LeaguesController@getLeague');
 	Route::get('leagues/user/positions', 'API\LeaguesController@getUserPositions');
 	Route::get('leagues/{id}/positions', 'API\LeaguesController@getLeaguePositions');
 	Route::post('leagues/create', 'API\LeaguesController@createLeague');

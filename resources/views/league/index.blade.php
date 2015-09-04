@@ -3,38 +3,40 @@
 @section('content')
 <div ng-controller="leaguesController" ng-init="leagues.init()" ng-cloak>
 
-<div class="modal fade" id="join-league-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal" type="button">&times;</button>
-                    <h4 class="modal-title" id="avatar-modal-label">Join A League</h4>
-                </div>
-                <div class="modal-body">
-                   <form ng-submit="leagues.joinSubmit()">
-                      <div ng-show="leagues.join.showMessage">
-                        <div class="col-md-12">
-                          <div class="alert alert-danger">{{leagues.join.message}}</div> 
-                        </div>
+  <div class="modal fade" id="join-league-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              
+              <div class="modal-header">
+                  <button class="close" data-dismiss="modal" type="button">&times;</button>
+                  <h4 class="modal-title" id="avatar-modal-label">Edit League</h4>
+              </div>
+              <div class="modal-body">
+                 <form ng-submit="leagues.joinSubmit()">
+                    <div ng-show="leagues.join.showMessage">
+                      <div class="col-md-12">
+                        <div class="alert alert-danger">{{leagues.join.message}}</div> 
                       </div>
-                      <div class="item form-group">
-                        <label class="col-md-4 control-label">League Code</label>
-                        <div class="col-md-6">
-                          <input id="name" ng-model="leagues.join.code" type="text" class="form-control col-md-7 col-xs-12" /> 
-                        </div>
+                    </div>
+                    <div class="item form-group">
+                      <label class="col-md-4 control-label">Name</label>
+                      <div class="col-md-8">
+                        <input id="name" ng-model="leagueShow.inputs.name" type="text" class="form-control col-md-7 col-xs-12" /> 
                       </div>
+                    </div>
 
-                      <div class="form-group">
-                        <div class="col-md-6 col-md-offset-4">
-                          <button type="submit" class="btn btn-success">Submit</button>
-                        </div>
+                    <div class="form-group">
+                      <div class="col-md-6 col-md-offset-4">
+                        <button type="submit" class="btn btn-success">Submit</button>
                       </div>
-                   </form>
-                </div>
-            </div>
-        </div>
-    </div>
+                    </div>
+                 </form>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
   <div class="page-title">
     <div class="title_left">
         <h3>Leagues</h3>

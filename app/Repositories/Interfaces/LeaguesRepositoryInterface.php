@@ -4,6 +4,8 @@ namespace App\Repositories\Interfaces;
 
 interface LeaguesRepositoryInterface
 {
+    public function GetLeagueById($id);
+
     public function GetDefaultLeagues();
 
     public function CreateLeague($name, $initial_balance, $owner);

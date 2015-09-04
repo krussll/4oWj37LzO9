@@ -18,6 +18,15 @@ use App\Repositories\PortfoliosRepository as PortfoliosRepository;
 
 class LeaguesController extends BaseController
 {
+
+    public function getLeague($id)
+    {
+        $rep = new LeaguesRepository();
+        $league = $rep->GetLeagueById($id);
+        $isUsersLeague = ($league->user_id == Auth::user()->id);
+        return response()->json(array('league' => $league, 'is_owner' => $isUsersLeague));
+    }
+
     public function getUserPositions()
     {
         $rep = new LeaguesRepository();
