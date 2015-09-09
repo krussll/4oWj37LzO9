@@ -10,12 +10,12 @@ class CreateLeagueTable extends Migration
      *
      * @return void
      */
-    
+
 
 
     public function up()
     {
-        Schema::create('trades', function(Blueprint $table)
+      Schema::create('trades', function(Blueprint $table)
       {
         $table->increments('id');
         $table->integer('portfolio_id')->unsigned();

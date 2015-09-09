@@ -21,7 +21,7 @@
 
   </div>
   <div>
-      
+
       <div class="row">
 
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -39,17 +39,17 @@
                   </thead>
                   <tbody>
                     <tr ng-repeat="hashtag in list.hashtags">
-                      <td scope="row"><a href="/hashtag/{{hashtag.id}}">{{hashtag.tag}}</a></td><td>{{hashtag.current_price | currency}}</td>
+                      <td scope="row"><a href="/hashtag/{{hashtag.id}}">{{hashtag.tag}}</a></td><td>${{hashtag.current_price | number }}</td>
                       <td><cdn-buy-button button-size="xs" hashtag-id="{{hashtag.id}}" tag="{{hashtag.tag}}" price="{{hashtag.current_price}}" event-handler="" /></td>
                     </tr>
                   </tbody>
                   </table>
                   <paging
-                    page="list.paging.currentPage" 
-                    page-size="list.paging.pageLength" 
+                    page="list.paging.currentPage"
+                    page-size="list.paging.pageLength"
                     total="list.paging.total"
                     paging-action="list.listHashtags('hashtag', page)">
-                  </div> 
+                  </div>
                 </div>
             </div>
         </div>

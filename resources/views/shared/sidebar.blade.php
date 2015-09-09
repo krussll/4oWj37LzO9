@@ -14,7 +14,7 @@
                                     @if (Auth::check())
                                     <li class="">
                                         <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                            
+
                                             <span><cdn-image
                                                 cdn-src="user/[[Auth::user()->id]]"
                                                 cdn-file="[[Auth::user()->profile_image]]" />
@@ -37,7 +37,7 @@
                                         <li><a href="/register" class="button">Register</a></li>
                                         <li><a href="/login" class="button">Login</a></li>
                                     @endif
-                                    
+
 
                                 </ul>
                             </nav>
@@ -50,7 +50,7 @@
                     <div class="nav toggle">
                         <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                     </div>
-                    
+
                     <div class="clearfix"></div>
 
                     @if (Auth::check())
@@ -76,17 +76,17 @@
                             <span>
                                 <select ng-options="obj.name for obj in sideNav.userPortfolios" ng-model="sideNav.portfolio" class="form-control" ng-change="sideNav.change()">
                                 </select>
-                                <h3 ng-hide="sideNav.portfolio == null">${{sideNav.portfolio.balance}}</h3>
+                                <h3 ng-hide="sideNav.portfolio == null">${{sideNav.portfolio.balance | number }}</h3>
                             </span>
                             <ul class="nav side-menu">
                                 <li>
                                     <a href="/dashboard"><i class="fa fa-bar-chart-o"></i>  Dashboard</a>
                                 </li>
-                                
+
                                 <li>
                                     <a href="/leagues"><i class="fa fa-table"></i>  Leagues</a>
                                 </li>
-                                
+
                                 <li>
                                     <a href="/hashtags/list"><i class="fa fa-line-chart"></i>  Find Hashtags</a>
                                 </li>

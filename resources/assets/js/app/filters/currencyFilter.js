@@ -5,7 +5,7 @@
 angular.module('appMain')
     .filter('currency', function() {
     return function(s) {
-        return '$' + s;
+        return s;
     };
 });
 

@@ -19,7 +19,7 @@ class HashtagsController extends BaseController
         $rep = new HashtagsRepository();
 
         return response()->json($rep->GetLatestHashtags(5));
-    } 
+    }
 
     public function getHashtagsByName()
     {
@@ -33,14 +33,14 @@ class HashtagsController extends BaseController
         $rep = new HashtagsRepository();
 
         return response()->json($rep->GetHashtagById(Input::get('id')));
-    } 
+    }
 
     public function getPopularHashtags()
     {
         $rep = new HashtagsRepository();
 
         return response()->json($rep->GetPopularHashtags(5));
-    } 
+    }
 
     public function getHashtagCountsById()
     {
@@ -49,12 +49,23 @@ class HashtagsController extends BaseController
         return response()->json($rep->GetHashtagPrices(Input::get('id')));
     }
 
+    public function watchHashtag()
+    {
+      $hashtagId = Input::get('id');
+      $userId = Auth::user()->id;
+    }
+
+    public function unWatchHashtag()
+    {
+      $hashtagId = Input::get('id');
+    }
+
     public function getHashtagsList()
     {
         $rep = new HashtagsRepository();
 
         return response()->json($rep->HashtagsList(Input::get('page'), Input::get('length')));
-    } 
+    }
 
     public function getHashtagInfo()
     {
