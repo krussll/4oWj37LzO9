@@ -49,17 +49,17 @@ class PullHashtags extends Command
         $now = Carbon::now();
         $min = 1;
         $ignoredWords = array('');
-        echo "herere";
+        echo "starting";
         $results = DB::connection('pgsql')->select(DB::raw("SELECT LOWER(hashtag) as hashtag, COUNT(*) as count FROM  \"tagQueue\".\"tagQueue\" WHERE hashtag ~ E'[a-z0-9]' AND is_processed = B'0' AND created < now() GROUP BY hashtag HAVING COUNT(*) > 3",
                         array('now' => $now, 'min' => $min)));
-
+echo "got new tags";
         $hashtags = [];
         foreach(Hashtag::get() as $hashtag)
         {
             $hashtags[$hashtag->tag] = $hashtag->id;
 
         }
-/*
+
         $newhashtags = [];
         foreach($results as $tag)
         {
@@ -76,7 +76,7 @@ class PullHashtags extends Command
 
             }
         }
-
+echo "inserting new hashtags";
         Hashtag::insert($newhashtags);
 
         foreach(Hashtag::get() as $hashtag)
@@ -96,7 +96,7 @@ class PullHashtags extends Command
                 $counts[] = array('hashtag_id' => $hashtags[$tag->hashtag], 'count' => $tag->count, 'created_at' => $now, 'updated_at' => $now);
             }
         }
-
+echo "inserting counts";
         HashtagCount::insert($counts);
 
         $results = DB::connection('pgsql')->update( DB::raw("UPDATE \"tagQueue\".\"tagQueue\" SET is_processed = B'1' WHERE is_processed = B'0' AND created < ':now';",
@@ -106,6 +106,6 @@ class PullHashtags extends Command
         $results = DB::connection('pgsql')->update( DB::raw("DELETE FROM \"tagQueue\".\"tagQueue\" WHERE is_processed = B'1'"));
         $results = DB::update( DB::raw("DELETE FROM hashtag_count WHERE created_at < DATE_SUB(CURDATE(), INTERVAL 7 DAY)"));
 
-        */
+
     }
 }
