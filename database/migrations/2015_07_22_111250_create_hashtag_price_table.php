@@ -14,7 +14,6 @@ class CreateHashtagPriceTable extends Migration
     {
         Schema::create('hashtag_price', function(Blueprint $table)
       {
-        $table->increments('id');
         $table->integer('amount');
         $table->integer('hashtag_id')->unsigned();
         $table->timestamps();

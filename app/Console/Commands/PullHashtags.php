@@ -49,16 +49,17 @@ class PullHashtags extends Command
         $now = Carbon::now();
         $min = 1;
         $ignoredWords = array('');
-        $results = DB::connection('pgsql')->select(DB::raw("SELECT LOWER(hashtag) as hashtag, COUNT(*) as count FROM  \"tagQueue\".\"tagQueue\" WHERE hashtag ~ E'[a-z0-9]' AND is_processed = B'0' AND created < ':now' GROUP BY hashtag HAVING COUNT(*) > 3", 
+        echo "herere";
+        $results = DB::connection('pgsql')->select(DB::raw("SELECT LOWER(hashtag) as hashtag, COUNT(*) as count FROM  \"tagQueue\".\"tagQueue\" WHERE hashtag ~ E'[a-z0-9]' AND is_processed = B'0' AND created < now() GROUP BY hashtag HAVING COUNT(*) > 3",
                         array('now' => $now, 'min' => $min)));
-        
+
         $hashtags = [];
         foreach(Hashtag::get() as $hashtag)
         {
             $hashtags[$hashtag->tag] = $hashtag->id;
-            
-        }
 
+        }
+/*
         $newhashtags = [];
         foreach($results as $tag)
         {
@@ -72,7 +73,7 @@ class PullHashtags extends Command
                 {
                     $newhashtags[] = array('tag' => $tag->hashtag, 'created_at' => $now, 'updated_at' => $now);
                 }
-                
+
             }
         }
 
@@ -82,7 +83,7 @@ class PullHashtags extends Command
         {
             if (!array_key_exists($tag->hashtag,$hashtags))
             {
-                $hashtags[$hashtag->tag] = $hashtag->id; 
+                $hashtags[$hashtag->tag] = $hashtag->id;
            }
         }
 
@@ -101,8 +102,10 @@ class PullHashtags extends Command
         $results = DB::connection('pgsql')->update( DB::raw("UPDATE \"tagQueue\".\"tagQueue\" SET is_processed = B'1' WHERE is_processed = B'0' AND created < ':now';",
             array('now' => $now)));
 
-        
+
         $results = DB::connection('pgsql')->update( DB::raw("DELETE FROM \"tagQueue\".\"tagQueue\" WHERE is_processed = B'1'"));
         $results = DB::update( DB::raw("DELETE FROM hashtag_count WHERE created_at < DATE_SUB(CURDATE(), INTERVAL 7 DAY)"));
+
+        */
     }
 }

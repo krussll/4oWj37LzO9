@@ -65,10 +65,10 @@ return [
 
         'mysql' => [
             'driver'    => 'mysql',
-            'host'      => 'eu-cdbr-west-01.cleardb.com',
-            'database'  => 'heroku_9585836a8861845',
-            'username'  => 'b7dc66985bfce4',
-            'password'  => '5b68e1d6',
+            'host'      => 'tagtest.czlric1ktmu6.eu-west-1.rds.amazonaws.com',
+            'database'  => 'tagdb',
+            'username'  => 'root',
+            'password'  => 'password',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',

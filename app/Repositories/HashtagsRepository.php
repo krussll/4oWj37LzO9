@@ -11,13 +11,13 @@ class HashtagsRepository implements HashtagsRepositoryInterface
 {
 	public function GetLatestHashtags($limit)
 	{
-		return Hashtag::take($limit)->orderBy('created_at', 'DESC')->get();
+		return Hashtag::where('is_archived', false)->take($limit)->orderBy('created_at', 'DESC')->get();
 	}
 
 	public function GetHashtagsByNameLike($tag)
 	{
 
-		return Hashtag::where('tag', 'like', $tag . '%')->get();
+		return Hashtag::where('tag', 'like', $tag . '%')->where('is_archived', false)->get();
 	}
 
 	public function GetHashtagById($id)
@@ -33,6 +33,7 @@ class HashtagsRepository implements HashtagsRepositoryInterface
                     ->leftJoin('hashtags', 'hashtags.id', '=', 'hashtag_count.hashtag_id')
                     ->where('hashtag_count.created_at', '>', $date->toDateTimeString())
                     ->where('current_price', '>', '0')
+                    ->where('is_archived', false)
                     ->groupBy('hashtags.tag')
                     ->orderBy(DB::raw('SUM(hashtag_count.count)'), 'DESC')
                     ->take($limit)
@@ -57,11 +58,11 @@ class HashtagsRepository implements HashtagsRepositoryInterface
 			$skip = ($page--) * $length;
 		}
 		
-		return Hashtag::take($length)->skip($skip)->orderBy('current_price', 'DESC')->get();
+		return Hashtag::where('is_archived', false)->take($length)->skip($skip)->orderBy('current_price', 'DESC')->get();
 	}
 
 	public function CountHashtags()
 	{
-		return Hashtag::count();
+		return Hashtag::where('is_archived', false)->count();
 	}
 }

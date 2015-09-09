@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddLeagueOwner' => $baseDir . '/database/migrations/2015_09_04_165016_add_league_owner.php',
+    'ArchiveHashtag' => $baseDir . '/database/migrations/2015_09_07_174700_archive_hashtag.php',
     'CreateBetaList' => $baseDir . '/database/migrations/2015_09_04_195427_create_beta_list.php',
     'CreateFollowHashtagTable' => $baseDir . '/database/migrations/2015_07_21_114644_create_follow_hashtag_table.php',
     'CreateHashtagCountTable' => $baseDir . '/database/migrations/2015_07_22_111237_create_hashtag_count_table.php',

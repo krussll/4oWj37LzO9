@@ -50,6 +50,7 @@ class PriceHashtags extends Command
                 FROM hashtags h  
                 Left Join hashtag_count c ON h.id = c.hashtag_id AND c.created_at > DATE_SUB(CURDATE(), INTERVAL 4 DAY)
                 LEFT JOIN trades t ON h.id = t.hashtag_id AND t.created_at > DATE_SUB(CURDATE(), INTERVAL 4 DAY)
+                WHERE h.is_archived = false
                  GROUP BY h.id")
             );
 
@@ -63,7 +64,7 @@ class PriceHashtags extends Command
         {
                 $m = rand(10, 14) / 10;//multiplier
                 $q = rand(-5, 7);//random quirk
-                $price = 0;
+                $price = 1;
 
                 if ($hashtag_data->r > 0)
                 {

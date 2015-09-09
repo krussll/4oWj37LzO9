@@ -39,6 +39,21 @@ class HashtagClearup extends Command
     public function handle()
     {
         //
-        
+        $results = DB::select(
+                DB::raw("SELECT h.id FROM hashtags h
+                    LEFT JOIN hashtag_price c ON c.hashtag_id = h.id AND c.created_at > DATE_SUB(CURDATE(), INTERVAL 2 DAY)
+                     where current_price < 2
+                     AND c.amount < 2
+                     GROUP BY h.id")
+            );
+
+
+        DB::transaction(function() use ($results)
+        {
+            foreach($results as $result)
+            {
+                DB::update( DB::raw("UPDATE hashtags SET is_archived = true WHERE id = " . $result->id));
+            }
+        });
     }
 }
