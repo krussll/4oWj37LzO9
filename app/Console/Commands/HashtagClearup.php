@@ -55,5 +55,8 @@ class HashtagClearup extends Command
                 DB::update( DB::raw("UPDATE hashtags SET is_archived = true WHERE id = " . $result->id));
             }
         });
+
+        $results = DB::update( DB::raw("DELETE FROM hashtag_count WHERE created_at < DATE_SUB(CURDATE(), INTERVAL 7 DAY)"));
+        $results = DB::update( DB::raw("DELETE FROM hashtag_price WHERE created_at < DATE_SUB(CURDATE(), INTERVAL 7 DAY)"));
     }
 }
