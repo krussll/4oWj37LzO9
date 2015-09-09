@@ -22,13 +22,14 @@ angular.module('appMain')
                             hideHover: 'auto',
                             xLabels: "day",
                             lineColors: ['#26B99A'],
+                            pointFillColors: ['#ffffff'],
                             data: data
                         });
                     });
-                }); 
+                });
             },
-            
-            
+
+
         };
     });
 
