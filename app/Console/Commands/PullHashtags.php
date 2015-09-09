@@ -81,7 +81,7 @@ echo "inserting new hashtags";
 
         foreach(Hashtag::get() as $hashtag)
         {
-            if (!array_key_exists($tag->hashtag,$hashtags))
+            if (!array_key_exists($hashtag->hashtag,$hashtags))
             {
                 $hashtags[$hashtag->tag] = $hashtag->id;
            }
