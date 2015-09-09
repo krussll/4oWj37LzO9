@@ -20,10 +20,6 @@ body.nav-sm .navbar.nav_title {
     width: 70px;
 }
 
-circle[r|=4]
-{
-    display:none;
-}
 
 body.nav-sm .navbar.nav_title a i {
     font-size: 27px;
@@ -102,13 +98,13 @@ body.nav-sm .profile {
 }
 
 @media (min-width: 768px) {
-    .home-container { width: 750px; } 
+    .home-container { width: 750px; }
 }
 @media (min-width: 992px) {
-    .home-container { width: 970px; } 
+    .home-container { width: 970px; }
 }
 @media (min-width: 1200px) {
-    .home-container { width: 1170px; } 
+    .home-container { width: 1170px; }
 }
 
 
@@ -254,7 +250,7 @@ body.nav-sm .menu_section h3 {
     float: left;
     /*background: #F4F6F9;
     border-bottom: 1px solid #E6E9ED;*/
-    
+
     background: #000;
     margin-bottom: 10px;
     width: 100%;
@@ -284,7 +280,6 @@ body.nav-md .container.body .right_col.full {
 #menu_toggle { color: #FFF; }
 
 .nav_title {
-    width: 230px;
     float: left;
     border-radius: 0;
     height: 57px;
@@ -444,7 +439,7 @@ body {
     color: rgb(34, 34, 34);
     background: #2A3F54;
     /*#ECF0F1; #FCFCFC*/
-    
+
     font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
     font-size: 13px;
     font-weight: 400;
@@ -847,7 +842,7 @@ li.current-page a {
 
 nav { margin: 0 20px; }
 nav .site_title {
-      
+
     text-overflow: ellipsis;
     overflow: hidden;
     font-weight: 400;
@@ -2517,7 +2512,7 @@ span.section {
   color: #333;
   border: 0;
   border-bottom: 1px solid #e5e5e5;
-} 
+}
 
 .form-control {
     border-radius: 0;
@@ -2981,7 +2976,7 @@ select.parsley-error {
 }
 
 .well .markup-heading{
-    
+
 }
 .well .markup{
     background: #fff;
@@ -3570,7 +3565,7 @@ span.tag a {
 
 ul.bar_tabs {
     /* border: 1px solid #ff0000; */
-    
+
     overflow: visible;
     background: #F5F7FA;
     height: 25px;
@@ -3955,7 +3950,7 @@ ul.social li {
     position: absolute;
     height: auto;
     /* Ensures notices are above everything */
-    
+
     z-index: 9999;
 }
 /* Hides position: fixed from IE6 */
@@ -5754,12 +5749,12 @@ a.hiddenanchor{
     position: relative;
 }
 
-#register, 
+#register,
 #login{
     position: absolute;
     top: 0px; width:100%;
 }
-#register{	
+#register{
     z-index: 21;
     opacity: 0; width:100%;
 }
