@@ -7,9 +7,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
- 
+
     <title ng-bind="layout.consts.siteName"></title>
-    <link href="/favicon.ico?v=1" rel="shortcut icon" type="image/x-icon">
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <!-- Bootstrap core CSS -->
 
     {!! Minify::stylesheet('/css/bootstrap.min.css') !!}
@@ -54,7 +54,7 @@
     <div class="modal fade" ng-controller="buyController" ng-init="buy.init()" id="login-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                
+
                 <div class="modal-header">
                     <button class="close" data-dismiss="modal" type="button">&times;</button>
                     <h4 class="modal-title" id="avatar-modal-label">Login</h4>
@@ -95,40 +95,40 @@
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <select ng-model="buy.hashtag.portfolio" class="form-control">
-                                                <option 
+                                                <option
                                                         ng-repeat="portfolio in buy.userPortfolios"
                                                         value="{{portfolio.id}}">
                                                     {{portfolio.name}}
                                                 </option>
                                             </select>
                                         </div>
-                                        <div class="alert" ng-hide="buy.validation.portfolio.isValid">{{buy.validation.portfolio.message}}</div> 
+                                        <div class="alert" ng-hide="buy.validation.portfolio.isValid">{{buy.validation.portfolio.message}}</div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group item" ng-class="{bad: !buy.validation.shares_taken.isValid}">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    
+
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Number of Shares <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <input type="number" id="number-shares" ng-model="buy.hashtag.shares_taken" class="form-control">
                                         </div>
-                                        <div class="alert" ng-hide="buy.validation.shares_taken.isValid">{{buy.validation.shares_taken.message}}</div> 
+                                        <div class="alert" ng-hide="buy.validation.shares_taken.isValid">{{buy.validation.shares_taken.message}}</div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    
+
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Price
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <h4>${{buy.hashtag.price}}</h4>
                                         </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -140,7 +140,7 @@
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <h4>${{buy.total}}</h4>
                                         </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -193,7 +193,7 @@
     {!! Minify::javascript('/js/moris/morris.js') !!}
     {!! Minify::javascript('/js/all.js') !!}
     {!! Minify::javascript('/js/custom.js') !!}
-    
+
 
 
 </body>

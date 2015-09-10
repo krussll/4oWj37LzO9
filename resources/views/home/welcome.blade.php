@@ -4,9 +4,11 @@
 
 <div class="wide">
     <div class="header-content">
-      <div class="col-xs-12 site_title">
-        <h1>{{ layout.consts.siteName | uppercase }}</h1>
-        <h3>Make money, beat your friends</h3>
+      <div class="home-container">
+        <div class="col-xs-12 site_title">
+          <h1>{{ layout.consts.siteName | uppercase }}</h1>
+          <h3>Free entry to Hashtag Trading Contests</h3>
+        </div>
       </div>
     </div>
 </div>
@@ -25,11 +27,11 @@
 		<p>
 			We are currently in a closed beta test, but if you'd like us to let you know when we move to the open beta please fill in the form below.
 		</p>
-		
+
 		<p>
 			<div ng-show="betaWait.message != ''">
               <div class="col-md-12">
-                <div class="alert alert-success">{{betaWait.message}}</div> 
+                <div class="alert alert-success">{{betaWait.message}}</div>
               </div>
             </div>
 			<form ng-submit="betaWait.submit()" class="form-horizontal form-label-left">
@@ -40,7 +42,7 @@
                   <div class="col-md-6 col-sm-6 col-xs-12">
                       <input id="email" ng-model="betaWait.inputs.email" type="text" class="form-control col-md-7 col-xs-12" />
                   </div>
-                  <div class="alert" ng-hide="betaWait.validation.email.isValid">{{betaWait.validation.email.message}}</div> 
+                  <div class="alert" ng-hide="betaWait.validation.email.isValid">{{betaWait.validation.email.message}}</div>
               </div>
 
               <div class="form-group">
@@ -53,6 +55,3 @@
 	</div>
 </div>
 @stop
-
-
-
