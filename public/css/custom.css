@@ -140,6 +140,16 @@ body.nav-sm .profile {
     margin-top: 50px;
 }
 
+@media all and (max-width: 768px) {
+  .wide .site_title > h1 {
+      font-size:50px !important;
+  }
+
+  .wide {
+      height:250px !important;
+  }
+}
+
 .menu_section {
     margin-bottom: 35px;
 }

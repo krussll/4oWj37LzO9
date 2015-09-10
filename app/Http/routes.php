@@ -54,9 +54,9 @@ Route::get('login', function () {
     return view('account.login');
 });
 
-/*Route::get('register', function () {
+Route::get('register-hidden', function () {
     return view('account.register');
-});*/
+});
 
 
 Route::post('logout','AccountController@Logout');
