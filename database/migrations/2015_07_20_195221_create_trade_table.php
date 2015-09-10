@@ -25,8 +25,8 @@ class CreateTradeTable extends Migration
         });
 
         DB::table('leagues')->insert(['name' => 'Overall', 'code' => '', 'initial_balance' => 10000, 'is_default' => true, 'is_global' => true, 'start_at' => new DateTime, 'end_at' => null, 'created_at' => new DateTime, 'updated_at' => new DateTime]);
-        
-        
+
+
     }
 
     /**
@@ -36,7 +36,7 @@ class CreateTradeTable extends Migration
      */
     public function down()
     {
-        
+
         Schema::drop('portfolios');
         Schema::drop('leagues');
     }

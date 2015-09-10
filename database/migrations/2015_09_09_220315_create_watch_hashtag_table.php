@@ -13,7 +13,7 @@ class CreateWatchHashtagTable extends Migration
     public function up()
     {
         //
-        Schema::create('watch_hashtag', function(Blueprint $table)
+        /*Schema::create('watch_hashtag', function(Blueprint $table)
         {
           $table->increments('id');
           $table->integer('user_id')->unsigned();
@@ -21,7 +21,7 @@ class CreateWatchHashtagTable extends Migration
           $table->timestamps();
           $table->foreign('user_id')->references('id')->on('users');
           $table->foreign('hashtag_id')->references('id')->on('hashtags');
-        });
+        });*/
     }
 
     /**

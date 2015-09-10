@@ -71,7 +71,7 @@ echo "got new tags";
 
                 if (!in_array($model->tag, $ignoredWords))
                 {
-                    $newhashtags[] = array('tag' => $tag->hashtag, 'created_at' => $now, 'updated_at' => $now);
+                    $newhashtags[] = array('tag' => $tag->hashtag, 'current_price' => 1, 'created_at' => $now, 'updated_at' => $now);
                 }
 
             }
@@ -104,7 +104,7 @@ echo "inserting counts";
 
 
         $results = DB::connection('pgsql')->update( DB::raw("DELETE FROM \"tagQueue\".\"tagQueue\" WHERE is_processed = B'1'"));
-        
+
 
 
     }

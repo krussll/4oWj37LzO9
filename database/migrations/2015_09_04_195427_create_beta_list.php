@@ -12,11 +12,11 @@ class CreateBetaList extends Migration
      */
     public function up()
     {
-        Schema::create('beta_wait_list', function (Blueprint $table) {
+        /*Schema::create('beta_wait_list', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('email')->unique();
                 $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -27,5 +27,6 @@ class CreateBetaList extends Migration
     public function down()
     {
         //
+        //Schema::drop('beta_wait_list');
     }
 }

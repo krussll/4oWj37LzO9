@@ -24,8 +24,8 @@ class CreatePortfolioTable extends Migration
         $table->foreign('league_id')->references('id')->on('leagues');
       });
 
-        DB::table('portfolios')->insert(['user_id' => 1, 'league_id' => 1, 'balance' => 10700, 'is_active' => true, 'created_at' => new DateTime, 'updated_at' => new DateTime]);
-        
+        DB::table('portfolios')->insert(['user_id' => 1, 'league_id' => 1, 'balance' => 10000, 'is_active' => true, 'created_at' => new DateTime, 'updated_at' => new DateTime]);
+
     }
 
     /**
@@ -35,6 +35,6 @@ class CreatePortfolioTable extends Migration
      */
     public function down()
     {
-        Schema::drop('portfolios');
+        //Schema::drop('portfolios');
     }
 }
