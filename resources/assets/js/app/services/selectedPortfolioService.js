@@ -29,31 +29,31 @@ angular.module('appMain')
 
                 if (useId === false)
                 {
-                    selectedPortfolio.portfolio = selectedPortfolio.portfolios[i];
+                    selectedPortfolio.portfolio = selectedPortfolio.portfolios[0];
                     if (selectedPortfolio.portfolio)
                     {
                         id = selectedPortfolio.portfolio.id;
                     }else {
                         id = 0;
                     }
-                        
+
                 }
             }else
             {
-                selectedPortfolio.portfolio = selectedPortfolio.portfolios[i];
-                var id = selectedPortfolio.portfolios[0].id;
+                selectedPortfolio.portfolio = selectedPortfolio.portfolios[0];
+                id = selectedPortfolio.portfolio.id;
             }
-            
+
             if(id > 0)
             {
-               selectedPortfolio.setPortfolioId(id); 
+               selectedPortfolio.setPortfolioId(id);
             }
         });
 
         selectedPortfolio.setPortfolioId = function(id)
         {
             selectedPortfolio.portfolioId = id;
-            
+
             $cookies.tagdaqportfolio = id;
         }
 
@@ -61,7 +61,7 @@ angular.module('appMain')
         {
             return selectedPortfolio.portfolio;
         }
-        
+
         selectedPortfolio.getPortfolioId = function()
         {
             return selectedPortfolio.portfolioId;

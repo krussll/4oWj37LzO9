@@ -11,7 +11,7 @@
           </span>
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12">
-          <span>
+          <span> 
               <h3 ng-hide="sideNav.portfolio == null">${{sideNav.portfolio.balance | number }}</h3>
           </span>
         </div>
