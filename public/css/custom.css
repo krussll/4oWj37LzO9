@@ -311,7 +311,7 @@ body.nav-md .container.body .right_col.full {
         padding-right: 0
     }
     .right_col {
-        padding: 10px !important;
+        padding-top: 10px !important;
     }
 }
 

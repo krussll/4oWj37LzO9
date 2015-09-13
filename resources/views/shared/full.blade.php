@@ -10,7 +10,7 @@
                             @if (Auth::check())
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <span>
+                                    <span class="hidden-xs">
                                         <cdn-image
                                             cdn-src="user/[[Auth::user()->id]]"
                                             cdn-file="[[Auth::user()->profile_image]]" />
@@ -31,7 +31,7 @@
                                 <!--<li><a href="/register">Register</a></li>-->
                                 <li><a  href="#login-modal" data-toggle="modal">Login</a></li>
                             @endif
-                            
+
 
                         </ul>
                     </nav>
