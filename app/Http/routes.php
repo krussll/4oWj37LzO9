@@ -20,6 +20,7 @@ Route::group(array('prefix'=>'/api'),function(){
 	Route::get('users/id', 'API\UsersController@getUserById');
 	Route::get('user/portfolios', 'API\PortfoliosController@getByUserId');
 
+  Route::post('contact/create', 'API\ContactController@create');
 
 	Route::post('beta/create','API\UsersController@createBeta');
 

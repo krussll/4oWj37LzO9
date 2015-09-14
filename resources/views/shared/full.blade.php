@@ -8,6 +8,9 @@
                         </div>
                         <ul class="nav navbar-nav navbar-right">
                             @if (Auth::check())
+                            <li>
+                              <a href="#contact-modal" data-toggle="modal">Contact Us</a>
+                            </li>
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                     <span class="hidden-xs">

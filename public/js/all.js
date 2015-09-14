@@ -1025,6 +1025,53 @@ angular.module('appMain')
 });
 
 })();
+
+(function () {
+
+'use strict';
+
+angular.module('appMain')
+
+.controller('contactController', function($scope, $http, pnotifyService) {
+    $scope.contact =
+    {
+    	control: {
+            isLoading: false,
+            isSubmitted: false
+        },
+        userPortfolios: null,
+        inputs: {
+            subject: '',
+            message: ''
+        },
+        submit: function()
+        {
+            var contact = this;
+            contact.control.isLoading = true;
+
+            $http.post('/api/contact/create', contact.inputs)
+                .success(function(data){
+                    if (data.success == true)
+                    {
+                        $('#contact-modal').modal('hide');
+                        pnotifyService.success('Trade Complete', 'Hashtag has been bought');
+
+                        contact.control.isSubmitted = true;
+                    }else {
+                        pnotifyService.error('Trade Error', data.message);
+                    }
+
+                    contact.control.isLoading = false;
+                });
+
+        }
+
+
+	};
+});
+
+})();
+
 (function () {
 
 'use strict';
