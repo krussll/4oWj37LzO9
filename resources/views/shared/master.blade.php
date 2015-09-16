@@ -17,7 +17,7 @@
     {!! Minify::stylesheet('/fonts/css/font-awesome.min.css') !!}
 
     <!-- Custom styling plus plugins -->
-    {!! Minify::stylesheet('/css/custom.css') !!}
+    {!! Minify::stylesheet('/css/custom.css?v=1') !!}
     {!! Minify::stylesheet('/css/maps/jquery-jvectormap-2.0.1.css') !!}
     {!! Minify::stylesheet('/css/icheck/flat/green.css') !!}
     {!! Minify::stylesheet('/css/floatexamples.css') !!}
