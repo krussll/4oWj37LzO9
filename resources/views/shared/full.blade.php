@@ -13,11 +13,7 @@
                             </li>
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <span class="hidden-xs">
-                                        <cdn-image
-                                            cdn-src="user/[[Auth::user()->id]]"
-                                            cdn-file="[[Auth::user()->profile_image]]" />
-                                    </span>
+                                    
                                     [[Auth::user()->firstname]] [[Auth::user()->surname]]
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
