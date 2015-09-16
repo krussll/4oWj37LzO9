@@ -283,7 +283,8 @@ body.nav-md .container.body .right_col {
     margin-left: 230px;
 }
 body.nav-md .container.body .right_col.full {
-    margin-left: 0px;
+    margin: auto;
+    max-width:1250px;
     padding:0;
 }
 
@@ -447,7 +448,7 @@ dark,
 
 body {
     color: rgb(34, 34, 34);
-    background: #2A3F54;
+    background: #FFF;
     /*#ECF0F1; #FCFCFC*/
 
     font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
