@@ -284,7 +284,7 @@ body.nav-md .container.body .right_col {
 }
 body.nav-md .container.body .right_col.full {
     margin: auto;
-    max-width:1250px;
+    max-width:1300px;
     padding:0;
 }
 
@@ -447,8 +447,9 @@ dark,
 }
 
 body {
+    padding: 10px 17px;
     color: rgb(34, 34, 34);
-    background: #FFF;
+    background: #EFEFEF;
     /*#ECF0F1; #FCFCFC*/
 
     font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
@@ -523,6 +524,9 @@ body {
 
 table.no-margin .progress {
     margin-bottom: 0;
+}
+.no-margin {
+  margin: 0px !important;
 }
 
 .main_content {
@@ -1148,7 +1152,6 @@ h2 {
     position: relative;
     width: 100%;
     margin-bottom: 10px;
-    padding: 10px 17px;
     display: inline-block;
     background: #fff;
     -webkit-column-break-inside: avoid;

@@ -1,9 +1,9 @@
 @extends('shared.full')
 
-@section('content') 
+@section('content')
 <div ng-controller="dashboardController" ng-init="dashboard.init()" ng-cloak>
   <div>
-      <div class="row x_panel" ng-controller="sideNavController">
+      <div class="x_panel" ng-controller="sideNavController">
         <div class="col-md-4 col-sm-4 col-xs-12">
           <span>
               <select ng-options="obj.name for obj in sideNav.userPortfolios" ng-model="sideNav.portfolio" class="form-control" ng-change="sideNav.change()">
@@ -12,7 +12,7 @@
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12">
           <span>
-              <h3 ng-hide="sideNav.portfolio == null">${{sideNav.portfolio.balance | number }}</h3>
+              <h3 class="no-margin" ng-hide="sideNav.portfolio == null">${{sideNav.portfolio.balance | number }}</h3>
           </span>
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12 form-group top_search">
