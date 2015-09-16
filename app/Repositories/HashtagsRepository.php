@@ -17,7 +17,7 @@ class HashtagsRepository implements HashtagsRepositoryInterface
 	public function GetHashtagsByNameLike($tag)
 	{
 
-		return Hashtag::where('tag', 'like', $tag . '%')->where('is_archived', false)->get();
+		return Hashtag::where('tag', 'like', '%' . $tag . '%')->where('is_archived', false)->get();
 	}
 
 	public function GetHashtagById($id)
@@ -57,7 +57,7 @@ class HashtagsRepository implements HashtagsRepositoryInterface
 		{
 			$skip = ($page--) * $length;
 		}
-		
+
 		return Hashtag::where('is_archived', false)->take($length)->skip($skip)->orderBy('current_price', 'DESC')->get();
 	}
 
