@@ -56,8 +56,10 @@ echo "got new tags";
         $hashtags = [];
         foreach(Hashtag::get() as $hashtag)
         {
+          if (!in_array($hashtag->tag, $ignoredWords))
+          {
             $hashtags[$hashtag->tag] = $hashtag->id;
-
+          }
         }
 
         $newhashtags = [];
