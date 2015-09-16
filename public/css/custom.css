@@ -155,8 +155,8 @@ div.full-width {
       font-size:50px !important;
   }
 
-  .wide {
-      height:250px !important;
+  div.top-margin-large {
+    margin-top: 0px !important;
   }
 }
 
@@ -675,7 +675,7 @@ div.light {
     background-color: #E8E8E8;
 }
 
-img.medium { max-width: 700px;}
+img.medium { max-width: 100%;}
 .grid_slider .col-md-6 {
     padding: 0 40px;
 }
