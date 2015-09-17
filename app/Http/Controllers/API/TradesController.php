@@ -21,12 +21,12 @@ class TradesController extends BaseController
         $rep = new TradesRepository();
 
         return response()->json($rep->GetAllTrades());
-    } 
+    }
 
     public function getActiveTrades()
     {
         $rep = new TradesRepository();
-        
+
         $portfolio = Portfolio::find(Input::get('portfolio_id'));
 
         if ($portfolio->user_id == Auth::user()->id)
@@ -34,9 +34,9 @@ class TradesController extends BaseController
 
             return response()->json(array('success' => true, 'trades' => $rep->GetTradesByPortfolioId($portfolio->id)));
         }
-        
+
         return response()->json(array('success' => false, 'trades' => []));
-    }    
+    }
 
     public function CreateTrade()
     {
@@ -44,7 +44,7 @@ class TradesController extends BaseController
         $portfolioRep = new PortfoliosRepository();
         $user = Auth::user();
         $message = "";
-        
+
         if ($user)
         {
             $hashtag = Hashtag::find(Input::get('hashtag_id'));
@@ -62,7 +62,7 @@ class TradesController extends BaseController
                         $trade = new Trade;
                         $trade->portfolio_id = $portfolio->id;
                         $trade->hashtag_id = $hashtag->id;
-                        $trade->shares_taken = $sharestaken; 
+                        $trade->shares_taken = $sharestaken;
                         $trade->price_taken = $hashtag->current_price;
                         $trade->price_sold = 0;
                         $trade->is_active = 1;
@@ -83,15 +83,15 @@ class TradesController extends BaseController
             {
                 $message = "You don't have access to this portfolio";
             }
-            
-            
+
+
         }else
         {
             $message = "You're not currently logged in";
         }
 
         return response()->json(array('success' => false, 'message' => $message));
-    }  
+    }
 
     public function CompleteTrade()
     {
@@ -114,12 +114,12 @@ class TradesController extends BaseController
                 $trade->price_sold = $hashtag->current_price;
 
                 $trade->save();
-
-                $portfolioRep->IncreaseBalance($portfolio, ($hashtag->current_price * $trade->shares_taken)); 
-                return response()->json(array('success' => true));
+                $price = ($hashtag->current_price * $trade->shares_taken);
+                $portfolioRep->IncreaseBalance($portfolio, $price);
+                return response()->json(array('success' => true, 'portfolioId' => $portfolio->id, 'price' => $price));
             }
         }
-        
+
         return response()->json(array('success' => false));
     }
 }

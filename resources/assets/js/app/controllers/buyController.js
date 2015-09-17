@@ -34,7 +34,7 @@ angular.module('appMain')
         init: function()
         {
             var buy = this;
-            buy.userPortfolios = []; 
+            buy.userPortfolios = [];
         },
         buy: function()
         {
@@ -54,6 +54,7 @@ angular.module('appMain')
                         console.log(data);
                         if (data.success == true)
                         {
+                            selectedPortfolioService.boughtPortfolioValue(buy.hashtag.portfolio, buy.total);
                             $('#buy-modal').modal('hide');
                             pnotifyService.success('Trade Complete', 'Hashtag has been bought');
 
@@ -61,12 +62,12 @@ angular.module('appMain')
                             {
                                 buyTagService.callback();
                             }
-                            
+
                             buy.control.isSubmitted = true;
                         }else {
                             pnotifyService.error('Trade Error', data.message);
                         }
-                        
+
                         buy.control.isLoading = false;
                     });
             }else
@@ -79,10 +80,10 @@ angular.module('appMain')
             var buy = this;
 
             var isValid = true;
-           
+
             buy.validation.shares_taken = validationService.isInteger(buy.hashtag.shares_taken);
             buy.validation.portfolio = validationService.dropdownOption(buy.hashtag.portfolio);
-            
+
             angular.forEach(buy.validation, function(validation)
             {
                 if (validation.isValid === false)
@@ -94,7 +95,7 @@ angular.module('appMain')
             return isValid;
         }
 
-        
+
 	};
 
     portfoliosService.then(function(service)
@@ -104,18 +105,18 @@ angular.module('appMain')
 
     $scope.$watch(function () {
            return selectedPortfolioService.portfolioId;
-         },                       
+         },
           function(newVal, oldVal) {
             if(newVal > 0)
             {
                $scope.buy.hashtag.portfolio = newVal;
             }
-            
+
         }, true);
 
     $scope.$watch(function () {
            return buyTagService.id;
-         },                       
+         },
           function(newVal, oldVal) {
             $scope.buy.hashtag.hashtag_id = newVal;
             $scope.buy.hashtag.shares_taken = 0;
@@ -123,14 +124,14 @@ angular.module('appMain')
 
     $scope.$watch(function () {
            return buyTagService.tag;
-         },                       
+         },
           function(newVal, oldVal) {
             $scope.buy.hashtag.tag = newVal;
         }, true);
 
     $scope.$watch(function () {
            return buyTagService.price;
-         },                       
+         },
           function(newVal, oldVal) {
             $scope.buy.hashtag.price = newVal;
         }, true);
@@ -138,7 +139,7 @@ angular.module('appMain')
 
     $scope.$watch(function () {
            return $scope.buy.hashtag.shares_taken;
-         },                       
+         },
           function(newVal, oldVal) {
             $scope.buy.total = newVal * $scope.buy.hashtag.price;
         }, true);

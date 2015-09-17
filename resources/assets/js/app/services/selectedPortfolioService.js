@@ -67,6 +67,30 @@ angular.module('appMain')
             return selectedPortfolio.portfolioId;
         }
 
+        selectedPortfolio.boughtPortfolioValue = function(portfolioId, value)
+        {
+          for (var i = 0; i < selectedPortfolio.portfolios.length; i++) {
+              if (selectedPortfolio.portfolios[i].id == portfolioId)
+              {
+                  selectedPortfolio.portfolio = selectedPortfolio.portfolios[i];
+                  selectedPortfolio.portfolio.balance = selectedPortfolio.portfolio.balance - value;
+                  break;
+              }
+          }
+        }
+
+        selectedPortfolio.soldPortfolioValue = function(portfolioId, value)
+        {
+          for (var i = 0; i < selectedPortfolio.portfolios.length; i++) {
+              if (selectedPortfolio.portfolios[i].id == portfolioId)
+              {
+                  selectedPortfolio.portfolio = selectedPortfolio.portfolios[i];
+                  selectedPortfolio.portfolio.balance = selectedPortfolio.portfolio.balance + value;
+                  break;
+              }
+          }
+        }
+
         return selectedPortfolio;
     }]);
 

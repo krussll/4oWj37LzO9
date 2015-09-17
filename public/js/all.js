@@ -659,7 +659,7 @@ angular.module('appMain')
         init: function()
         {
             var buy = this;
-            buy.userPortfolios = []; 
+            buy.userPortfolios = [];
         },
         buy: function()
         {
@@ -679,6 +679,7 @@ angular.module('appMain')
                         console.log(data);
                         if (data.success == true)
                         {
+                            selectedPortfolioService.boughtPortfolioValue(buy.hashtag.portfolio, buy.total);
                             $('#buy-modal').modal('hide');
                             pnotifyService.success('Trade Complete', 'Hashtag has been bought');
 
@@ -686,12 +687,12 @@ angular.module('appMain')
                             {
                                 buyTagService.callback();
                             }
-                            
+
                             buy.control.isSubmitted = true;
                         }else {
                             pnotifyService.error('Trade Error', data.message);
                         }
-                        
+
                         buy.control.isLoading = false;
                     });
             }else
@@ -704,10 +705,10 @@ angular.module('appMain')
             var buy = this;
 
             var isValid = true;
-           
+
             buy.validation.shares_taken = validationService.isInteger(buy.hashtag.shares_taken);
             buy.validation.portfolio = validationService.dropdownOption(buy.hashtag.portfolio);
-            
+
             angular.forEach(buy.validation, function(validation)
             {
                 if (validation.isValid === false)
@@ -719,7 +720,7 @@ angular.module('appMain')
             return isValid;
         }
 
-        
+
 	};
 
     portfoliosService.then(function(service)
@@ -729,18 +730,18 @@ angular.module('appMain')
 
     $scope.$watch(function () {
            return selectedPortfolioService.portfolioId;
-         },                       
+         },
           function(newVal, oldVal) {
             if(newVal > 0)
             {
                $scope.buy.hashtag.portfolio = newVal;
             }
-            
+
         }, true);
 
     $scope.$watch(function () {
            return buyTagService.id;
-         },                       
+         },
           function(newVal, oldVal) {
             $scope.buy.hashtag.hashtag_id = newVal;
             $scope.buy.hashtag.shares_taken = 0;
@@ -748,14 +749,14 @@ angular.module('appMain')
 
     $scope.$watch(function () {
            return buyTagService.tag;
-         },                       
+         },
           function(newVal, oldVal) {
             $scope.buy.hashtag.tag = newVal;
         }, true);
 
     $scope.$watch(function () {
            return buyTagService.price;
-         },                       
+         },
           function(newVal, oldVal) {
             $scope.buy.hashtag.price = newVal;
         }, true);
@@ -763,7 +764,7 @@ angular.module('appMain')
 
     $scope.$watch(function () {
            return $scope.buy.hashtag.shares_taken;
-         },                       
+         },
           function(newVal, oldVal) {
             $scope.buy.total = newVal * $scope.buy.hashtag.price;
         }, true);
@@ -1054,11 +1055,11 @@ angular.module('appMain')
                     if (data.success == true)
                     {
                         $('#contact-modal').modal('hide');
-                        pnotifyService.success('Trade Complete', 'Hashtag has been bought');
+                        pnotifyService.success('Message Sent', 'Thanks for the message.');
 
                         contact.control.isSubmitted = true;
                     }else {
-                        pnotifyService.error('Trade Error', data.message);
+                        pnotifyService.error('Message Error', data.message);
                     }
 
                     contact.control.isLoading = false;
@@ -1167,7 +1168,7 @@ angular.module('appMain')
 'use strict';
 
 angular.module('appMain')
-    .directive('cdnSellButton', function($http, pnotifyService) {
+    .directive('cdnSellButton', function($http, pnotifyService, selectedPortfolioService) {
         return {
             restrict:'E',
             template: '<a ng-disabled="isLoading" href="#" class="btn btn-danger btn-{{buttonSize}}" ng-click="sell();"> Sell </a>',
@@ -1180,28 +1181,29 @@ angular.module('appMain')
                scope.sell = function()
                 {
                     scope.isLoading = true;
-                    
+
                     var postData = {
                         id: scope.tradeId
                     };
-                    
+
                     $http.post('/api/trades/complete', postData)
-                        .success(function(data){
-                            console.log(data);
+                        .success(function(data)
+                        {
                             if (data.success == true)
                             {
                                 pnotifyService.success('Trade Complete', 'Hashtag has been sold');
                                 scope.eventHandler();
+                                selectedPortfolioService.soldPortfolioValue(data.portfolioId, data.price);
                             }else {
                                 pnotifyService.error('Trade Failed', 'Something went wrong');
                             }
-                            
+
                             scope.isLoading = false;
                         });
                 }
             },
-            
-            
+
+
         };
     });
 
@@ -1879,6 +1881,30 @@ angular.module('appMain')
         selectedPortfolio.getPortfolioId = function()
         {
             return selectedPortfolio.portfolioId;
+        }
+
+        selectedPortfolio.boughtPortfolioValue = function(portfolioId, value)
+        {
+          for (var i = 0; i < selectedPortfolio.portfolios.length; i++) {
+              if (selectedPortfolio.portfolios[i].id == portfolioId)
+              {
+                  selectedPortfolio.portfolio = selectedPortfolio.portfolios[i];
+                  selectedPortfolio.portfolio.balance = selectedPortfolio.portfolio.balance - value;
+                  break;
+              }
+          }
+        }
+
+        selectedPortfolio.soldPortfolioValue = function(portfolioId, value)
+        {
+          for (var i = 0; i < selectedPortfolio.portfolios.length; i++) {
+              if (selectedPortfolio.portfolios[i].id == portfolioId)
+              {
+                  selectedPortfolio.portfolio = selectedPortfolio.portfolios[i];
+                  selectedPortfolio.portfolio.balance = selectedPortfolio.portfolio.balance + value;
+                  break;
+              }
+          }
         }
 
         return selectedPortfolio;
