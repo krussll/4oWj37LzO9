@@ -1,4 +1,4 @@
-@extends('shared.sidebar')
+@extends('shared.full')
 
 @section('content')
 <div ng-controller="leagueShowController" ng-init="leagueShow.init('[[$id]]')" ng-cloak>

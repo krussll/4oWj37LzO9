@@ -1,4 +1,4 @@
-@extends('shared.sidebar')
+@extends('shared.full')
 
 @section('content')
 <div ng-controller="hashtagShowController" ng-init="hashtagShow.init('[[$id]]')" ng-cloak>

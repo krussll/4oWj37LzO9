@@ -1,4 +1,4 @@
-@extends('shared.sidebar')
+@extends('shared.full')
 
 @section('content')
 <div ng-controller="searchController" ng-init="search.init('[[$term]]')" ng-cloak>
@@ -21,7 +21,7 @@
 
   </div>
   <div>
-      
+
       <div class="row">
 
         <div class="col-md-12 col-sm-12 col-xs-12">

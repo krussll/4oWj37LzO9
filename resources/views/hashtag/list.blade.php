@@ -1,4 +1,4 @@
-@extends('shared.sidebar')
+@extends('shared.full')
 
 @section('content')
 <div ng-controller="listController" ng-init="list.init()" ng-cloak>

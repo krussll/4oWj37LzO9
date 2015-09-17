@@ -1,4 +1,4 @@
-@extends('shared.master')
+@extends('shared.full')
 
 @section('content')
 <div ng-controller="userShowController" ng-init="userShow.init('[[$id]]')" >
@@ -24,7 +24,7 @@
          </div>
 
         </section>
-        
-  </div> 
+
+  </div>
 </div>
 @stop

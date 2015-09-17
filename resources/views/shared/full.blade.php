@@ -4,13 +4,15 @@
                 <div class="nav_menu">
                     <nav class="" role="navigation">
                         <div class="navbar nav_title" style="border: 0;">
+                          @if (Auth::check())
+                            <a href="/dashboard" class="site_title"><span>{{layout.consts.siteName | uppercase}}</span></a>
+                          @else
                             <a href="/" class="site_title"><span>{{layout.consts.siteName | uppercase}}</span></a>
+                          @endif
                         </div>
+
                         <ul class="nav navbar-nav navbar-right">
                             @if (Auth::check())
-                            <li>
-                              <a href="#contact-modal" data-toggle="modal">Contact Us</a>
-                            </li>
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 
@@ -25,6 +27,14 @@
                                     <li><a href="#" ng-click="layout.logout()"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                                     </li>
                                 </ul>
+                            </li>
+                            <li>
+                              <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bars"></i></a>
+                              <ul class="dropdown-menu dropdown-mobilemenu animated fadeInDown">
+                                  <li><a href="/leagues">Leagues</a></li>
+                                  <li><a href="/hashtags/list">Find Hashtags</a></li>
+                                  <li><a href="#contact-modal" data-toggle="modal">Contact Us</a></li>
+                              </ul>
                             </li>
                             @else
                                 <!--<li><a href="/register">Register</a></li>-->

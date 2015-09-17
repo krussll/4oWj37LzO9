@@ -1,15 +1,15 @@
-@extends('shared.sidebar')
+@extends('shared.full')
 
 @section('content')
   <div class="page-title">
     <div class="title_left">
         <h2>Settings</h2>
     </div>
-    
+
 
   </div>
   <div ng-controller="settingsController" ng-init="settings.init()" ng-cloak>
-      
+
       <div class="row">
 
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -26,7 +26,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Firstname <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="firstname" ng-model="settings.nameInputs.firstname" type="text" class="form-control col-md-7 col-xs-12" /> 
+                          <input id="firstname" ng-model="settings.nameInputs.firstname" type="text" class="form-control col-md-7 col-xs-12" />
                       </div>
                       <div class="alert" ng-hide="settings.nameValidation.firstname.isValid">{{settings.nameValidation.firstname.message}}</div>
                   </div>
@@ -35,7 +35,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Surname <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="surname" ng-model="settings.nameInputs.surname" type="text" class="form-control col-md-7 col-xs-12" /> 
+                          <input id="surname" ng-model="settings.nameInputs.surname" type="text" class="form-control col-md-7 col-xs-12" />
                       </div>
                       <div class="alert" ng-hide="settings.nameValidation.surname.isValid">{{settings.nameValidation.surname.message}}</div>
                   </div>
@@ -67,7 +67,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Current Password <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                         <input id="password" ng-model="settings.passwordInputs.currentPassword" type="password" class="form-control col-md-7 col-xs-12" /> 
+                         <input id="password" ng-model="settings.passwordInputs.currentPassword" type="password" class="form-control col-md-7 col-xs-12" />
                       </div>
                       <div class="alert" ng-hide="settings.passwordValidation.currentPassword.isValid">{{settings.passwordValidation.currentPassword.message}}</div>
                   </div>
@@ -76,7 +76,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">New Password <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                         <input id="password" ng-model="settings.passwordInputs.newPassword" type="password" class="form-control col-md-7 col-xs-12" /> 
+                         <input id="password" ng-model="settings.passwordInputs.newPassword" type="password" class="form-control col-md-7 col-xs-12" />
                       </div>
                       <div class="alert" ng-hide="settings.passwordValidation.newPassword.isValid">{{settings.passwordValidation.newPassword.message}}</div>
                   </div>
