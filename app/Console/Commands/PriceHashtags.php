@@ -41,13 +41,13 @@ class PriceHashtags extends Command
      * @return mixed
      */
     public function handle()
-    {        
+    {
 
         print('getting results');
         $results = DB::select(
-                DB::raw("SELECT SUM(case when c.count > 0 then c.count else 0 end) as d, COUNT(c.created_at) as r, 
-                SUM(case when t.is_active = true then 1 else 0 end) as b, SUM(case when t.is_active = false then 1 else 0 end) as s, h.id as id 
-                FROM hashtags h  
+                DB::raw("SELECT SUM(case when c.count > 0 then c.count else 0 end) as d, COUNT(c.created_at) as r,
+                SUM(case when t.is_active = true then 1 else 0 end) as b, SUM(case when t.is_active = false then 1 else 0 end) as s, h.id as id
+                FROM hashtags h
                 Left Join hashtag_count c ON h.id = c.hashtag_id AND c.created_at > DATE_SUB(CURDATE(), INTERVAL 4 DAY)
                 LEFT JOIN trades t ON h.id = t.hashtag_id AND t.created_at > DATE_SUB(CURDATE(), INTERVAL 4 DAY)
                 WHERE h.is_archived = false
@@ -55,23 +55,23 @@ class PriceHashtags extends Command
             );
 
         print('got results');
-        
+
         $divider = 1;
-        
+
         print('start pricing');
         $hashtags = [];
         foreach($results as $hashtag_data)
         {
                 $m = rand(10, 14) / 10;//multiplier
-                $q = rand(-5, 7);//random quirk
-                $price = 1;
+                $q = rand(-3, 5);//random quirk
+                $price = 10;
 
                 if ($hashtag_data->r > 0)
                 {
                     $price = round((($hashtag_data->d / $hashtag_data->r) + ( (($hashtag_data->b - $hashtag_data->s) / $hashtag_data->r) * $m )) + $q);
-                    if($price < 1)
+                    if($price < 10)
                     {
-                        $price = 1;
+                        $price = 10;
                     }
                 }
 
@@ -84,7 +84,7 @@ class PriceHashtags extends Command
         print('insert chunk start');
         DB::transaction(function() use ($hashtags)
         {
-            foreach ($hashtags as $id => $price) 
+            foreach ($hashtags as $id => $price)
             {
                 DB::table('hashtag_price')->insert(['amount' => $price, 'hashtag_id' => $id, 'created_at' => new \DateTime, 'updated_at' => new \DateTime]);
                 DB::update( DB::raw("UPDATE hashtags SET current_price = " . $price . " WHERE id = " . $id));
