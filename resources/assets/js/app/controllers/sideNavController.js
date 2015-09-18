@@ -10,9 +10,22 @@ angular.module('appMain')
     {
         userPortfolios: null,
         portfolio: null,
+        searchTerm: '',
+        invalidSearch: false,
         change: function () {
             var sideNav = this;
             selectedPortfolioService.setPortfolioId(sideNav.portfolio.id);
+        },
+        searchHashtags: function() {
+            var sideNav = this;
+                sideNav.invalidSearch = false;
+
+            if (sideNav.searchTerm != '')
+            {
+                window.location = '/hashtag/search/' + sideNav.searchTerm;
+            }else {
+                sideNav.invalidSearch = true;
+            }
         }
 	};
 

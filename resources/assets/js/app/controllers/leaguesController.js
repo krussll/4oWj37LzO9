@@ -5,8 +5,11 @@
 angular.module('appMain')
 
 .controller('leaguesController', function($scope, $http, selectedPortfolioService) {
-    $scope.leagues = 
+    $scope.leagues =
     {
+      control: {
+        isLoading: false
+      },
         join: {
             code: '',
             message: '',
@@ -17,19 +20,19 @@ angular.module('appMain')
         init: function ()
         {
             var leagues = this;
-
+            leagues.control.isLoading = true;
             $http.get('/api/leagues/user/positions')
                 .success(function(data){
                     leagues.globalLeagues = data.global;
                     leagues.privateLeagues = data.private;
-                    
+                    leagues.control.isLoading = false;
                 });
-            
+
         },
         joinSubmit: function()
         {
            var leagues = this;
-           
+
            leagues.join.showMessage = false;
            if(leagues.join.code === '')
            {
@@ -46,7 +49,7 @@ angular.module('appMain')
                         leagues.join.message = data.message;
                         leagues.join.showMessage = true;
                     }
-                    
+
                 });
            }
         }

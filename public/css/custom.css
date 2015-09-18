@@ -93,7 +93,7 @@ body.nav-sm .profile {
     font-size: 16px;
 }
 
-.home-container.light {
+.home-container {
     color: #808287;
 }
 
@@ -115,10 +115,12 @@ div.full-width {
 .home-container .row {
     padding: 75px 0;
 }
-
-.top-margin-large {
-  margin-top: 100px;
+@media (min-width: 768px) {
+  .top-margin-large {
+    margin-top: 100px;
+  }
 }
+
 .home-container p {
     display: block;
     text-align: center;
@@ -144,19 +146,18 @@ div.full-width {
 .wide .site_title > h1 {
     font-size:90px;
     margin-top: 60px;
+    color: #FFF;
 }
 
 .wide .site_title > h2 {
     font-size:40px;
+    color: #FFF;
+    margin-bottom: 60px;
 }
 
 @media all and (max-width: 768px) {
   .wide .site_title > h1 {
       font-size:50px !important;
-  }
-
-  div.top-margin-large {
-    margin-top: 0px !important;
   }
 }
 

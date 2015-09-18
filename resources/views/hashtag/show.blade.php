@@ -2,18 +2,9 @@
 
 @section('content')
 <div ng-controller="hashtagShowController" ng-init="hashtagShow.init('[[$id]]')" ng-cloak>
-  <div class="page-title">
-    <div class="title_left">
-        <h3>Hashtag Detail</h3>
-    </div>
-
-
-
-  </div>
   <div>
-
+      @include('account.account-header-partial')
       <div class="row">
-
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">

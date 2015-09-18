@@ -302,7 +302,7 @@ angular.module('appMain')
 angular.module('appMain')
 
 .controller('dashboardController', function($scope, $http, selectedPortfolioService) {
-    $scope.dashboard = 
+    $scope.dashboard =
     {
     	control: {
             isLoading: true,
@@ -313,8 +313,6 @@ angular.module('appMain')
         globalLeagues: [],
         privateLeagues: [],
         popularHashtag: null,
-        searchTerm: '',
-        invalidSearch: false,
         init: function ()
         {
             var dashboard = this;
@@ -336,22 +334,10 @@ angular.module('appMain')
                 .success(function(data){
                     dashboard.globalLeagues = data.global;
                     dashboard.privateLeagues = data.private;
-                    
+
                     dashboard.control.hashtagsLoading = false;
                 });
-            
-        },
-        searchHashtags: function() {
-            var dashboard = this;
-                dashboard.invalidSearch = false;
 
-            if (dashboard.searchTerm != '')
-            {
-                window.location = 'hashtag/search/' + dashboard.searchTerm;
-            }else {
-                dashboard.invalidSearch = true;
-            }
-            
         },
         updateTrades: function()
         {
@@ -362,22 +348,23 @@ angular.module('appMain')
                     dashboard.activeTrades = data.trades;
                     dashboard.control.isLoading = false;
                 });
-        } 
+        }
 	};
 
     $scope.$watch(function () {
            return selectedPortfolioService.portfolioId;
-         },                       
+         },
           function(newVal, oldVal) {
             if(newVal > 0)
             {
-               $scope.dashboard.updateTrades(); 
+               $scope.dashboard.updateTrades();
             }
-            
+
         }, true);
 });
 
 })();
+
 (function () {
 
 'use strict';
@@ -784,9 +771,22 @@ angular.module('appMain')
     {
         userPortfolios: null,
         portfolio: null,
+        searchTerm: '',
+        invalidSearch: false,
         change: function () {
             var sideNav = this;
             selectedPortfolioService.setPortfolioId(sideNav.portfolio.id);
+        },
+        searchHashtags: function() {
+            var sideNav = this;
+                sideNav.invalidSearch = false;
+
+            if (sideNav.searchTerm != '')
+            {
+                window.location = '/hashtag/search/' + sideNav.searchTerm;
+            }else {
+                sideNav.invalidSearch = true;
+            }
         }
 	};
 
@@ -807,8 +807,11 @@ angular.module('appMain')
 angular.module('appMain')
 
 .controller('leaguesController', function($scope, $http, selectedPortfolioService) {
-    $scope.leagues = 
+    $scope.leagues =
     {
+      control: {
+        isLoading: false
+      },
         join: {
             code: '',
             message: '',
@@ -819,19 +822,19 @@ angular.module('appMain')
         init: function ()
         {
             var leagues = this;
-
+            leagues.control.isLoading = true;
             $http.get('/api/leagues/user/positions')
                 .success(function(data){
                     leagues.globalLeagues = data.global;
                     leagues.privateLeagues = data.private;
-                    
+                    leagues.control.isLoading = false;
                 });
-            
+
         },
         joinSubmit: function()
         {
            var leagues = this;
-           
+
            leagues.join.showMessage = false;
            if(leagues.join.code === '')
            {
@@ -848,7 +851,7 @@ angular.module('appMain')
                         leagues.join.message = data.message;
                         leagues.join.showMessage = true;
                     }
-                    
+
                 });
            }
         }
@@ -857,6 +860,7 @@ angular.module('appMain')
 });
 
 })();
+
 
 (function () {
 

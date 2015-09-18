@@ -78,6 +78,9 @@
                     <tr ng-repeat="league in leagues.globalLeagues">
                       <td scope="row">{{league.position}}</td><td><a href="/league/{{league.id}}">{{league.name | titlecase}}</a></td>
                     </tr>
+                    <tr ng-show="leagues.globalLeagues.length == 0 && !leagues.control.isLoading">
+                      <td class="no-record" colspan="3">No Active Trades</td>
+                    </tr>
                   </tbody>
                   </table>
                 </div>
@@ -92,6 +95,9 @@
                   <tbody>
                     <tr ng-repeat="league in leagues.privateLeagues">
                       <td scope="row">{{league.position}}</td><td><a href="/league/{{league.id}}">{{league.name | titlecase}}</a></td>
+                    </tr>
+                    <tr ng-show="leagues.privateLeagues.length == 0 && !leagues.control.isLoading">
+                      <td class="no-record" colspan="3">No Private Leagues</td>
                     </tr>
                   </tbody>
                   </table>

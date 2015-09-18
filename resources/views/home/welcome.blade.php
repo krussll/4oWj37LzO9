@@ -8,9 +8,6 @@
                         </div>
                         <ul class="nav navbar-nav navbar-right">
                             @if (Auth::check())
-                            <li>
-                              <a href="#contact-modal" data-toggle="modal">Contact Us</a>
-                            </li>
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 
@@ -25,6 +22,14 @@
                                     <li><a href="#" ng-click="layout.logout()"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                                     </li>
                                 </ul>
+                            </li>
+                            <li>
+                              <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bars"></i></a>
+                              <ul class="dropdown-menu dropdown-mobilemenu animated fadeInDown">
+                                  <li><a href="/leagues">Leagues</a></li>
+                                  <li><a href="/hashtags/list">Find Hashtags</a></li>
+                                  <li><a href="#contact-modal" data-toggle="modal">Contact Us</a></li>
+                              </ul>
                             </li>
                             @else
                                 <!--<li><a href="/register">Register</a></li>-->
@@ -72,31 +77,33 @@
                 </div>
                   <div class="home-container" ng-controller="betaWaitController">
                     <div class="row">
-                      <p>
-                        We are currently in a closed beta test, but if you'd like us to let you know when we move to the open beta please fill in the form below.
-                      </p>
+                      <div class="col-xs-12">
+                        <p>
+                          We are currently in a closed beta test, but if you'd like us to let you know when we move to the open beta please fill in the form below.
+                        </p>
 
-                      <p>
-                        <div ng-show="betaWait.message != ''">
-                                <div class="col-md-12">
-                                  <div class="alert alert-success">{{betaWait.message}}</div>
+                        <p>
+                          <div ng-show="betaWait.message != ''">
+                                  <div class="col-md-12">
+                                    <div class="alert alert-success">{{betaWait.message}}</div>
+                                  </div>
                                 </div>
-                              </div>
-                        <form data-parsley-validate ng-submit="betaWait.submit()" class="form-horizontal form-label-left">
+                          <form data-parsley-validate ng-submit="betaWait.submit()" class="form-horizontal form-label-left">
 
-                                <div class="item form-group" ng-class="{bad: !betaWait.validation.email.isValid}">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Email <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input id="email" required="required" ng-model="betaWait.inputs.email" type="text" class="form-control col-md-7 col-xs-12" />
-                                    </div>
-                                    <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <button type="submit" class="btn btn-success">Submit</button>
-                                    </div>
-                                </div>
+                                  <div class="item form-group" ng-class="{bad: !betaWait.validation.email.isValid}">
+                                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Email <span class="required">*</span>
+                                      </label>
+                                      <div class="col-md-6 col-sm-6 col-xs-12">
+                                          <input id="email" required="required" ng-model="betaWait.inputs.email" type="text" class="form-control col-md-7 col-xs-12" />
+                                      </div>
+                                      <div class="col-md-3 col-sm-3 col-xs-12">
+                                          <button type="submit" class="btn btn-success">Submit</button>
+                                      </div>
+                                  </div>
 
-                              </form>
-                      </p>
+                                </form>
+                        </p>
+                      </div>
                     </div>
                   </div>
 
