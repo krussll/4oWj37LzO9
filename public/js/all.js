@@ -24,7 +24,7 @@ angular.module('appMain')
         },
         consts:
         {
-            siteName: 'tagdaq'
+            siteName: 'Tagdaq'
         }
 	}
 });
@@ -98,7 +98,7 @@ angular.module('appMain')
         submit: function() {
 
             var login = this;
-            
+            login.control.isLoading = true;
             if(login.isValid())
             {
               $http.post('/api/login/auth', login.inputs)
@@ -114,8 +114,11 @@ angular.module('appMain')
 
                         login.validation.password.isValid = false;
                         login.validation.password.message = 'Incorrect email/password';
+                        login.control.isLoading = false;
                     }
                 });
+            }else {
+              login.control.isLoading = false;
             }
 
         },
@@ -123,10 +126,10 @@ angular.module('appMain')
         {
             var login = this;
             var isValid = true;
-           
+
             login.validation.email = validationService.email(login.inputs.email);
             login.validation.password = validationService.password(login.inputs.password);
-            
+
             angular.forEach(login.validation, function(validation)
             {
                 if (validation.isValid === false)
@@ -134,7 +137,7 @@ angular.module('appMain')
                     isValid = false;
                 }
             });
-            
+
             return isValid;
         }
 
@@ -307,6 +310,7 @@ angular.module('appMain')
     	control: {
             isLoading: true,
             hashtagsLoading: true,
+            leagueLoading: true
         },
         activeTrades: [],
         popularHashtags: [],
@@ -318,6 +322,7 @@ angular.module('appMain')
             var dashboard = this;
             dashboard.control.isLoading = true;
             dashboard.control.hashtagsLoading = true;
+            dashboard.control.leagueLoading = true;
 
 
             $http.get('/api/hashtags/popular')
@@ -335,7 +340,7 @@ angular.module('appMain')
                     dashboard.globalLeagues = data.global;
                     dashboard.privateLeagues = data.private;
 
-                    dashboard.control.hashtagsLoading = false;
+                    dashboard.control.leagueLoading = false;
                 });
 
         },
@@ -1200,9 +1205,9 @@ angular.module('appMain')
                                 selectedPortfolioService.soldPortfolioValue(data.portfolioId, data.price);
                             }else {
                                 pnotifyService.error('Trade Failed', 'Something went wrong');
+                                scope.isLoading = false;
                             }
 
-                            scope.isLoading = false;
                         });
                 }
             },

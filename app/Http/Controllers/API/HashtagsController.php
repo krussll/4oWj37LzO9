@@ -18,7 +18,7 @@ class HashtagsController extends BaseController
     {
         $rep = new HashtagsRepository();
 
-        return response()->json($rep->GetLatestHashtags(5));
+        return response()->json($rep->GetLatestHashtags(10));
     }
 
     public function getHashtagsByName()
@@ -39,7 +39,7 @@ class HashtagsController extends BaseController
     {
         $rep = new HashtagsRepository();
 
-        return response()->json($rep->GetPopularHashtags(5));
+        return response()->json($rep->GetPopularHashtags(10));
     }
 
     public function getHashtagCountsById()

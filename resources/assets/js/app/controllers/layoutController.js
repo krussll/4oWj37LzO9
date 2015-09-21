@@ -22,7 +22,7 @@ angular.module('appMain')
         },
         consts:
         {
-            siteName: 'tagdaq'
+            siteName: 'Tagdaq'
         }
 	}
 });

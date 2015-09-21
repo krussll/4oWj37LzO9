@@ -33,7 +33,7 @@ angular.module('appMain')
         submit: function() {
 
             var login = this;
-            
+            login.control.isLoading = true;
             if(login.isValid())
             {
               $http.post('/api/login/auth', login.inputs)
@@ -49,8 +49,11 @@ angular.module('appMain')
 
                         login.validation.password.isValid = false;
                         login.validation.password.message = 'Incorrect email/password';
+                        login.control.isLoading = false;
                     }
                 });
+            }else {
+              login.control.isLoading = false;
             }
 
         },
@@ -58,10 +61,10 @@ angular.module('appMain')
         {
             var login = this;
             var isValid = true;
-           
+
             login.validation.email = validationService.email(login.inputs.email);
             login.validation.password = validationService.password(login.inputs.password);
-            
+
             angular.forEach(login.validation, function(validation)
             {
                 if (validation.isValid === false)
@@ -69,7 +72,7 @@ angular.module('appMain')
                     isValid = false;
                 }
             });
-            
+
             return isValid;
         }
 

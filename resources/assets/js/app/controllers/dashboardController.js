@@ -10,6 +10,7 @@ angular.module('appMain')
     	control: {
             isLoading: true,
             hashtagsLoading: true,
+            leagueLoading: true
         },
         activeTrades: [],
         popularHashtags: [],
@@ -21,6 +22,7 @@ angular.module('appMain')
             var dashboard = this;
             dashboard.control.isLoading = true;
             dashboard.control.hashtagsLoading = true;
+            dashboard.control.leagueLoading = true;
 
 
             $http.get('/api/hashtags/popular')
@@ -38,7 +40,7 @@ angular.module('appMain')
                     dashboard.globalLeagues = data.global;
                     dashboard.privateLeagues = data.private;
 
-                    dashboard.control.hashtagsLoading = false;
+                    dashboard.control.leagueLoading = false;
                 });
 
         },

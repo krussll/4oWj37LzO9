@@ -11,11 +11,11 @@
                     <h2>Active Trades</h2>
                     <div class="clearfix"></div>
                 </div>
-                <div class="x_content">
+                <div class="x_content" ng-class="{loadingsection: dashboard.control.isLoading}">
                   <table class="table">
                     <thead>
                     <tr>
-                      <th>Hashtag</th><th class="hidden-xs">Date Started</th><th>Shares Taken</th><th class="hidden-xs">Price Taken</th><th>Current Price</th><th>Change</th><th></th>
+                      <th>Hashtag</th><th class="hidden-xs">Date Started</th><th class="hidden-xs">Shares Taken</th><th class="hidden-xs">Price Taken</th><th>Current Price</th><th>Change</th><th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -26,6 +26,9 @@
                     </tr>
                     <tr ng-show="dashboard.activeTrades.length == 0 && !dashboard.control.isLoading">
                       <td class="no-record" colspan="3">No Active Trades</td>
+                    </tr>
+                    <tr ng-show="dashboard.control.isLoading">
+                      <td colspan="3"><img src="/cdn/ajax-loader.gif" /></td>
                     </tr>
                   </tbody>
                   </table>
@@ -50,7 +53,7 @@
                     <h2>Popular Hashtags</h2>
                     <div class="clearfix"></div>
                 </div>
-                <div class="x_content">
+                <div class="x_content" ng-class="{loadingsection: dashboard.control.hashtagsLoading}">
                   <table class="table">
                     <thead>
                     <tr>
@@ -61,6 +64,9 @@
                     <tr ng-repeat="hashtag in dashboard.popularHashtags">
                       <td scope="row"><a href="/hashtag/{{hashtag.id}}">{{hashtag.tag}}</a></td><td>${{hashtag.current_price | number }}</td>
                       <td><cdn-buy-button button-size="xs" hashtag-id="{{hashtag.id}}" tag="{{hashtag.tag}}" price="{{hashtag.current_price}}" event-handler="dashboard.updateTrades()" /></td>
+                    </tr>
+                    <tr ng-show="dashboard.control.hashtagsLoading">
+                      <td class="no-record" colspan="3"><img src="/cdn/ajax-loader.gif" /></td>
                     </tr>
                   </tbody>
                   </table>
@@ -73,7 +79,7 @@
                     <h2>Your Leagues</h2>
                     <div class="clearfix"></div>
                 </div>
-                <div class="x_content">
+                <div class="x_content" ng-class="{loadingsection: dashboard.control.leagueLoading}">
                   <table class="table">
                     <thead>
                     <tr>
@@ -84,14 +90,17 @@
                     <tr ng-repeat="league in dashboard.globalLeagues">
                       <td scope="row">{{league.position}}</td><td><a href="/league/{{league.id}}">{{league.name | titlecase}}</a></td>
                     </tr>
-                    <tr ng-show="dashboard.globalLeagues.length == 0 && !dashboard.control.hashtagsLoading">
+                    <tr ng-show="dashboard.globalLeagues.length == 0 && !dashboard.control.leagueLoading">
                       <td class="no-record" colspan="2">No Global Leagues</td>
+                    </tr>
+                    <tr ng-show="dashboard.control.leagueLoading">
+                      <td class="no-record" colspan="2"><img src="/cdn/ajax-loader.gif" /></td>
                     </tr>
                   </tbody>
                   </table>
                 </div>
 
-                <div class="x_content2">
+                <div class="x_content2" ng-class="{loadingsection: dashboard.control.leagueLoading}">
                   <table class="table">
                     <thead>
                     <tr>
@@ -102,8 +111,11 @@
                     <tr ng-repeat="league in dashboard.privateLeagues">
                       <td scope="row">{{league.position}}</td><td><a href="/league/{{league.id}}">{{league.name | titlecase}}</a></td>
                     </tr>
-                    <tr ng-show="dashboard.privateLeagues.length == 0 && !dashboard.control.hashtagsLoading">
+                    <tr ng-show="dashboard.privateLeagues.length == 0 && !dashboard.control.leagueLoading">
                       <td class="no-record" colspan="2">No Private Leagues</td>
+                    </tr>
+                    <tr ng-show="dashboard.control.leagueLoading">
+                      <td class="no-record" colspan="2"><img src="/cdn/ajax-loader.gif" /></td>
                     </tr>
                   </tbody>
                   </table>

@@ -31,9 +31,9 @@ angular.module('appMain')
                                 selectedPortfolioService.soldPortfolioValue(data.portfolioId, data.price);
                             }else {
                                 pnotifyService.error('Trade Failed', 'Something went wrong');
+                                scope.isLoading = false;
                             }
 
-                            scope.isLoading = false;
                         });
                 }
             },
