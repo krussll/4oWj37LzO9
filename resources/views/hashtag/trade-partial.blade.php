@@ -65,7 +65,7 @@
 <div class="ln_solid"></div>
 <div class="form-group">
     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-        <button ng-disabled="buy.control.isLoading" type="submit" class="btn btn-success"><span ng-hide="login.control.isLoading">Submit</span><img src="/cdn/ajax-loader.gif" ng-show="login.control.isLoading" /></button>
+        <button ng-disabled="buy.control.isLoading" type="submit" class="btn btn-success"><span ng-hide="buy.control.isLoading">Submit</span><img src="/cdn/ajax-loader.gif" ng-show="buy.control.isLoading" /></button>
     </div>
 </div>
 
