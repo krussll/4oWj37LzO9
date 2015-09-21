@@ -3106,9 +3106,14 @@ select.parsley-error {
 /* ***** /buttons *******/
 /* *********  /form design  **************************** */
 /* *********  calender dropdown  **************************** */
-.loadingsection, .no-record {
-  color: #ccc !important;
+.loadingsection {
+  color: #CCC !important;
 }
+
+.no-record {
+  color: #5A738E !important;
+}
+
 .daterangepicker.dropdown-menu {
     font-size: 13px;
     padding: 0;

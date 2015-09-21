@@ -43,11 +43,22 @@ class HashtagsRepository implements HashtagsRepositoryInterface
 	public function GetHashtagPrices($id)
 	{
 		$date = new Carbon;
-        $date->subDays(4);
-		return DB::table('hashtag_price')
+    $date->subDays(4);
+
+		$prices = DB::table('hashtag_price')
                     ->where('created_at', '>', $date->toDateTimeString())
                     ->where('hashtag_id', $id)
                     ->get(['created_at', 'amount']);
+
+		$hashtag = $this->GetHashtagById($id);
+
+		if ($hashtag->created_at > $date)
+		{
+			 array_unshift($prices, array('amount' => 0, 'created_at' => $hashtag->created_at->toDateTimeString()));
+			 array_unshift($prices, array('amount' => 0, 'created_at' => $date->toDateTimeString()));
+		}
+
+		return $prices;
 	}
 
 	public function HashtagsList($page, $length)

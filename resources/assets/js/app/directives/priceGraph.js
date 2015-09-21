@@ -27,7 +27,7 @@ angular.module('appMain')
                            data: data
                        });
                    });
-                 }  
+                 }
                 });
             },
 

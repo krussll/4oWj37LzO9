@@ -21,7 +21,7 @@
                   </thead>
                   <tbody>
                     <tr ng-repeat="hashtag in list.hashtags">
-                      <td scope="row"><a href="/hashtag/{{hashtag.id}}">{{hashtag.tag}}</a></td><td>${{hashtag.current_price | number }}</td>
+                      <td scope="row"><a target="_blank" href="/hashtag/{{hashtag.id}}">{{hashtag.tag}}</a></td><td>${{hashtag.current_price | number }}</td>
                       <td><cdn-buy-button button-size="xs" hashtag-id="{{hashtag.id}}" tag="{{hashtag.tag}}" price="{{hashtag.current_price}}" event-handler="" /></td>
                     </tr>
                     <tr ng-show="list.hashtags.length == 0 && !list.control.isLoading">
