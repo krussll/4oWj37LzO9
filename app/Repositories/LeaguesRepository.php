@@ -44,10 +44,10 @@ class LeaguesRepository implements LeaguesRepositoryInterface
         $a = DB::table('portfolios')
         ->join('users', 'users.id', '=', 'portfolios.user_id')
         ->where('portfolios.league_id', $leagueId)
-        ->select('users.surname', 'users.firstname', 'portfolios.balance')
+        ->select('users.surname', 'users.firstname', 'portfolios.balance', 'users.id')
         ->orderBy('portfolios.balance', 'desc')->get();
 
-        $sql = "SELECT u.surname, u.firstname, IFNULL(SUM(t.price_taken * h.current_price), 0) + p.balance as balance FROM portfolios p
+        $sql = "SELECT u.surname, u.firstname, u.id as id, IFNULL(SUM(t.price_taken * h.current_price), 0) + p.balance as balance FROM portfolios p
                 LEFT JOIN users u ON u.id = p.user_id
                 LEFT JOIN trades t ON t.portfolio_id = p.id AND t.is_active = 1
                 LEFT JOIN hashtags h ON h.id = t.hashtag_id
@@ -102,18 +102,18 @@ class LeaguesRepository implements LeaguesRepositoryInterface
 
     public function GetLeaguePosition($userId, $leagueId)
     {
-        $sql = "SELECT `rank`
-                    FROM
-                    (
-                      select @rownum:=@rownum+1 `rank`, p.*
-                      from portfolios p, (SELECT @rownum:=0) r
-                      WHERE league_id = " . $leagueId . "
-                      order by balance DESC
-                    ) s
-                    WHERE user_id = " . $userId;
-        $results = DB::select(DB::raw($sql));
+        $position = 1;
 
-        return $results[0]->rank;
+        foreach($this->GetLeaguePositions($leagueId) as $leaguePosition)
+        {
+          if($leaguePosition->id == $userId)
+          {
+            break;
+          }
+          $position++;
+        }
+
+        return $position;
     }
 
     public function GetLeagueByCode($code)
