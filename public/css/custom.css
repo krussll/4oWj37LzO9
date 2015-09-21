@@ -269,10 +269,7 @@ body.nav-sm .menu_section h3 {
 
 .nav_menu {
     float: left;
-    /*background: #F4F6F9;
-    border-bottom: 1px solid #E6E9ED;*/
-
-    background: #000;
+    background: #323A45;
     margin-bottom: 10px;
     width: 100%;
 }

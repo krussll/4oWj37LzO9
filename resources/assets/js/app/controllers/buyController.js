@@ -141,6 +141,11 @@ angular.module('appMain')
            return $scope.buy.hashtag.shares_taken;
          },
           function(newVal, oldVal) {
+            if(newVal > 1000)
+            {
+                newVal = 1000;
+            }
+
             $scope.buy.total = newVal * $scope.buy.hashtag.price;
         }, true);
 });
