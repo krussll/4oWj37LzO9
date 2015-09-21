@@ -13,7 +13,7 @@ class LeaguesRepository implements LeaguesRepositoryInterface
     {
         return League::find($id);
     }
-    
+
 	public function GetDefaultLeagues()
 	{
 		return League::where('is_default', true)->get();
@@ -41,7 +41,23 @@ class LeaguesRepository implements LeaguesRepositoryInterface
 
     public function GetLeaguePositions($leagueId)
     {
-        return DB::table('portfolios')->join('users', 'users.id', '=', 'portfolios.user_id')->where('portfolios.league_id', $leagueId)->select('users.surname', 'users.firstname', 'portfolios.balance')->orderBy('portfolios.balance', 'desc')->get();
+        $a = DB::table('portfolios')
+        ->join('users', 'users.id', '=', 'portfolios.user_id')
+        ->where('portfolios.league_id', $leagueId)
+        ->select('users.surname', 'users.firstname', 'portfolios.balance')
+        ->orderBy('portfolios.balance', 'desc')->get();
+
+        $sql = "SELECT u.surname, u.firstname, IFNULL(SUM(t.price_taken * h.current_price), 0) + p.balance as balance FROM portfolios p
+                LEFT JOIN users u ON u.id = p.user_id
+                LEFT JOIN trades t ON t.portfolio_id = p.id AND t.is_active = 1
+                LEFT JOIN hashtags h ON h.id = t.hashtag_id
+                WHERE
+                p.league_id = " . $leagueId . "
+                GROUP BY u.id
+                ORDER BY balance DESC";
+        $results = DB::select(DB::raw($sql));
+
+        return $results;
     }
 
     public function AddUserToGlobalLeagues($userId)
@@ -89,14 +105,14 @@ class LeaguesRepository implements LeaguesRepositoryInterface
         $sql = "SELECT `rank`
                     FROM
                     (
-                      select @rownum:=@rownum+1 `rank`, p.* 
-                      from portfolios p, (SELECT @rownum:=0) r 
+                      select @rownum:=@rownum+1 `rank`, p.*
+                      from portfolios p, (SELECT @rownum:=0) r
                       WHERE league_id = " . $leagueId . "
                       order by balance DESC
                     ) s
                     WHERE user_id = " . $userId;
         $results = DB::select(DB::raw($sql));
-        
+
         return $results[0]->rank;
     }
 
