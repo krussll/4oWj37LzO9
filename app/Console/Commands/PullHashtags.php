@@ -54,7 +54,7 @@ class PullHashtags extends Command
                         array('now' => $now, 'min' => $min)));
 echo "got new tags";
         $hashtags = [];
-        foreach(Hashtag::get() as $hashtag)
+        foreach(Hashtag::where('is_archived', false)->get() as $hashtag)
         {
           if (!in_array($hashtag->tag, $ignoredWords))
           {

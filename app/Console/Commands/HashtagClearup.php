@@ -42,8 +42,8 @@ class HashtagClearup extends Command
         $results = DB::select(
                 DB::raw("SELECT h.id FROM hashtags h
                     LEFT JOIN hashtag_price c ON c.hashtag_id = h.id AND c.created_at > DATE_SUB(CURDATE(), INTERVAL 2 DAY)
-                     where current_price < 2
-                     AND c.amount < 2
+                     where current_price < 11
+                     AND c.amount < 11
                      GROUP BY h.id")
             );
 
