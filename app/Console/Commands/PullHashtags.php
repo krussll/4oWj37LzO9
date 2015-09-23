@@ -73,7 +73,7 @@ echo "got new tags";
 
                 if (!in_array($model->tag, $ignoredWords))
                 {
-                    $newhashtags[] = array('tag' => $tag->hashtag, 'current_price' => 1, 'created_at' => $now, 'updated_at' => $now);
+                    $newhashtags[] = array('tag' => $tag->hashtag, 'current_price' => 1, 'is_active' => false, 'created_at' => $now, 'updated_at' => $now);
                 }
 
             }

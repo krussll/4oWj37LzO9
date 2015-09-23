@@ -87,7 +87,7 @@ class PriceHashtags extends Command
             foreach ($hashtags as $id => $price)
             {
                 DB::table('hashtag_price')->insert(['amount' => $price, 'hashtag_id' => $id, 'created_at' => new \DateTime, 'updated_at' => new \DateTime]);
-                DB::update( DB::raw("UPDATE hashtags SET current_price = " . $price . " WHERE id = " . $id));
+                DB::update( DB::raw("UPDATE hashtags SET current_price = " . $price . ", is_active = true WHERE id = " . $id));
             }
         });
         print('chunk end');
