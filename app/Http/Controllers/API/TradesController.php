@@ -42,6 +42,8 @@ class TradesController extends BaseController
     {
         $userRep = new UsersRepository();
         $portfolioRep = new PortfoliosRepository();
+        $tradeRep = new TradesRepository();
+
         $user = Auth::user();
         $message = "";
 
@@ -59,6 +61,11 @@ class TradesController extends BaseController
 
                     if($portfolio->balance >= $totalCost)
                     {
+                      $trade = $tradeRep->GetActiveHashtagPortfolioTrade($hashtag->id, $portfolio->id);
+                      if($trade !== null){
+                        $trade->shares_taken = $trade->shares_taken + $sharestaken;
+                        $trade->price_taken = $hashtag->current_price;
+                      }else {
                         $trade = new Trade;
                         $trade->portfolio_id = $portfolio->id;
                         $trade->hashtag_id = $hashtag->id;
@@ -66,6 +73,8 @@ class TradesController extends BaseController
                         $trade->price_taken = $hashtag->current_price;
                         $trade->price_sold = 0;
                         $trade->is_active = 1;
+                      }
+
                         $trade->save();
 
                         $portfolioRep->DecreaseBalance($portfolio, $totalCost);

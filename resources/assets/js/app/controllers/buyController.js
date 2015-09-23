@@ -51,7 +51,6 @@ angular.module('appMain')
 
                 $http.post('/api/trades/create', postData)
                     .success(function(data){
-                        console.log(data);
                         if (data.success == true)
                         {
                             selectedPortfolioService.boughtPortfolioValue(buy.hashtag.portfolio, buy.total);

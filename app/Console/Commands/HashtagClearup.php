@@ -3,7 +3,14 @@
 namespace App\Console\Commands;
 
 use DB;
+use Auth;
+use App\Trade;
+use App\Hashtag;
+use App\Portfolio;
 use Illuminate\Console\Command;
+use App\Repositories\TradesRepository as TradesRepository;
+use App\Repositories\UsersRepository as UsersRepository;
+use App\Repositories\PortfoliosRepository as PortfoliosRepository;
 
 class HashtagClearup extends Command
 {
@@ -38,6 +45,7 @@ class HashtagClearup extends Command
      */
     public function handle()
     {
+
         //
         $results = DB::select(
                 DB::raw("SELECT h.id FROM hashtags h
@@ -50,9 +58,23 @@ class HashtagClearup extends Command
 
         DB::transaction(function() use ($results)
         {
+          $portfolioRep = new PortfoliosRepository();
+          $tradesRep = new TradesRepository();
             foreach($results as $result)
             {
-                DB::update( DB::raw("UPDATE hashtags SET is_archived = true WHERE id = " . $result->id));
+              foreach($tradesRep->GetActiveHashtagTrades($result->id) as $trade)
+              {
+                $hashtag = Hashtag::find($trade->hashtag_id);
+                $portfolio = Portfolio::find($trade->portfolio_id);
+
+                $trade->is_active = false;
+                $trade->price_sold = $hashtag->current_price;
+
+                $trade->save();
+                $price = ($hashtag->current_price * $trade->shares_taken);
+                $portfolioRep->IncreaseBalance($portfolio, $price);
+              }
+              DB::update( DB::raw("UPDATE hashtags SET is_archived = true WHERE id = " . $result->id));
             }
         });
 
