@@ -25,13 +25,14 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected function schedule(Schedule $schedule)
 	{
-		$schedule->command('inspire')
-				 ->hourly();
 		$schedule->command('hashtag:pull')
 		 				 ->everyTenMinutes();
 
 		 $schedule->command('hashtag:price')
 		 				->everyThirtyMinutes();
+
+		 $schedule->command('hashtag:clearup')
+		 				->daily();
 	}
 
 }
