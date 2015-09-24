@@ -27,6 +27,11 @@ class Kernel extends ConsoleKernel {
 	{
 		$schedule->command('inspire')
 				 ->hourly();
+		$schedule->command('hashtag:pull')
+		 				 ->everyTenMinutes();
+
+		 $schedule->command('hashtag:price')
+		 				->everyThirtyMinutes();
 	}
 
 }
