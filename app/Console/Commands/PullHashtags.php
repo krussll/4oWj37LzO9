@@ -50,7 +50,7 @@ class PullHashtags extends Command
         $min = 1;
         $ignoredWords = array('job', 'jobs', 'hiring', 'careerarc');
         echo "starting";
-        $results = DB::connection('pgsql')->select(DB::raw("SELECT LOWER(hashtag) as hashtag, COUNT(*) as count FROM  \"tagQueue\".\"tagQueue\" WHERE hashtag ~ E'[a-z0-9]' AND is_processed = B'0' AND created < now() GROUP BY hashtag HAVING COUNT(*) > 3",
+        $results = DB::connection('pgsql')->select(DB::raw("SELECT LOWER(hashtag) as hashtag, COUNT(*) as count FROM  \"tagQueue\".\"tagQueue\" WHERE hashtag ~ E'[a-z0-9]' AND is_processed = B'0' AND created < now() GROUP BY hashtag",
                         array('now' => $now, 'min' => $min)));
 echo "got new tags";
         $hashtags = [];
