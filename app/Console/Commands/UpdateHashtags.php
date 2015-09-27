@@ -46,7 +46,7 @@ class UpdateHashtags extends Command
 
         print('getting results');
         $results = PriceQueue::orderBy('created_at', 'desc')
-               ->take(3000)
+               ->take(6000)
                ->get();
 
         print('got results');
@@ -83,7 +83,7 @@ class UpdateHashtags extends Command
         print('chunk end');
 
         $results = PriceQueue::orderBy('created_at', 'desc')
-               ->take(3000)
+               ->take(6000)
                ->delete();
 
         print('deleted chunk');

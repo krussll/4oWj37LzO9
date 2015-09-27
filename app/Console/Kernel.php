@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel {
 
 
 		 $schedule->command('hashtag:update')
-		 				->everyMinute();
+		 				->everyFiveMinutes();
 
 		 $schedule->command('hashtag:clearup')
 		 				->daily();
