@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel {
 		'App\Console\Commands\PullHashtags',
 		'App\Console\Commands\PriceHashtags',
 		'App\Console\Commands\HashtagClearup',
+		'App\Console\Commands\UpdateHashtags',
 	];
 
 	/**
@@ -30,6 +31,10 @@ class Kernel extends ConsoleKernel {
 
 		 $schedule->command('hashtag:price')
 		 				->everyThirtyMinutes();
+
+
+		 $schedule->command('hashtag:update')
+		 				->everyMinute();
 
 		 $schedule->command('hashtag:clearup')
 		 				->daily();

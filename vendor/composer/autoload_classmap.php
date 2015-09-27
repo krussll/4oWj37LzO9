@@ -18,6 +18,7 @@ return array(
     'CreateLeagueTable' => $baseDir . '/database/migrations/2015_08_08_152803_create_league_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreatePortfolioTable' => $baseDir . '/database/migrations/2015_08_08_152737_create_portfolio_table.php',
+    'CreatePriceQueueTable' => $baseDir . '/database/migrations/2015_09_27_102235_create_price_queue_table.php',
     'CreateTradeTable' => $baseDir . '/database/migrations/2015_07_20_195221_create_trade_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'CreateWatchHashtagTable' => $baseDir . '/database/migrations/2015_09_09_220315_create_watch_hashtag_table.php',

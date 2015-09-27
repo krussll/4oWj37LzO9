@@ -6,6 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 use App\HashtagCount;
 use App\HashtagPrice;
 use App\Hashtag;
+use App\PriceQueue;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
@@ -80,18 +81,20 @@ class PriceHashtags extends Command
 
 
 
-
-        print('insert chunk start');
-        DB::transaction(function() use ($hashtags)
+        foreach(array_chunk($hashtags, 3000, true) as $hashtagChunk)
         {
-            foreach ($hashtags as $id => $price)
-            {
-                DB::table('hashtag_price')->insert(['amount' => $price, 'hashtag_id' => $id, 'created_at' => new \DateTime, 'updated_at' => new \DateTime]);
-                DB::update( DB::raw("UPDATE hashtags SET current_price = " . $price . ", is_active = true WHERE id = " . $id));
-            }
-        });
-        print('chunk end');
+          print('insert chunk start');
+          DB::transaction(function() use ($hashtagChunk)
+          {
+            $priceUpdates = [];
+              foreach ($hashtagChunk as $id => $price)
+              {
+                  $priceUpdates[] = array('price' => $price, 'hashtag_id' => $id, 'created_at' => new \DateTime, 'updated_at' => new \DateTime);
+              }
 
-
+              PriceQueue::insert($priceUpdates);
+          });
+          print('chunk end');
+        }
     }
 }
