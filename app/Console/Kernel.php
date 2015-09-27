@@ -32,10 +32,6 @@ class Kernel extends ConsoleKernel {
 		 $schedule->command('hashtag:price')
 		 				->everyThirtyMinutes();
 
-
-		 $schedule->command('hashtag:update')
-		 				->everyFiveMinutes();
-
 		 $schedule->command('hashtag:clearup')
 		 				->daily();
 	}

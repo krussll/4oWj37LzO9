@@ -44,49 +44,5 @@ class UpdateHashtags extends Command
     public function handle()
     {
 
-        print('getting results');
-        $results = PriceQueue::orderBy('created_at', 'desc')
-               ->take(6000)
-               ->get();
-
-        print('got results');
-
-
-        DB::transaction(function() use ($results)
-        {
-          $priceUpdates = [];
-            foreach ($results as $price)
-            {
-              $priceUpdates[] = array('amount' => $price->price, 'hashtag_id' => $price->hashtag_id, 'created_at' => new \DateTime, 'updated_at' => new \DateTime);
-            }
-            DB::table('hashtag_price')->insert($priceUpdates);
-        });
-
-        print('hashtag_price done');
-
-        $updateIds = "";
-        $isFirst = true;
-
-        foreach ($results as $price)
-        {
-          if($isFirst)
-          {
-            $isFirst = false;
-            $updateIds .= $price->hashtag_id;
-          }else {
-            $updateIds .= ", " . $price->hashtag_id;
-          }
-        }
-
-        DB::statement('call UpdatePrices("' . $updateIds . '");');
-
-        print('chunk end');
-
-        $results = PriceQueue::orderBy('created_at', 'desc')
-               ->take(6000)
-               ->delete();
-
-        print('deleted chunk');
-
     }
 }
