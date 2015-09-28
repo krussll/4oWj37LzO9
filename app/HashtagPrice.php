@@ -15,6 +15,6 @@ class HashtagPrice extends Model
      */
     protected $table = 'hashtag_price';
 
-
+    
 
 }
