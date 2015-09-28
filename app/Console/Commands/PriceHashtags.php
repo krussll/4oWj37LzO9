@@ -79,16 +79,19 @@ class PriceHashtags extends Command
                 $hashtags[$hashtag_data->id] = $price;
         }
 
-        foreach(array_chunk($hashtag, 2000, true) as $chunk)
+        foreach(array_chunk($hashtags, 2000, true) as $chunk)
         {
-
-                    print('insert chunk start');
+          print('chunk start');
           $inserts = [];
             foreach ($chunk as $id => $price)
             {
                 $inserts[] = array('amount' => $price, 'hashtag_id' => $id, 'created_at' => new \DateTime, 'updated_at' => new \DateTime);
             }
+
+            print('insert start');
+            //print_r($inserts);
             DB::table('hashtag_price')->insert($inserts);
+            print('insert chunk end');
         }
 
 
