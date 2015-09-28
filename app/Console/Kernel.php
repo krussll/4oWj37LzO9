@@ -29,8 +29,6 @@ class Kernel extends ConsoleKernel {
 		$schedule->command('hashtag:pull')
 		 				 ->everyTenMinutes();
 
-		 $schedule->command('hashtag:price')
-		 				->everyThirtyMinutes();
 
 		 $schedule->command('hashtag:clearup')
 		 				->daily();
