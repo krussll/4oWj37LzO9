@@ -85,7 +85,7 @@ angular.module('appMain')
               if (selectedPortfolio.portfolios[i].id == portfolioId)
               {
                   selectedPortfolio.portfolio = selectedPortfolio.portfolios[i];
-                  selectedPortfolio.portfolio.balance = selectedPortfolio.portfolio.balance + value;
+                  selectedPortfolio.portfolio.balance = parseInt(selectedPortfolio.portfolio.balance) + parseInt(value);
                   break;
               }
           }

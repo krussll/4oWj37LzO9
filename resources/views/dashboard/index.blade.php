@@ -62,8 +62,8 @@
                   </thead>
                   <tbody>
                     <tr ng-repeat="hashtag in dashboard.popularHashtags">
-                      <td scope="row"><a href="/hashtag/{{hashtag.id}}">{{hashtag.tag}}</a></td><td>${{hashtag.current_price | number }}</td>
-                      <td><cdn-buy-button button-size="xs" hashtag-id="{{hashtag.id}}" tag="{{hashtag.tag}}" price="{{hashtag.current_price}}" event-handler="dashboard.updateTrades()" /></td>
+                      <td scope="row"><a href="/hashtag/{{hashtag.id}}">{{hashtag.tag}}</a></td><td>${{hashtag.hashtag.current_price | number }}</td>
+                      <td><cdn-buy-button button-size="xs" hashtag-id="{{hashtag.id}}" tag="{{hashtag.tag}}" price="{{hashtag.hashtag.current_price}}" event-handler="dashboard.updateTrades()" /></td>
                     </tr>
                     <tr ng-show="dashboard.control.hashtagsLoading">
                       <td class="no-record" colspan="3"><img src="/cdn/ajax-loader.gif" /></td>

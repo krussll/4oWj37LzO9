@@ -21,6 +21,11 @@ class Hashtag extends Model
         return $this->hasMany('App\HashtagPrice');
     }
 
+    public function counts()
+    {
+        return $this->hasMany('App\HashtagCount');
+    }
+
 
     public function getCurrentPriceAttribute($val)
     {
@@ -28,7 +33,7 @@ class Hashtag extends Model
       {
         return 0;
       }
-      
+
       return $this->prices->last()->amount;
     }
 

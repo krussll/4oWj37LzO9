@@ -29,8 +29,7 @@ class HashtagsRepository implements HashtagsRepositoryInterface
 	{
 		$date = new Carbon;
         $date->subHours(1);
-		return DB::table('hashtag_count')
-                    ->leftJoin('hashtags', 'hashtags.id', '=', 'hashtag_count.hashtag_id')
+		return HashtagCount::with('hashtag')->leftJoin('hashtags', 'hashtags.id', '=', 'hashtag_count.hashtag_id')
                     ->where('hashtag_count.created_at', '>', $date->toDateTimeString())
                     ->where('is_archived', false)
 										->where('is_active', true)
