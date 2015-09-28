@@ -14,7 +14,22 @@ class Hashtag extends Model
      * @var string
      */
     protected $table = 'hashtags';
+    protected $hidden = ['prices'];
+
+    public function prices()
+    {
+        return $this->hasMany('App\HashtagPrice');
+    }
 
 
+    public function getCurrentPriceAttribute($val)
+    {
+      if ($this->prices->isEmpty())
+      {
+        return 0;
+      }
+      
+      return $this->prices->last()->amount;
+    }
 
 }
