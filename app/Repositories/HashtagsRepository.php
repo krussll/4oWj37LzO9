@@ -32,7 +32,6 @@ class HashtagsRepository implements HashtagsRepositoryInterface
 		return DB::table('hashtag_count')
                     ->leftJoin('hashtags', 'hashtags.id', '=', 'hashtag_count.hashtag_id')
                     ->where('hashtag_count.created_at', '>', $date->toDateTimeString())
-                    ->where('current_price', '>', '0')
                     ->where('is_archived', false)
 										->where('is_active', true)
                     ->groupBy('hashtags.tag')
