@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Tagdaq - Twitter hashtag trading game</title>
+    <meta id="description" name="description" content="Hashtag Trading - Free stock market game with player rank, profiles, earnings game."/>
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <!-- Bootstrap core CSS -->
 
