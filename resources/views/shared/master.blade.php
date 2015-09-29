@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title ng-bind="layout.consts.siteName"></title>
+    <title>Tagdaq - Twitter hashtag trading game</title>
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <!-- Bootstrap core CSS -->
 
