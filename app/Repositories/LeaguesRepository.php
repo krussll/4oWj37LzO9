@@ -47,10 +47,9 @@ class LeaguesRepository implements LeaguesRepositoryInterface
         ->select('users.surname', 'users.firstname', 'portfolios.balance', 'users.id')
         ->orderBy('portfolios.balance', 'desc')->get();
 
-        $sql = "SELECT u.surname, u.firstname, u.id as id, IFNULL(SUM(t.price_taken * h.current_price), 0) + p.balance as balance FROM portfolios p
+        $sql = "SELECT u.surname, u.firstname, u.id as id, p.balance as balance FROM portfolios p
                 LEFT JOIN users u ON u.id = p.user_id
                 LEFT JOIN trades t ON t.portfolio_id = p.id AND t.is_active = 1
-                LEFT JOIN hashtags h ON h.id = t.hashtag_id
                 WHERE
                 p.league_id = " . $leagueId . "
                 GROUP BY u.id

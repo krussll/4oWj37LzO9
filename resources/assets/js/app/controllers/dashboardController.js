@@ -25,7 +25,7 @@ angular.module('appMain')
             dashboard.control.leagueLoading = true;
 
 
-            $http.get('/api/hashtags/popular')
+            $http.get('/api/profiles/popular')
                 .success(function(data){
                     dashboard.popularHashtags = data;
                     if (data.length > 0)

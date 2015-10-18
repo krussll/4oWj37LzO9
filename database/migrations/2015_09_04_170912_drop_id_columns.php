@@ -12,7 +12,7 @@ class DropIdColumns extends Migration
      */
     public function up()
     {
-        Schema::table('hashtag_count', function (Blueprint $table) {
+        Schema::table('follower_counts', function (Blueprint $table) {
             $table->dropColumn('id');
         });
     }

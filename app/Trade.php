@@ -20,9 +20,9 @@ class Trade extends Model
         return $this->belongsTo('App\Portfolio');
     }
 
-    public function hashtag()
+    public function profile()
     {
-        return $this->belongsTo('App\Hashtag');
+        return $this->belongsTo('App\Profile');
     }
 
 }

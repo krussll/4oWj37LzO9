@@ -12,9 +12,6 @@ class AddIsActiveHashtagColumn extends Migration
      */
     public function up()
     {
-      Schema::table('hashtags', function (Blueprint $table) {
-          $table->boolean('is_active')->default(false);
-      });
     }
 
     /**

@@ -8,8 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Tagdaq - Twitter hashtag trading game</title>
-    <meta id="description" name="description" content="Hashtag Trading - Free stock market game with player rank, profiles, earnings game."/>
+    <title>Tagdaq - Twitter profile trading game</title>
+    <meta id="description" name="description" content="Twitter Profile Trading - Free stock market game with player rank, profiles, earnings game."/>
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <!-- Bootstrap core CSS -->
 
@@ -71,7 +71,7 @@
 
     {!! Minify::javascript('/js/bootstrap.min.js') !!}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-cookies.js"></script>
    <!-- PNotify -->
     {!! Minify::javascript('/js/notify/pnotify.core.js') !!}

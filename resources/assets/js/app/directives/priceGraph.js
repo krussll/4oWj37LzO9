@@ -14,7 +14,7 @@ angular.module('appMain')
                attrs.$observe('hashtagId', function () {
                  if (scope.hashtagId > 0)
                  {
-                   $http.get('/api/hashtags/counts?id=' + scope.hashtagId)
+                   $http.get('/api/profiles/counts?id=' + scope.hashtagId)
                        .success(function(data){
                        new Morris.Area({
                            element: 'graph_line',
@@ -29,9 +29,7 @@ angular.module('appMain')
                    });
                  }
                 });
-            },
-
-
+            }
         };
     });
 

@@ -4,6 +4,18 @@ return array(
 
     /*
     |--------------------------------------------------------------------------
+    | Sort Direction
+    |--------------------------------------------------------------------------
+    |
+    | You can set the sort direction (ascending/descending) when
+    | minifying full directories.
+    |
+    */
+
+    'reverse_sort' => true,
+
+    /*
+    |--------------------------------------------------------------------------
     | App environments to not minify
     |--------------------------------------------------------------------------
     |
@@ -29,6 +41,7 @@ return array(
     */
 
     'css_build_path' => '/css/builds/',
+    'css_url_path' => '/css/builds/',
 
     /*
     |--------------------------------------------------------------------------
@@ -43,14 +56,28 @@ return array(
     */
 
     'js_build_path' => '/js/builds/',
+    'js_url_path' => '/js/builds/', 
+
+	/*
+    |--------------------------------------------------------------------------
+    | Hash modification
+    |--------------------------------------------------------------------------
+    |
+    | You can disable usage of modification time (mtime) for hash build and
+	| add additional salt (exp. commit hash) for hash build
+    |
+    */
+
+    'disable_mtime' => false,
+    'hash_salt' => '', 
 
 	/*
     |--------------------------------------------------------------------------
     | Base URL
     |--------------------------------------------------------------------------
     |
-    | You can set the base URL for the links generated with the configuration 
-	| value. By default if empty HTTP_HOST would be used.
+    | You can set the base URL for the links generated with the configuration
+    | value. By default if empty HTTP_HOST would be used.
     |
     */
 	'base_url' => ''

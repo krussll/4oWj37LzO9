@@ -33,20 +33,4 @@ class UsersRepository implements UsersRepositoryInterface
 	{
 		return User::orderBy('balance', 'desc')->get();
 	}
-
-	public function GetUserGlobalPosition($id, $leagueId)
-	{
-		$sql = "SELECT `rank`
-					FROM
-					(
-					  select @rownum:=@rownum+1 `rank`, p.* 
-					  from portfolios p, (SELECT @rownum:=0) r 
-					  WHERE league_id = " . $leagueId . "
-					  order by balance DESC
-					) s
-					WHERE user_id = " . $id;
-		$results = DB::select(DB::raw($sql));
-		
-		return $results[0]->rank;
-	}
 }

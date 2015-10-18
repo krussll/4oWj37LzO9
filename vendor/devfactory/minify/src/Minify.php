@@ -45,6 +45,12 @@ class Minify
   private $onlyUrl = false;
 
   /**
+   * @var bool
+   */
+  private $buildExtension;
+   
+
+  /**
    * @param array $config
    * @param string $environment
    */
@@ -61,9 +67,10 @@ class Minify
    * @return string
    */
   public function javascript($file, $attributes = array()) {
-    $this->provider = new JavaScript(public_path());
+    $this->provider = new JavaScript(public_path(), ['hash_salt' => $this->config['hash_salt'], 'disable_mtime' => $this->config['disable_mtime']]);
     $this->buildPath = $this->config['js_build_path'];
     $this->attributes = $attributes;
+    $this->buildExtension = 'js';
 
     $this->process($file);
 
@@ -76,9 +83,10 @@ class Minify
    * @return string
    */
   public function stylesheet($file, $attributes = array()) {
-    $this->provider = new StyleSheet(public_path());
+    $this->provider = new StyleSheet(public_path(), ['hash_salt' => $this->config['hash_salt'], 'disable_mtime' => $this->config['disable_mtime']]);
     $this->buildPath = $this->config['css_build_path'];
     $this->attributes = $attributes;
+    $this->buildExtension = 'css';
 
     $this->process($file);
 
@@ -91,9 +99,10 @@ class Minify
    * @return string
    */
   public function stylesheetDir($dir, $attributes = array()) {
-    $this->provider = new StyleSheet(public_path());
+    $this->provider = new StyleSheet(public_path(), ['hash_salt' => $this->config['hash_salt'], 'disable_mtime' => $this->config['disable_mtime']]);
     $this->buildPath = $this->config['css_build_path'];
     $this->attributes = $attributes;
+    $this->buildExtension = 'css';
 
     return $this->assetDirHelper('css', $dir);
   }
@@ -104,9 +113,10 @@ class Minify
    * @return string
    */
   public function javascriptDir($dir, $attributes = array()) {
-    $this->provider = new JavaScript(public_path());
+    $this->provider = new JavaScript(public_path(), ['hash_salt' => $this->config['hash_salt'], 'disable_mtime' => $this->config['disable_mtime']]);
     $this->buildPath = $this->config['js_build_path'];
     $this->attributes = $attributes;
+    $this->buildExtension = 'js';
 
     return $this->assetDirHelper('js', $dir);
   }
@@ -133,7 +143,12 @@ class Minify
 
     if (count($files) > 0)
       {
-        rsort($files);
+          if($this->config['reverse_sort']) {
+              rsort($files);
+          }
+          else {
+              sort($files);
+          }
         $this->process($files);
       }
 
@@ -165,7 +180,16 @@ class Minify
         return $this->provider->tags($baseUrl, $this->attributes);
       }
 
-    $filename = $baseUrl . $this->buildPath . $this->provider->getFilename();
+    if( $this->buildExtension == 'js')
+    {
+        $buildPath =  isset($this->config['js_url_path']) ? $this->config['js_url_path'] : $this->buildPath;
+    }
+    else# if( $this->buildExtension == 'css')
+    {
+        $buildPath =  isset($this->config['css_url_path']) ? $this->config['css_url_path'] : $this->buildPath;        
+    }
+    
+    $filename = $baseUrl . $buildPath  . $this->provider->getFilename();
 
     if ($this->onlyUrl) {
       return $filename;

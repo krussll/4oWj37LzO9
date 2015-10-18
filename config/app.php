@@ -138,7 +138,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         'Illuminate\Html\HtmlServiceProvider',
         'Devfactory\Minify\MinifyServiceProvider',
-
+        'Thujohn\Twitter\TwitterServiceProvider',
         /*
          * Application Service Providers...
          */
@@ -197,6 +197,7 @@ return [
         'HTML'      => 'Illuminate\Html\HtmlFacade',
         'Minify'    => 'Devfactory\Minify\Facades\MinifyFacade',
         'Tracker'   => 'PragmaRX\Tracker\Vendor\Laravel\Facade',
+        'Twitter' => 'Thujohn\Twitter\Facades\Twitter',
     ],
 
 ];

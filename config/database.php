@@ -65,10 +65,10 @@ return [
 
         'mysql' => [
             'driver'    => 'mysql',
-            'host'      => 'tagtest.czlric1ktmu6.eu-west-1.rds.amazonaws.com',
+            'host'      => 'tagdaq-prod.cas7rb6zwm0i.eu-west-1.rds.amazonaws.com',
             'database'  => 'tagdb',
-            'username'  => 'root',
-            'password'  => 'password',
+            'username'  => 'business',
+            'password'  => '8u51n355',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',

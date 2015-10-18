@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration {
 				$table->increments('id');
 				$table->string('firstname');
 				$table->string('surname');
+				$table->string('handle');
 				$table->string('email')->unique();
 				$table->string('profile_image', 100);
 				$table->string('password', 60);
@@ -24,7 +25,7 @@ class CreateUsersTable extends Migration {
 		});
 
 		DB::table('users')->insert(['profile_image' => 'profile.jpg', 'firstname' => 'Dean', 'password' => bcrypt('passpass1'), 'surname' => 'Proffitt', 'email' => 'd.proffitt@test.com', 'created_at' => new DateTime, 'updated_at' => new DateTime]);
-		
+
 	}
 
 	/**

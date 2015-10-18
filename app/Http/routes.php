@@ -32,13 +32,13 @@ Route::group(array('prefix'=>'/api'),function(){
 	Route::post('trades/complete', 'API\TradesController@completeTrade');
 	Route::post('trades/create', 'API\TradesController@createTrade');
 
-	Route::get('hashtags/list', 'API\HashtagsController@getHashtagsList');
-	Route::get('hashtags/info', 'API\HashtagsController@getHashtagInfo');
-	Route::get('hashtags/latest', 'API\HashtagsController@getLatestHashtags');
-	Route::get('hashtags/popular', 'API\HashtagsController@getPopularHashtags');
-	Route::get('hashtags/byname', 'API\HashtagsController@getHashtagsByName');
-	Route::get('hashtags/id', 'API\HashtagsController@getHashtagById');
-	Route::get('hashtags/counts', 'API\HashtagsController@getHashtagCountsById');
+	Route::get('profiles/list', 'API\ProfilesController@getHashtagsList');
+	Route::get('profiles/info', 'API\ProfilesController@getHashtagInfo');
+	Route::get('profiles/latest', 'API\ProfilesController@getLatestHashtags');
+	Route::get('profiles/popular', 'API\ProfilesController@getPopularHashtags');
+	Route::get('profiles/byname', 'API\ProfilesController@getHashtagsByName');
+	Route::get('profiles/id', 'API\ProfilesController@getHashtagById');
+	Route::get('profiles/counts', 'API\ProfilesController@getProfilePriceHistoryById');
 
 	Route::get('leagues/{id}', 'API\LeaguesController@getLeague');
 	Route::get('leagues/user/positions', 'API\LeaguesController@getUserPositions');
@@ -65,9 +65,9 @@ Route::post('logout','AccountController@Logout');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', ['uses' =>'DashboardController@index']);
     Route::get('/settings', ['uses' =>'UserController@settings']);
-	Route::get('/hashtag/search/{term}', ['uses' =>'HashtagController@search']);
-	Route::get('/hashtags/list', ['uses' =>'HashtagController@listHashtags']);
-	Route::get('/hashtag/{id}', ['uses' =>'HashtagController@show']);
+	Route::get('/profiles/search/{term}', ['uses' =>'ProfileController@search']);
+	Route::get('/profiles/list', ['uses' =>'ProfileController@listHashtags']);
+	Route::get('/profiles/{id}', ['uses' =>'ProfileController@show']);
 	Route::get('/leagues', ['uses' =>'LeagueController@index']);
 	Route::get('/league/{id}', ['uses' =>'LeagueController@show']);
 	Route::get('/leagues/create', ['uses' =>'LeagueController@create']);

@@ -10,7 +10,8 @@
         "illuminate/html": "5.0.*@dev",
         "devfactory/minify": "1.0.*",
         "nesbot/carbon": "^1.20",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "thujohn/twitter": "~2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

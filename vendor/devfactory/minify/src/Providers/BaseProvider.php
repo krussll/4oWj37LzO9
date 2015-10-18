@@ -5,6 +5,7 @@ use Devfactory\Minify\Exceptions\CannotSaveFileException;
 use Devfactory\Minify\Exceptions\DirNotExistException;
 use Devfactory\Minify\Exceptions\DirNotWritableException;
 use Devfactory\Minify\Exceptions\FileNotExistException;
+use Illuminate\Filesystem\Filesystem;
 use Countable;
 
 abstract class BaseProvider implements Countable
@@ -40,11 +41,31 @@ abstract class BaseProvider implements Countable
     private $publicPath;
 
     /**
+     * @var Illuminate\Foundation\Filesystem
+     */
+    protected $file;
+
+    /**
+     * @var boolean
+     */
+    private $disable_mtime;
+
+    /**
+     * @var string
+     */
+    private $hash_salt;
+
+    /**
      * @param null $publicPath
      */
-    public function __construct($publicPath = null)
+    public function __construct($publicPath = null, $config = null, Filesystem $file = null)
     {
+        $this->file = $file ?: new Filesystem;
+
         $this->publicPath = $publicPath ?: $_SERVER['DOCUMENT_ROOT'];
+
+        $this->disable_mtime = $config['disable_mtime'] ?: false;
+        $this->hash_salt = $config['hash_salt'] ?: '';
 
         $value = function($key)
         {
@@ -186,7 +207,10 @@ abstract class BaseProvider implements Countable
     {
         if (!file_exists($this->outputDir))
         {
+          // Try to create the directory
+          if (!$this->file->makeDirectory($this->outputDir, 0775, true)) {
             throw new DirNotExistException("Buildpath '{$this->outputDir}' does not exist");
+          }
         }
 
         if (!is_writable($this->outputDir))
@@ -209,7 +233,7 @@ abstract class BaseProvider implements Countable
      */
     protected function buildMinifiedFilename()
     {
-        $this->filename = $this->getHashedFilename() . $this->countModificationTime() . static::EXTENSION;
+        $this->filename = $this->getHashedFilename() . (($this->disable_mtime) ? '' : $this->countModificationTime()) . static::EXTENSION;
     }
 
     /**
@@ -258,7 +282,8 @@ abstract class BaseProvider implements Countable
      */
     protected function getHashedFilename()
     {
-        return md5(implode('-', $this->files));
+        $publicPath = $this->publicPath;
+        return md5(implode('-', array_map(function($file) use ($publicPath) { return str_replace($publicPath, '', $file); }, $this->files)) . $this->hash_salt);
     }
 
     /**
@@ -273,7 +298,7 @@ abstract class BaseProvider implements Countable
             if ($this->checkExternalFile($file))
             {
                 $userAgent = isset($this->headers['User-Agent']) ? $this->headers['User-Agent'] : '';
-                $time += hexdec(md5($file . $userAgent));
+                $time += hexdec(substr(md5($file . $userAgent), 0, 8));
             }
             else {
                 $time += filemtime($file);

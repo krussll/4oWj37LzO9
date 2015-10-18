@@ -15,12 +15,12 @@
                   <table class="table">
                     <thead>
                     <tr>
-                      <th>Hashtag</th><th class="hidden-xs">Date Started</th><th class="hidden-xs">Shares Taken</th><th>Price Taken</th><th>Current Price</th><th>Change</th><th></th>
+                      <th>Profile</th><th class="hidden-xs">Date Started</th><th class="hidden-xs">Shares Taken</th><th>Price Taken</th><th>Current Price</th><th>Change</th><th></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr ng-repeat="trade in dashboard.activeTrades">
-                      <td><a href="/hashtag/{{trade.hashtag.id}}">{{trade.hashtag.tag}}</a></td><td class="hidden-xs">{{trade.created_at}}</td><td class="hidden-xs">{{trade.shares_taken}}</td><td>{{trade.price_taken | currency}}</td><td>{{trade.hashtag.current_price | currency}}</td>
+                      <td><a href="/hashtag/{{trade.hashtag.id}}">{{trade.hashtag.name}}</a></td><td class="hidden-xs">{{trade.created_at}}</td><td class="hidden-xs">{{trade.shares_taken}}</td><td>{{trade.price_taken | currency}}</td><td>{{trade.hashtag.current_price | currency}}</td>
                       <td><span ng-class="{'green': (trade.hashtag.current_price - trade.price_taken ) >= 0, 'red': (trade.hashtag.current_price - trade.price_taken ) < 0}">{{trade.change | percentageDifference:trade.price_taken:trade.hashtag.current_price  }}</span></td>
                       <td><cdn-sell-button button-size="xs" trade-id="{{trade.id}}" event-handler="dashboard.updateTrades()" /></td>
                     </tr>
@@ -38,7 +38,7 @@
 
             <div class="x_panel" ng-show="dashboard.popularHashtag">
                 <div class="x_title">
-                    <h2>Current Popular Hashtag Price History - {{dashboard.popularHashtag.tag}}</h2>
+                    <h2>Current Popular Profile Price History - {{dashboard.popularHashtag.tag}}</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -50,20 +50,20 @@
         <div class="col-md-4 col-sm-12 col-xs-12">
           <div class="x_panel">
                 <div class="x_title">
-                    <h2>Popular Hashtags</h2>
+                    <h2>Popular Profiles</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content" ng-class="{loadingsection: dashboard.control.hashtagsLoading}">
                   <table class="table">
                     <thead>
                     <tr>
-                      <th>Hashtag</th><th>Current Price</th><th></th>
+                      <th>Profile</th><th>Current Price</th><th></th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr ng-repeat="hashtag in dashboard.popularHashtags">
-                      <td scope="row"><a href="/hashtag/{{hashtag.id}}">{{hashtag.tag}}</a></td><td>${{hashtag.hashtag.current_price | number }}</td>
-                      <td><cdn-buy-button button-size="xs" hashtag-id="{{hashtag.id}}" tag="{{hashtag.tag}}" price="{{hashtag.hashtag.current_price}}" event-handler="dashboard.updateTrades()" /></td>
+                    <tr ng-repeat="profile in dashboard.popularHashtags">
+                      <td scope="row"><a href="/profile/{{profile.id}}">{{profile.name}}</a></td><td>${{profile.current_price | number }}</td>
+                      <td><cdn-buy-button button-size="xs" hashtag-id="{{profile.id}}" tag="{{profile.name}}" price="{{profile.current_price}}" event-handler="dashboard.updateTrades()" /></td>
                     </tr>
                     <tr ng-show="dashboard.control.hashtagsLoading">
                       <td class="no-record" colspan="3"><img src="/cdn/ajax-loader.gif" /></td>
