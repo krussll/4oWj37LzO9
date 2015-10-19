@@ -65,12 +65,12 @@ Route::post('logout','AccountController@Logout');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', ['uses' =>'DashboardController@index']);
     Route::get('/settings', ['uses' =>'UserController@settings']);
-	Route::get('/profiles/search/{term}', ['uses' =>'ProfileController@search']);
-	Route::get('/profiles/list', ['uses' =>'ProfileController@listHashtags']);
-	Route::get('/profiles/{id}', ['uses' =>'ProfileController@show']);
-	Route::get('/leagues', ['uses' =>'LeagueController@index']);
-	Route::get('/league/{id}', ['uses' =>'LeagueController@show']);
-	Route::get('/leagues/create', ['uses' =>'LeagueController@create']);
+		Route::get('/profiles/search/{term}', ['uses' =>'ProfileController@search']);
+		Route::get('/profiles/list', ['uses' =>'ProfileController@listHashtags']);
+		Route::get('/profile/{id}', ['uses' =>'ProfileController@show']);
+		Route::get('/leagues', ['uses' =>'LeagueController@index']);
+		Route::get('/league/{id}', ['uses' =>'LeagueController@show']);
+		Route::get('/leagues/create', ['uses' =>'LeagueController@create']);
 });
 
 //Route::get('user/show/{id}', ['uses' =>'UserController@show']);
