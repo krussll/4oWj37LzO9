@@ -102,7 +102,7 @@ class ProfilePull extends Command
         }
       }
 
-      //FollowerCount::insert($followerCounts);
+      FollowerCount::insert($followerCounts);
       TweetCount::insert($tweetCounts);
 
     }
