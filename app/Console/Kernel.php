@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected function schedule(Schedule $schedule)
 	{
-		$schedule->command('profile:pull')->everyTenMinutes();
-		$schedule->command('profile:price')->everyThirtyMinutes();
+		$schedule->command('profile:pull')->everyThirtyMinutes();
+		$schedule->command('profile:price')->hourly();
 	}
 }
