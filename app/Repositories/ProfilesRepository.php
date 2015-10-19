@@ -26,11 +26,11 @@ class ProfilesRepository implements ProfilesRepositoryInterface
 		return Profile::find($id);
 	}
 
-	public function GetPopularHashtags($limit)
+	public function GetPopularProfiles($limit)
 	{
 		$date = new Carbon;
         $date->subHours(1);
-		return Profile::take($limit)->get();
+		return Profile::where('is_active', true)->take($limit)->get();
 	}
 
 	public function GetProfilePrices($id)
@@ -55,7 +55,7 @@ class ProfilesRepository implements ProfilesRepositoryInterface
 		return $prices;
 	}
 
-	public function HashtagsList($page, $length)
+	public function ProfilesList($page, $length)
 	{
 		$skip = 0;
 		if($page > 1)
@@ -63,11 +63,11 @@ class ProfilesRepository implements ProfilesRepositoryInterface
 			$skip = ($page--) * $length;
 		}
 
-		return Hashtag::where('is_archived', false)->where('is_active', true)->take($length)->skip($skip)->orderBy('current_price', 'DESC')->get();
+		return Profile::where('is_active', true)->take($length)->skip($skip)->orderBy('current_price', 'DESC')->get();
 	}
 
-	public function CountHashtags()
+	public function CountProfiles()
 	{
-		return Hashtag::where('is_archived', false)->where('is_active', true)->count();
+		return Profile::where('is_active', true)->count();
 	}
 }

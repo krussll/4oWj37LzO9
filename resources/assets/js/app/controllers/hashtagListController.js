@@ -5,7 +5,7 @@
 angular.module('appMain')
 
 .controller('listController', function($scope, $http) {
-    $scope.list = 
+    $scope.list =
     {
     	control: {
             isLoading: true,
@@ -19,11 +19,11 @@ angular.module('appMain')
         init: function ()
         {
             var list = this;
-            $http.get('/api/hashtags/info')
+            $http.get('/api/profiles/info')
                 .success(function(data){
                     list.paging.total = data.total;
                 });
-               
+
             list.listHashtags('hashtag', list.paging.currentPage);
         },
         listHashtags: function(objectName, newPage)
@@ -32,12 +32,12 @@ angular.module('appMain')
             list.control.isLoading = true;
             list.paging.currentPage = newPage;
 
-            $http.get('/api/hashtags/list?page=' + list.paging.currentPage + '&length=' + list.paging.pageLength)
+            $http.get('/api/profiles/list?page=' + list.paging.currentPage + '&length=' + list.paging.pageLength)
                 .success(function(data){
                     list.hashtags = data;
                     list.control.isLoading = false;
                 });
-        }        
+        }
 	}
 });
 

@@ -39,7 +39,7 @@ class ProfilesController extends BaseController
     {
         $rep = new ProfilesRepository();
 
-        return response()->json($rep->GetPopularHashtags(7));
+        return response()->json($rep->GetPopularProfiles(7));
     }
 
     public function getProfilePriceHistoryById()
@@ -53,13 +53,13 @@ class ProfilesController extends BaseController
     {
         $rep = new ProfilesRepository();
 
-        return response()->json($rep->HashtagsList(Input::get('page'), Input::get('length')));
+        return response()->json($rep->ProfilesList(Input::get('page'), Input::get('length')));
     }
 
     public function getProfileInfo()
     {
         $rep = new ProfilesRepository();
-        $total = $rep->CountHashtags();
+        $total = $rep->CountProfiles();
         return response()->json(array('total' => $total));
     }
 }

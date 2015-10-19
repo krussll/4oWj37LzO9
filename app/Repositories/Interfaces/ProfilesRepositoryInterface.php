@@ -10,11 +10,11 @@ interface ProfilesRepositoryInterface
 
     public function GetProfileById($id);
 
-    public function GetPopularHashtags($limit);
+    public function GetPopularProfiles($limit);
 
     public function GetProfilePrices($id);
 
-    public function HashtagsList($page, $length);
+    public function ProfilesList($page, $length);
 
-    public function CountHashtags();
+    public function CountProfiles();
 }
