@@ -21,7 +21,7 @@
                   </thead>
                   <tbody>
                     <tr ng-repeat="hashtag in search.hashtags">
-                      <td scope="row"><a href="/hashtag/{{hashtag.id}}" target="_blank">{{hashtag.tag}}</a></td><td>{{hashtag.current_price | currency}}</td>
+                      <td scope="row"><a href="/profile/{{hashtag.id}}" target="_blank">{{hashtag.tag}}</a></td><td>{{hashtag.current_price | currency}}</td>
                       <td><cdn-buy-button button-size="xs" hashtag-id="{{hashtag.id}}" tag="{{hashtag.tag}}" price="{{hashtag.current_price}}" event-handler="" /></td>
                     </tr>
                     <tr ng-show="search.hashtags.length == 0 && !search.control.isLoading">

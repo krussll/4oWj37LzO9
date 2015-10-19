@@ -22,7 +22,7 @@ angular.module('appMain')
 
             if (sideNav.searchTerm != '')
             {
-                window.location = '/hashtag/search/' + sideNav.searchTerm;
+                window.location = '/profiles/search/' + sideNav.searchTerm;
             }else {
                 sideNav.invalidSearch = true;
             }
