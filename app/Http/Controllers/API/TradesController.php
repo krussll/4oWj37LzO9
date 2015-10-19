@@ -54,28 +54,28 @@ class TradesController extends BaseController
 
         if ($user)
         {
-            $hashtag = Hashtag::find(Input::get('hashtag_id'));
+            $profile = Profile::find(Input::get('profile_id'));
             $portfolio = Portfolio::find(Input::get('portfolio_id'));
 
             if ($portfolio->user_id == $user->id)
             {
-                if($hashtag->current_price > 0)
+                if($profile->current_price > 0)
                 {
                     $sharestaken = Input::get('shares_taken');
-                    $totalCost = Input::get('shares_taken') * $hashtag->current_price;
+                    $totalCost = Input::get('shares_taken') * $profile->current_price;
 
                     if($portfolio->balance >= $totalCost)
                     {
-                      $trade = $tradeRep->GetActiveHashtagPortfolioTrade($hashtag->id, $portfolio->id);
+                      $trade = $tradeRep->GetActiveHashtagPortfolioTrade($profile->id, $portfolio->id);
                       if($trade !== null){
                         $trade->shares_taken = $trade->shares_taken + $sharestaken;
-                        $trade->price_taken = $hashtag->current_price;
+                        $trade->price_taken = $profile->current_price;
                       }else {
                         $trade = new Trade;
                         $trade->portfolio_id = $portfolio->id;
-                        $trade->hashtag_id = $hashtag->id;
+                        $trade->profile_id = $profile->id;
                         $trade->shares_taken = $sharestaken;
-                        $trade->price_taken = $hashtag->current_price;
+                        $trade->price_taken = $profile->current_price;
                         $trade->price_sold = 0;
                         $trade->is_active = 1;
                       }
@@ -97,8 +97,6 @@ class TradesController extends BaseController
             {
                 $message = "You don't have access to this portfolio";
             }
-
-
         }else
         {
             $message = "You're not currently logged in";
@@ -122,13 +120,13 @@ class TradesController extends BaseController
 
             if ($portfolio->user_id == Auth::user()->id && $trade->is_active)
             {
-               $hashtag = Hashtag::find($trade->hashtag_id);
+               $profile = Profile::find($trade->profile_id);
 
                 $trade->is_active = false;
-                $trade->price_sold = $hashtag->current_price;
+                $trade->price_sold = $profile->current_price;
 
                 $trade->save();
-                $price = ($hashtag->current_price * $trade->shares_taken);
+                $price = ($profile->current_price * $trade->shares_taken);
                 $portfolioRep->IncreaseBalance($portfolio, $price);
                 return response()->json(array('success' => true, 'portfolioId' => $portfolio->id, 'price' => $price));
             }

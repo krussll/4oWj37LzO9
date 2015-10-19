@@ -662,7 +662,7 @@ angular.module('appMain')
             if(buy.isValid())
             {
                 var postData = {
-                    'hashtag_id': buy.hashtag.hashtag_id,
+                    'profile_id': buy.hashtag.hashtag_id,
                     'shares_taken': buy.hashtag.shares_taken,
                     'portfolio_id': buy.hashtag.portfolio
                 };
