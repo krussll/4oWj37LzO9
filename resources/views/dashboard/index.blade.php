@@ -20,8 +20,8 @@
                   </thead>
                   <tbody>
                     <tr ng-repeat="trade in dashboard.activeTrades">
-                      <td><a href="/hashtag/{{trade.hashtag.id}}">{{trade.hashtag.name}}</a></td><td class="hidden-xs">{{trade.created_at}}</td><td class="hidden-xs">{{trade.shares_taken}}</td><td>{{trade.price_taken | currency}}</td><td>{{trade.hashtag.current_price | currency}}</td>
-                      <td><span ng-class="{'green': (trade.hashtag.current_price - trade.price_taken ) >= 0, 'red': (trade.hashtag.current_price - trade.price_taken ) < 0}">{{trade.change | percentageDifference:trade.price_taken:trade.hashtag.current_price  }}</span></td>
+                      <td><a href="/profile/{{trade.hashtag.id}}">{{trade.profile.name}}</a></td><td class="hidden-xs">{{trade.created_at}}</td><td class="hidden-xs">{{trade.shares_taken}}</td><td>{{trade.price_taken | currency}}</td><td>{{trade.profile.current_price | currency}}</td>
+                      <td><span ng-class="{'green': (trade.profile.current_price - trade.price_taken ) >= 0, 'red': (trade.profile.current_price - trade.price_taken ) < 0}">{{trade.change | percentageDifference:trade.price_taken:trade.profile.current_price  }}</span></td>
                       <td><cdn-sell-button button-size="xs" trade-id="{{trade.id}}" event-handler="dashboard.updateTrades()" /></td>
                     </tr>
                     <tr ng-show="dashboard.activeTrades.length == 0 && !dashboard.control.isLoading">

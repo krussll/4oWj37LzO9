@@ -1,7 +1,7 @@
 <div ng-controller="buyController" ng-init="buy.init()" ng-class="{loadingsection: buy.control.isLoading}">
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
-        <h3>#{{buy.hashtag.tag}}</h3>
+        <h3>{{buy.hashtag.tag}}</h3>
     </div>
 </div>
 
