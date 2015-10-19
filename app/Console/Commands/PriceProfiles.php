@@ -56,7 +56,7 @@ class PriceProfiles extends Command
         $profiles = [];
         foreach($results as $profile_data)
         {
-                $d = 3500;
+                $d = 1000;
                 $q = 0;
                 $price = 1;
 
