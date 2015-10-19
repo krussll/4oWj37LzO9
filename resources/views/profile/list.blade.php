@@ -9,23 +9,23 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel" ng-hide="search.control.isLoading">
                 <div class="x_title">
-                    <h2>Hashtags Found</h2>
+                    <h2>Profiles</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content" ng-class="{loadingsection: list.control.isLoading}">
                   <table class="table">
                     <thead>
                     <tr>
-                      <th>Hashtag</th><th>Current Price</th><th></th>
+                      <th>Profile</th><th>Current Price</th><th></th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr ng-repeat="hashtag in list.hashtags">
-                      <td scope="row"><a target="_blank" href="/hashtag/{{hashtag.id}}">{{hashtag.tag}}</a></td><td>${{hashtag.current_price | number }}</td>
-                      <td><cdn-buy-button button-size="xs" hashtag-id="{{hashtag.id}}" tag="{{hashtag.tag}}" price="{{hashtag.current_price}}" event-handler="" /></td>
+                    <tr ng-repeat="profile in list.hashtags">
+                      <td scope="row"><a target="_blank" href="/profile/{{profile.id}}">{{profile.name}}</a></td><td>${{profile.current_price | number }}</td>
+                      <td><cdn-buy-button button-size="xs" hashtag-id="{{profile.id}}" tag="{{profile.name}}" price="{{profile.current_price}}" event-handler="" /></td>
                     </tr>
                     <tr ng-show="list.hashtags.length == 0 && !list.control.isLoading">
-                      <td class="no-record" colspan="3">No hashtags found</td>
+                      <td class="no-record" colspan="3">No profiles found</td>
                     </tr>
                     <tr ng-show="list.control.isLoading">
                       <td class="no-record" colspan="3"><img src="/cdn/ajax-loader.gif" /></td>

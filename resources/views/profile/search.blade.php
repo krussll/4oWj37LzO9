@@ -27,6 +27,9 @@
                     <tr ng-show="search.hashtags.length == 0 && !search.control.isLoading">
                       <td class="no-record" colspan="3">No Profiles Found</td>
                     </tr>
+                    <tr ng-show="search.control.isLoading">
+                      <td class="no-record" colspan="3"><img src="/cdn/ajax-loader.gif" /></td>
+                    </tr>
                   </tbody>
                   </table>
                 </div>
