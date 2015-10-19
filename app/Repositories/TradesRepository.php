@@ -10,7 +10,7 @@ class TradesRepository implements TradesRepositoryInterface
 {
 	public function GetAllTrades()
 	{
-		return Trade::with('hashtag')->get();
+		return Trade::with('profile')->get();
 	}
 
 	public function GetTradesByPortfolioId($id)
