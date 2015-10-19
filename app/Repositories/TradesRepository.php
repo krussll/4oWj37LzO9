@@ -16,16 +16,16 @@ class TradesRepository implements TradesRepositoryInterface
 	public function GetTradesByPortfolioId($id)
 	{
 
-		return Trade::with('hashtag')->where('portfolio_id', $id)->where('is_active', true)->get();
+		return Trade::with('profile')->where('portfolio_id', $id)->where('is_active', true)->get();
 	}
 
-	public function GetActiveHashtagPortfolioTrade($hashtagId, $portfolioId)
+	public function GetActiveHashtagPortfolioTrade($profile_id, $portfolioId)
 	{
-		return Trade::where('hashtag_id', $hashtagId)->where('portfolio_id', $portfolioId)->where('is_active', true)->first();
+		return Trade::where('profile_id', $profile_id)->where('portfolio_id', $portfolioId)->where('is_active', true)->first();
 	}
 
-	public function GetActiveHashtagTrades($hashtagId)
+	public function GetActiveHashtagTrades($profile_id)
 	{
-		return Trade::where('hashtag_id', $hashtagId)->where('is_active', true)->get();
+		return Trade::where('profile_id', $profile_id)->where('is_active', true)->get();
 	}
 }
