@@ -153,7 +153,7 @@ angular.module('appMain')
 angular.module('appMain')
 
 .controller('searchController', function($scope, $http) {
-    $scope.search = 
+    $scope.search =
     {
     	control: {
             isLoading: true
@@ -175,16 +175,17 @@ angular.module('appMain')
             var search = this;
             search.control.isLoading = true;
 
-            $http.get('/api/hashtags/byname?tag=' + search.inputs.hashtag)
+            $http.get('/api/profiles/byname?tag=' + search.inputs.hashtag)
                 .success(function(data){
                     search.hashtags = data;
                     search.control.isLoading = false;
                 });
-        }        
+        }
 	}
 });
 
 })();
+
 
 
 (function () {

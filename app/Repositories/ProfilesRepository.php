@@ -18,7 +18,7 @@ class ProfilesRepository implements ProfilesRepositoryInterface
 	public function GetHashtagsByNameLike($tag)
 	{
 
-		return Hashtag::where('tag', 'like', '%' . $tag . '%')->where('is_archived', false)->where('is_active', true)->get();
+		return Profile::where('handle', 'like', '%' . $tag . '%')->orwhere('name', 'like', '%' . $tag . '%')->where('is_active', true)->get();
 	}
 
 	public function GetProfileById($id)
