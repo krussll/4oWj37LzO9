@@ -18,7 +18,7 @@ class ProfileController extends BaseController
     	return View::make('profile.show', array('id' => $id));
     }
 
-    public function list()
+    public function listAll()
     {
     	return View::make('profile.list');
     }
