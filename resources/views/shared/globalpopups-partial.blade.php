@@ -29,7 +29,7 @@
                   </div>
                   <div class="modal-body">
                       <div class="form-group">
-                            @include('hashtag.trade-partial')
+                            @include('profile.trade-partial')
                       </div>
                   </div>
               </div>
