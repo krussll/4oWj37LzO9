@@ -29,6 +29,11 @@ class TradesController extends BaseController
 
         $portfolio = Portfolio::find(Input::get('portfolio_id'));
 
+        if ($portfolio == null)
+        {
+          return response()->json(array('success' => false, 'trades' => array());
+        }
+
         if ($portfolio->user_id == Auth::user()->id)
         {
 
