@@ -31,7 +31,7 @@ class TradesController extends BaseController
 
         if ($portfolio == null)
         {
-          return response()->json(array('success' => false, 'trades' => array());
+          return response()->json(array('success' => false, 'trades' => array()));
         }
 
         if ($portfolio->user_id == Auth::user()->id)
