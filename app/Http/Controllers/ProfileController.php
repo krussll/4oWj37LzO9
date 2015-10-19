@@ -10,16 +10,16 @@ class ProfileController extends BaseController
 {
     public function search($term)
     {
-    	return View::make('hashtag.search', array('term' => $term));
+    	return View::make('profile.search', array('term' => $term));
     }
 
     public function show($id)
     {
-    	return View::make('hashtag.show', array('id' => $id));
+    	return View::make('profile.show', array('id' => $id));
     }
 
-    public function listHashtags()
+    public function list()
     {
-    	return View::make('hashtag.list');
+    	return View::make('profile.list');
     }
 }
