@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use Input;
 use Auth;
 use App\Trade;
-use App\Hashtag;
+use App\Profile;
 use App\Portfolio;
 use Illuminate\Routing\Controller as BaseController;
 
