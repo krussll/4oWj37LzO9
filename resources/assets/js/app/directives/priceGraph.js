@@ -19,7 +19,7 @@ angular.module('appMain')
                        new Morris.Area({
                            element: 'graph_line',
                            xkey: 'created_at',
-                           ykeys: ['amount'],
+                           ykeys: ['price'],
                            labels: ['Price'],
                            hideHover: 'auto',
                            xLabels: "day",

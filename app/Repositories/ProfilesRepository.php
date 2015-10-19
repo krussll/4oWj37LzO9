@@ -21,9 +21,9 @@ class ProfilesRepository implements ProfilesRepositoryInterface
 		return Hashtag::where('tag', 'like', '%' . $tag . '%')->where('is_archived', false)->where('is_active', true)->get();
 	}
 
-	public function GetHashtagById($id)
+	public function GetProfileById($id)
 	{
-		return Hashtag::find($id);
+		return Profile::find($id);
 	}
 
 	public function GetPopularHashtags($limit)
@@ -33,19 +33,18 @@ class ProfilesRepository implements ProfilesRepositoryInterface
 		return Profile::take($limit)->get();
 	}
 
-	public function GetHashtagPrices($id)
+	public function GetProfilePrices($id)
 	{
 		$date = new Carbon;
     $date->subDays(4);
 
-		return array();
-		
-		$prices = DB::table('hashtag_price')
-                    ->where('created_at', '>', $date->toDateTimeString())
-                    ->where('hashtag_id', $id)
-                    ->get(['created_at', 'amount']);
 
-		$hashtag = $this->GetHashtagById($id);
+		$prices = DB::table('profile_history_prices')
+                    ->where('created_at', '>', $date->toDateTimeString())
+                    ->where('profile_id', $id)
+                    ->get(['created_at', 'price']);
+
+		$hashtag = $this->GetProfileById($id);
 
 		if ($hashtag->created_at > $date)
 		{

@@ -8,11 +8,11 @@ interface ProfilesRepositoryInterface
 
     public function GetHashtagsByNameLike($name);
 
-    public function GetHashtagById($id);
+    public function GetProfileById($id);
 
     public function GetPopularHashtags($limit);
 
-    public function GetHashtagPrices($id);
+    public function GetProfilePrices($id);
 
     public function HashtagsList($page, $length);
 

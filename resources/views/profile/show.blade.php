@@ -8,12 +8,12 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2>Hashtag Detail</h2>
+                <h2>Profile Detail</h2>
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
                 <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
-                    <h3 ng-show="hashtagShow.hashtag">#{{hashtagShow.hashtag.tag}}</h3>
+                    <h3 ng-show="hashtagShow.hashtag">{{hashtagShow.hashtag.name}}</h3>
                     <h4 ng-show="hashtagShow.hashtag">Current price: ${{hashtagShow.hashtag.current_price | number }}</h4>
                     <cdn-buy-button button-size="s" hashtag-id="{{hashtagShow.hashtag.id}}" tag="{{hashtagShow.hashtag.tag}}" price="{{hashtagShow.hashtag.current_price}}" event-handler="" ng-hide="hashtagShow.control.isLoading" />
                 </div>

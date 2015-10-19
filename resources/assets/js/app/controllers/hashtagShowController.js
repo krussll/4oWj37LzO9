@@ -7,7 +7,7 @@
 angular.module('appMain')
 
 .controller('hashtagShowController', function($scope, $http) {
-    $scope.hashtagShow = 
+    $scope.hashtagShow =
     {
     	control: {
     		isLoading: false
@@ -22,14 +22,14 @@ angular.module('appMain')
             hashtagShow.control.isLoading = true;
 
             hashtagShow.id = id;
-            $http.get('/api/hashtags/id?id=' + hashtagShow.id)
+            $http.get('/api/profiles/id?id=' + hashtagShow.id)
                 .success(function(data){
                     hashtagShow.hashtag = data;
                     hashtagShow.control.isLoading = false;
                 });
 
-            
-            
+
+
     	},
 	}
 });

@@ -32,12 +32,12 @@ Route::group(array('prefix'=>'/api'),function(){
 	Route::post('trades/complete', 'API\TradesController@completeTrade');
 	Route::post('trades/create', 'API\TradesController@createTrade');
 
-	Route::get('profiles/list', 'API\ProfilesController@getHashtagsList');
-	Route::get('profiles/info', 'API\ProfilesController@getHashtagInfo');
-	Route::get('profiles/latest', 'API\ProfilesController@getLatestHashtags');
-	Route::get('profiles/popular', 'API\ProfilesController@getPopularHashtags');
-	Route::get('profiles/byname', 'API\ProfilesController@getHashtagsByName');
-	Route::get('profiles/id', 'API\ProfilesController@getHashtagById');
+	Route::get('profiles/list', 'API\ProfilesController@getProfilesList');
+	Route::get('profiles/info', 'API\ProfilesController@getProfileInfo');
+	Route::get('profiles/latest', 'API\ProfilesController@getLatestProfiles');
+	Route::get('profiles/popular', 'API\ProfilesController@getPopularProfiles');
+	Route::get('profiles/byname', 'API\ProfilesController@getProfilesByName');
+	Route::get('profiles/id', 'API\ProfilesController@GetProfileById');
 	Route::get('profiles/counts', 'API\ProfilesController@getProfilePriceHistoryById');
 
 	Route::get('leagues/{id}', 'API\LeaguesController@getLeague');
