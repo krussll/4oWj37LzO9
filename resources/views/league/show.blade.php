@@ -53,7 +53,7 @@
                     <tr ng-repeat="position in leagueShow.positions">
                       <td scope="row">{{$index + 1}}</td>
                       <td scope="row">{{position.firstname}} {{position.surname}}</td>
-                      <td scope="row">${{position.balance | number }}</td>
+                      <td scope="row">{{layout.consts.siteCurrency}}{{position.balance | number }}</td>
 
                     </tr>
                   </tbody>

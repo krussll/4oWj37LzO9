@@ -14,7 +14,7 @@
               <div class="x_content">
                 <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
                     <h3 ng-show="hashtagShow.hashtag">{{hashtagShow.hashtag.name}}</h3>
-                    <h4 ng-show="hashtagShow.hashtag">Current price: ${{hashtagShow.hashtag.current_price | number }}</h4>
+                    <h4 ng-show="hashtagShow.hashtag">Current price: {{layout.consts.siteCurrency}}{{hashtagShow.hashtag.current_price | number }}</h4>
                     <cdn-buy-button button-size="s" hashtag-id="{{hashtagShow.hashtag.id}}" tag="{{hashtagShow.hashtag.tag}}" price="{{hashtagShow.hashtag.current_price}}" event-handler="" ng-hide="hashtagShow.control.isLoading" />
                 </div>
 
