@@ -4,9 +4,9 @@ namespace App\Repositories\Interfaces;
 
 interface ProfilesRepositoryInterface
 {
-    public function GetLatestHashtags($limit);
+    public function GetLatestProfiles($limit);
 
-    public function GetHashtagsByNameLike($name);
+    public function GetProfilesByNameLike($name);
 
     public function GetProfileById($id);
 

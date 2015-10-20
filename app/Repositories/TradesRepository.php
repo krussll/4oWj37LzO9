@@ -19,12 +19,12 @@ class TradesRepository implements TradesRepositoryInterface
 		return Trade::with('profile')->where('portfolio_id', $id)->where('is_active', true)->get();
 	}
 
-	public function GetActiveHashtagPortfolioTrade($profile_id, $portfolioId)
+	public function GetActiveProfilePortfolioTrade($profile_id, $portfolioId)
 	{
 		return Trade::where('profile_id', $profile_id)->where('portfolio_id', $portfolioId)->where('is_active', true)->first();
 	}
 
-	public function GetActiveHashtagTrades($profile_id)
+	public function GetActiveProfileTrades($profile_id)
 	{
 		return Trade::where('profile_id', $profile_id)->where('is_active', true)->get();
 	}

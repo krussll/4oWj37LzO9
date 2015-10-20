@@ -8,7 +8,7 @@ interface TradesRepositoryInterface
 
     public function GetTradesByPortfolioId($id);
 
-    public function GetActiveHashtagPortfolioTrade($hashtagId, $portfolioId);
+    public function GetActiveProfilePortfolioTrade($hashtagId, $portfolioId);
 
-    public function GetActiveHashtagTrades($hashtagId);
+    public function GetActiveProfileTrades($hashtagId);
 }

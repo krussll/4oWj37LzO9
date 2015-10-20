@@ -22,7 +22,8 @@ angular.module('appMain')
         },
         consts:
         {
-            siteName: 'Tagdaq'
+            siteName: 'Tagdaq',
+            siteCurrency: '£'
         }
 	}
 });

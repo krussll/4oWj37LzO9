@@ -10,12 +10,12 @@ use App\Repositories\Interfaces\ProfilesRepositoryInterface as ProfilesRepositor
 
 class ProfilesRepository implements ProfilesRepositoryInterface
 {
-	public function GetLatestHashtags($limit)
+	public function GetLatestProfiles($limit)
 	{
-		return Hashtag::where('is_archived', false)->where('is_active', true)->take($limit)->orderBy('created_at', 'DESC')->get();
+		return Profile::where('is_active', true)->take($limit)->orderBy('created_at', 'DESC')->get();
 	}
 
-	public function GetHashtagsByNameLike($tag)
+	public function GetProfilesByNameLike($tag)
 	{
 
 		return Profile::where('handle', 'like', '%' . $tag . '%')->orwhere('name', 'like', '%' . $tag . '%')->where('is_active', true)->get();

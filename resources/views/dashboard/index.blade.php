@@ -62,7 +62,7 @@
                   </thead>
                   <tbody>
                     <tr ng-repeat="profile in dashboard.popularHashtags">
-                      <td scope="row"><a href="/profile/{{profile.id}}">{{profile.name}}</a></td><td>${{profile.current_price | number }}</td>
+                      <td scope="row"><a href="/profile/{{profile.id}}">{{profile.name}}</a></td><td>{{layout.consts.siteCurrency}}{{profile.current_price | number }}</td>
                       <td><cdn-buy-button button-size="xs" hashtag-id="{{profile.id}}" tag="{{profile.name}}" price="{{profile.current_price}}" event-handler="dashboard.updateTrades()" /></td>
                     </tr>
                     <tr ng-show="dashboard.control.hashtagsLoading">

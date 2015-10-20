@@ -66,7 +66,7 @@ class TradesController extends BaseController
 
                     if($portfolio->balance >= $totalCost)
                     {
-                      $trade = $tradeRep->GetActiveHashtagPortfolioTrade($profile->id, $portfolio->id);
+                      $trade = $tradeRep->GetActiveProfilePortfolioTrade($profile->id, $portfolio->id);
                       if($trade !== null){
                         $trade->shares_taken = $trade->shares_taken + $sharestaken;
                         $trade->price_taken = $profile->current_price;
@@ -87,11 +87,11 @@ class TradesController extends BaseController
                         return response()->json(array('success' => true, 'trade' => $trade));
                     }else
                     {
-                        $message = "You can't afford this hashtag";
+                        $message = "You can't afford this profile";
                     }
                 }else
                 {
-                    $message = "The hashtag doesn't currently have a price";
+                    $message = "The profile doesn't currently have a price";
                 }
             }else
             {

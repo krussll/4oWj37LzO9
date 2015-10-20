@@ -41,8 +41,12 @@ class PriceProfiles extends Command
     public function handle()
     {
         $results = DB::select(
-                DB::raw("SELECT SUM(case when c.count > 0 then c.count else 0 end) as d,  SUM(case when tc.count > 0 then tc.count else 0 end) as tc, COUNT(c.created_at) as r,
-                  SUM(case when t.is_active = true then 1 else 0 end) as b, SUM(case when t.is_active = false then 1 else 0 end) as s, p.id as id
+                DB::raw("SELECT SUM(case when c.count > 0 then c.count else 0 end) / COUNT(c.created_at) as d,
+SUM(case when tc.count > 0 then tc.count else 0 end) / COUNT(tc.created_at) as tc,
+SUM(case when t.is_active = true then 1 else 0 end) as b,
+SUM(case when t.is_active = false then 1 else 0 end) as s,
+p.id as id
+
                   FROM profiles p
                   Left Join follower_counts c ON p.id = c.profile_id AND c.created_at > DATE_SUB(CURDATE(), INTERVAL 1 DAY)
                   Left Join tweet_counts tc ON p.id = tc.profile_id AND tc.created_at > DATE_SUB(CURDATE(), INTERVAL 4 DAY)
@@ -60,10 +64,8 @@ class PriceProfiles extends Command
                 $q = 0;
                 $price = 1;
 
-                if ($profile_data->r > 0)
-                {
-                    $price = round((($profile_data->tc / $profile_data->r) + ((($profile_data->b - $profile_data->s) / $profile_data->r)) + $profile_data->d) / $d);
-                }
+                $price = round((($profile_data->tc) + ($profile_data->d)) / $d);
+
 
                 $profiles[$profile_data->id] = $price;
         }

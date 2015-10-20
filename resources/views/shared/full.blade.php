@@ -20,8 +20,6 @@
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                                    <li><a href="/dashboard">  Dashboard</a>
-                                    </li>
                                     <li><a href="/settings">  Settings</a>
                                     </li>
                                     <li><a href="#" ng-click="layout.logout()"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
@@ -31,6 +29,8 @@
                             <li>
                               <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bars"></i></a>
                               <ul class="dropdown-menu dropdown-mobilemenu animated fadeInDown">
+                                <li><a href="/dashboard">  Dashboard</a>
+                              </li>
                                   <li><a href="/leagues">Leagues</a></li>
                                   <li><a href="/profiles/list">Find Profiles</a></li>
                                   <li><a href="#contact-modal" data-toggle="modal">Contact Us</a></li>

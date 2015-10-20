@@ -18,14 +18,14 @@ class ProfilesController extends BaseController
     {
         $rep = new ProfilesRepository();
 
-        return response()->json($rep->GetLatestHashtags(10));
+        return response()->json($rep->GetLatestProfiles(10));
     }
 
     public function getProfilesByName()
     {
         $rep = new ProfilesRepository();
 
-        return response()->json($rep->GetHashtagsByNameLike(Input::get('tag')));
+        return response()->json($rep->GetProfilesByNameLike(Input::get('tag')));
     }
 
     public function GetProfileById()
