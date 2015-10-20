@@ -7,7 +7,7 @@
   </div>
   <div class="col-md-4 col-sm-4 col-xs-12">
     <span>
-        <h3 class="no-margin" ng-hide="sideNav.portfolio == null">${{sideNav.portfolio.balance | number }}</h3>
+        <h3 class="no-margin" ng-hide="sideNav.portfolio == null">{{layout.consts.siteCurrency}}{{sideNav.portfolio.balance | number }}</h3>
     </span>
   </div>
   <div class="col-md-4 col-sm-4 col-xs-12 form-group top_search">
