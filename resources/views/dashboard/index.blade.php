@@ -5,7 +5,7 @@
   <div>
       @include('account.account-header-partial')
       <div class="row">
-        <div class="col-md-8 col-sm-12 col-xs-12">
+        <div class="col-md-9 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
                     <h2>Active Trades</h2>
@@ -17,7 +17,7 @@
                   <div ng-show="dashboard.control.isLoading">
                     <img src="/cdn/ajax-loader.gif" />
                   </div>
-                    <div ng-repeat="trade in dashboard.activeTrades" class="col-md-4 col-xs-12">
+                    <div ng-repeat="trade in dashboard.activeTrades" class="col-md-3 col-xs-12">
                         <div class="tile-stats container">
                           <div class="row name-container">
                             <div class="col-xs-8">
@@ -68,7 +68,7 @@
             </div>
         </div>
 
-        <div class="col-md-4 col-sm-12 col-xs-12">
+        <div class="col-md-3 col-sm-12 col-xs-12">
           <div class="x_panel">
                 <div class="x_title">
                     <h2>Popular Profiles</h2>
