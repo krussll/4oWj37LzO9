@@ -2219,7 +2219,7 @@ h4.graph_title {
     border: 1px solid #E4E4E4;
     -webkit-border-radius: 5px;
     overflow: hidden;
-    padding: 5px;
+    padding: 10px;
     -webkit-background-clip: padding-box;
     -moz-border-radius: 5px;
     -moz-background-clip: padding;

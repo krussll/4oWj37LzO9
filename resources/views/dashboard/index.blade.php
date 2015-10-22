@@ -34,15 +34,19 @@
                           <div class="row">
                             <div class="col-xs-4">
                               <div>
-                                <cdn-sell-button button-size="xs" trade-id="{{trade.id}}" event-handler="dashboard.updateTrades()" />
+                                <cdn-sell-button button-size="md" trade-id="{{trade.id}}" event-handler="dashboard.updateTrades()" />
                               </div>
                             </div>
                             <div class="col-xs-8">
-                                <div class="right">
+                                <div class="col-xs-12">
+                                  <div class="right">
                                   <h3>{{layout.consts.siteCurrency}}{{trade.profile.current_price | number}}</h3>
+                                  </div>
                                 </div>
-                                <div class="right">
-                                  <span ng-class="{'green': (trade.profile.current_price - trade.price_taken ) >= 0, 'red': (trade.profile.current_price - trade.price_taken ) < 0}"><h4>{{trade.change | percentageDifference:trade.price_taken:trade.profile.current_price  }}</h4></span>
+                                <div class="col-xs-12">
+                                  <div class="right">
+                                    <span ng-class="{'green': (trade.profile.current_price - trade.price_taken ) >= 0, 'red': (trade.profile.current_price - trade.price_taken ) < 0}"><h4>{{trade.change | percentageDifference:trade.price_taken:trade.profile.current_price  }}</h4></span>
+                                  </div>
                                 </div>
                             </div>
                           </div>
@@ -86,12 +90,12 @@
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-xs-12">
+                        <div class="col-xs-4">
+                          <cdn-buy-button button-size="md" hashtag-id="{{profile.id}}" tag="{{profile.name}}" price="{{profile.current_price}}" event-handler="dashboard.updateTrades()" />
+                        </div>
+                          <div class="col-xs-8">
                               <div class="right">
                                 <h3>{{layout.consts.siteCurrency}}{{profile.current_price | number}}</h3>
-                              </div>
-                              <div>
-                                <cdn-buy-button button-size="xs" hashtag-id="{{profile.id}}" tag="{{profile.name}}" price="{{profile.current_price}}" event-handler="dashboard.updateTrades()" />
                               </div>
                           </div>
                         </div>
