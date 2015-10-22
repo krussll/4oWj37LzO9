@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddImageColumn' => $baseDir . '/database/migrations/2015_10_21_202203_add_image_column.php',
     'AddIsActiveHashtagColumn' => $baseDir . '/database/migrations/2015_09_23_121807_add_is_active_hashtag_column.php',
     'AddLeagueOwner' => $baseDir . '/database/migrations/2015_09_04_165016_add_league_owner.php',
     'CreateBetaList' => $baseDir . '/database/migrations/2015_09_04_195427_create_beta_list.php',

@@ -12,26 +12,43 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content" ng-class="{loadingsection: dashboard.control.isLoading}">
-                  <table class="table">
-                    <thead>
-                    <tr>
-                      <th>Profile</th><th class="hidden-xs">Date Started</th><th class="hidden-xs">Shares Taken</th><th>Price Taken</th><th>Current Price</th><th>Change</th><th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr ng-repeat="trade in dashboard.activeTrades">
-                      <td><a href="/profile/{{trade.hashtag.id}}">{{trade.profile.name}}</a></td><td class="hidden-xs">{{trade.created_at}}</td><td class="hidden-xs">{{trade.shares_taken}}</td><td>{{layout.consts.siteCurrency}}{{trade.price_taken | number}}</td><td>{{layout.consts.siteCurrency}}{{trade.profile.current_price | number}}</td>
-                      <td><span ng-class="{'green': (trade.profile.current_price - trade.price_taken ) >= 0, 'red': (trade.profile.current_price - trade.price_taken ) < 0}">{{trade.change | percentageDifference:trade.price_taken:trade.profile.current_price  }}</span></td>
-                      <td><cdn-sell-button button-size="xs" trade-id="{{trade.id}}" event-handler="dashboard.updateTrades()" /></td>
-                    </tr>
-                    <tr ng-show="dashboard.activeTrades.length == 0 && !dashboard.control.isLoading">
-                      <td class="no-record" colspan="3">No Active Trades</td>
-                    </tr>
-                    <tr ng-show="dashboard.control.isLoading">
-                      <td colspan="3"><img src="/cdn/ajax-loader.gif" /></td>
-                    </tr>
-                  </tbody>
-                  </table>
+
+
+                  <div ng-show="dashboard.control.isLoading">
+                    <img src="/cdn/ajax-loader.gif" />
+                  </div>
+                    <div ng-repeat="trade in dashboard.activeTrades" class="col-md-4 col-xs-12">
+                        <div class="tile-stats container">
+                          <div class="row name-container">
+                            <div class="col-xs-8">
+                              <div class="count">
+                                <a href="/profile/{{trade.profile.id}}">{{trade.profile.name}}</a>
+                              </div>
+                            </div>
+                            <div class="col-xs-4">
+                              <div class="right">
+                                <img src="{{trade.profile.image}}" />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-xs-4">
+                              <div>
+                                <cdn-sell-button button-size="xs" trade-id="{{trade.id}}" event-handler="dashboard.updateTrades()" />
+                              </div>
+                            </div>
+                            <div class="col-xs-8">
+                                <div class="right">
+                                  <h3>{{layout.consts.siteCurrency}}{{trade.profile.current_price | number}}</h3>
+                                </div>
+                                <div class="right">
+                                  <span ng-class="{'green': (trade.profile.current_price - trade.price_taken ) >= 0, 'red': (trade.profile.current_price - trade.price_taken ) < 0}"><h4>{{trade.change | percentageDifference:trade.price_taken:trade.profile.current_price  }}</h4></span>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -54,22 +71,32 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content" ng-class="{loadingsection: dashboard.control.hashtagsLoading}">
-                  <table class="table">
-                    <thead>
-                    <tr>
-                      <th>Profile</th><th>Current Price</th><th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr ng-repeat="profile in dashboard.popularHashtags">
-                      <td scope="row"><a href="/profile/{{profile.id}}">{{profile.name}}</a></td><td>{{layout.consts.siteCurrency}}{{profile.current_price | number }}</td>
-                      <td><cdn-buy-button button-size="xs" hashtag-id="{{profile.id}}" tag="{{profile.name}}" price="{{profile.current_price}}" event-handler="dashboard.updateTrades()" /></td>
-                    </tr>
-                    <tr ng-show="dashboard.control.hashtagsLoading">
-                      <td class="no-record" colspan="3"><img src="/cdn/ajax-loader.gif" /></td>
-                    </tr>
-                  </tbody>
-                  </table>
+                  <div ng-repeat="profile in dashboard.popularHashtags" class="col-xs-12">
+                      <div class="tile-stats container">
+                        <div class="row name-container">
+                          <div class="col-xs-8">
+                            <div class="count">
+                              <a href="/profile/{{profile.id}}">{{profile.name}}</a>
+                            </div>
+                          </div>
+                          <div class="col-xs-4">
+                            <div class="right">
+                              <img src="{{profile.image}}" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-12">
+                              <div class="right">
+                                <h3>{{layout.consts.siteCurrency}}{{profile.current_price | number}}</h3>
+                              </div>
+                              <div>
+                                <cdn-buy-button button-size="xs" hashtag-id="{{profile.id}}" tag="{{profile.name}}" price="{{profile.current_price}}" event-handler="dashboard.updateTrades()" />
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
                 </div>
             </div>
 

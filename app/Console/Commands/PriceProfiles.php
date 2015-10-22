@@ -41,17 +41,24 @@ class PriceProfiles extends Command
     public function handle()
     {
         $results = DB::select(
-                DB::raw("SELECT SUM(case when c.count > 0 then c.count else 0 end) / COUNT(c.created_at) as d,
-SUM(case when tc.count > 0 then tc.count else 0 end) / COUNT(tc.created_at) as tc,
-SUM(case when t.is_active = true then 1 else 0 end) as b,
-SUM(case when t.is_active = false then 1 else 0 end) as s,
-p.id as id
+                DB::raw("SELECT
+                  (
+                  	SUBSTRING_INDEX( GROUP_CONCAT(CAST(c.count AS CHAR) ORDER BY c.created_at DESC), ',', 1 ) -
+                  	SUBSTRING_INDEX( GROUP_CONCAT(CAST(c.count AS CHAR) ORDER BY c.created_at), ',', 1 )
+                  ) as d,
+                  (
+                  	SUBSTRING_INDEX( GROUP_CONCAT(CAST(tc.count AS CHAR) ORDER BY tc.created_at DESC), ',', 1 ) -
+                  	SUBSTRING_INDEX( GROUP_CONCAT(CAST(tc.count AS CHAR) ORDER BY tc.created_at), ',', 1 )
+                  ) as tc,
+                  SUM(case when t.is_active = true then 1 else 0 end) as b,
+                  SUM(case when t.is_active = false then 1 else 0 end) as s,
+                  p.id as id
 
                   FROM profiles p
-                  Left Join follower_counts c ON p.id = c.profile_id AND c.created_at > DATE_SUB(CURDATE(), INTERVAL 1 DAY)
-                  Left Join tweet_counts tc ON p.id = tc.profile_id AND tc.created_at > DATE_SUB(CURDATE(), INTERVAL 4 DAY)
-                  LEFT JOIN trades t ON p.id = t.profile_id AND t.created_at > DATE_SUB(CURDATE(), INTERVAL 4 DAY)
-                   GROUP BY p.id"
+                  	LEFT JOIN follower_counts c ON p.id = c.profile_id AND c.created_at > DATE_SUB(CURDATE(), INTERVAL 1 DAY)
+                  	LEFT JOIN tweet_counts tc ON p.id = tc.profile_id AND tc.created_at > DATE_SUB(CURDATE(), INTERVAL 4 DAY)
+                  	LEFT JOIN trades t ON p.id = t.profile_id AND t.created_at > DATE_SUB(CURDATE(), INTERVAL 4 DAY)
+                  GROUP BY p.id"
                 )
             );
 
@@ -60,7 +67,7 @@ p.id as id
         $profiles = [];
         foreach($results as $profile_data)
         {
-                $d = 1000;
+                $d = 1;
                 $q = 0;
                 $price = 1;
 
@@ -75,9 +82,10 @@ p.id as id
           $inserts = [];
             foreach ($chunk as $id => $price)
             {
+              echo $price . " - ";
                 $inserts[] = array('price' => $price, 'profile_id' => $id, 'created_at' => new \DateTime, 'updated_at' => new \DateTime);
             }
-
+return;
             DB::table('profile_current_prices')->insert($inserts);
             DB::table('profile_history_prices')->insert($inserts);
         }

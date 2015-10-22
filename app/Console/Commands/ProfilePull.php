@@ -56,26 +56,22 @@ class ProfilePull extends Command
 
       $addNewProfiles = false;
       $newprofiles = [];
+
       foreach($result->users as $member)
       {
         if($member->verified)
         {
           $screen_name = strtolower($member->screen_name);
+          $image = $member->profile_image_url;
           if (!array_key_exists($screen_name, $profiles))
           {
             $addNewProfiles = true;
             echo "adding " . $screen_name . " - ";
-            // /echo $member->profile_image_url;
+
             $newprofiles[] = array('name' => $member->name, 'handle' => $screen_name, 'current_price' => 0, 'created_at' => $now, 'updated_at' => $now);
           }
-          //echo $member->followers_count;
-          //echo $member->statuses_count;
-
-          //print_r($member);
-          break;
         }
       }
-
 
       if($addNewProfiles)
       {

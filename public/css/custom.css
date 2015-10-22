@@ -2219,7 +2219,7 @@ h4.graph_title {
     border: 1px solid #E4E4E4;
     -webkit-border-radius: 5px;
     overflow: hidden;
-    padding-bottom: 5px;
+    padding: 5px;
     -webkit-background-clip: padding-box;
     -moz-border-radius: 5px;
     -moz-background-clip: padding;
@@ -2230,6 +2230,9 @@ h4.graph_title {
     -o-transition: all 300ms ease-in-out;
     -webkit-transition: all 300ms ease-in-out;
     transition: all 300ms ease-in-out;
+}
+.tile-stats .name-container {
+  min-height: 70px;
 }
 
 .tile-stats:hover .icon i {
@@ -2268,9 +2271,8 @@ h4.graph_title {
 }
 
 .tile-stats .count {
-    font-size: 38px;
+    font-size: 18px;
     font-weight: bold;
-    line-height: 1.65857143
 }
 
 .tile-stats .count,
@@ -2278,9 +2280,12 @@ h4.graph_title {
 .tile-stats p {
     position: relative;
     margin: 0;
-    margin-left: 10px;
     z-index: 5;
     padding: 0;
+}
+
+.right {
+  float: right;
 }
 
 .tile-stats h3 {
