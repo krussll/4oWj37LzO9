@@ -80,7 +80,7 @@ class ProfilePriceCommand extends Command
               echo $price . " - ";
                 $inserts[] = array('price' => $price, 'profile_id' => $id, 'created_at' => new \DateTime, 'updated_at' => new \DateTime);
             }
-return;
+
             DB::table('profile_current_prices')->insert($inserts);
             DB::table('profile_history_prices')->insert($inserts);
         }
