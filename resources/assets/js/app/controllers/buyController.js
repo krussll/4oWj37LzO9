@@ -13,12 +13,12 @@ angular.module('appMain')
             isSubmitted: false
         },
         userPortfolios: null,
-        hashtag: {
+        profile: {
             portfolio: null,
-            hastag_id: 0,
+            profile_id: 0,
             shares_taken: 0,
             price: 0,
-            tag: ''
+            name: ''
         },
         validation: {
             portfolio: {
@@ -44,18 +44,18 @@ angular.module('appMain')
             if(buy.isValid())
             {
                 var postData = {
-                    'profile_id': buy.hashtag.hashtag_id,
-                    'shares_taken': buy.hashtag.shares_taken,
-                    'portfolio_id': buy.hashtag.portfolio
+                    'profile_id': buy.profile.profile_id,
+                    'shares_taken': buy.profile.shares_taken,
+                    'portfolio_id': buy.profile.portfolio
                 };
 
                 $http.post('/api/trades/create', postData)
                     .success(function(data){
                         if (data.success == true)
                         {
-                            selectedPortfolioService.boughtPortfolioValue(buy.hashtag.portfolio, buy.total);
+                            selectedPortfolioService.boughtPortfolioValue(buy.profile.portfolio, buy.total);
                             $('#buy-modal').modal('hide');
-                            pnotifyService.success('Trade Complete', 'Hashtag has been bought');
+                            pnotifyService.success('Trade Complete', 'Profile has been bought');
 
                             if(angular.isFunction(buyTagService.callback))
                             {
@@ -80,8 +80,8 @@ angular.module('appMain')
 
             var isValid = true;
 
-            buy.validation.shares_taken = validationService.isInteger(buy.hashtag.shares_taken);
-            buy.validation.portfolio = validationService.dropdownOption(buy.hashtag.portfolio);
+            buy.validation.shares_taken = validationService.isInteger(buy.profile.shares_taken);
+            buy.validation.portfolio = validationService.dropdownOption(buy.profile.portfolio);
 
             angular.forEach(buy.validation, function(validation)
             {
@@ -108,7 +108,7 @@ angular.module('appMain')
           function(newVal, oldVal) {
             if(newVal > 0)
             {
-               $scope.buy.hashtag.portfolio = newVal;
+               $scope.buy.profile.portfolio = newVal;
             }
 
         }, true);
@@ -117,30 +117,30 @@ angular.module('appMain')
            return buyTagService.id;
          },
           function(newVal, oldVal) {
-            $scope.buy.hashtag.hashtag_id = newVal;
-            $scope.buy.hashtag.shares_taken = 0;
+            $scope.buy.profile.profile_id = newVal;
+            $scope.buy.profile.shares_taken = 0;
         }, true);
 
     $scope.$watch(function () {
            return buyTagService.tag;
          },
           function(newVal, oldVal) {
-            $scope.buy.hashtag.tag = newVal;
+            $scope.buy.profile.tag = newVal;
         }, true);
 
     $scope.$watch(function () {
            return buyTagService.price;
          },
           function(newVal, oldVal) {
-            $scope.buy.hashtag.price = newVal;
+            $scope.buy.profile.price = newVal;
         }, true);
 
 
     $scope.$watch(function () {
-           return $scope.buy.hashtag.shares_taken;
+           return $scope.buy.profile.shares_taken;
          },
           function(newVal, oldVal) {
-            var price = Number($scope.buy.hashtag.price);
+            var price = Number($scope.buy.profile.price);
             if (typeof newVal == 'undefined')
             {
                 newVal = 1000;

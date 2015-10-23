@@ -1,7 +1,7 @@
 <div ng-controller="buyController" ng-init="buy.init()" ng-class="{loadingsection: buy.control.isLoading}">
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
-        <h3>{{buy.hashtag.tag}}</h3>
+        <h3>{{buy.profile.tag}}</h3>
     </div>
 </div>
 
@@ -12,7 +12,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Portfolio <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <select ng-model="buy.hashtag.portfolio" class="form-control">
+                <select ng-model="buy.profile.portfolio" class="form-control">
                     <option
                             ng-repeat="portfolio in buy.userPortfolios"
                             value="{{portfolio.id}}">
@@ -31,7 +31,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Number of Shares <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="number" id="number-shares" ng-model="buy.hashtag.shares_taken" class="form-control">
+                <input type="number" id="number-shares" ng-model="buy.profile.shares_taken" class="form-control">
             </div>
             <div class="alert" ng-hide="buy.validation.shares_taken.isValid">{{buy.validation.shares_taken.message}}</div>
     </div>
@@ -44,7 +44,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Price
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <h4>{{layout.consts.siteCurrency}}{{buy.hashtag.price | number }}</h4>
+                <h4>{{layout.consts.siteCurrency}}{{buy.profile.price | number }}</h4>
             </div>
 
     </div>

@@ -147,46 +147,6 @@ angular.module('appMain')
 
 })();
 
-(function () {
-
-'use strict';
-
-angular.module('appMain')
-
-.controller('searchController', function($scope, $http) {
-    $scope.search =
-    {
-    	control: {
-            isLoading: true
-        },
-        inputs: {
-            hashtag: ''
-        },
-        hashtags:[],
-        init: function (hashtag)
-        {
-            var search = this;
-            search.inputs.hashtag = hashtag;
-            search.control.isLoading = true;
-
-            search.searchHashtags();
-        },
-        searchHashtags: function()
-        {
-            var search = this;
-            search.control.isLoading = true;
-
-            $http.get('/api/profiles/byname?tag=' + search.inputs.hashtag)
-                .success(function(data){
-                    search.hashtags = data;
-                    search.control.isLoading = false;
-                });
-        }
-	}
-});
-
-})();
-
 
 
 (function () {
@@ -311,30 +271,30 @@ angular.module('appMain')
     {
     	control: {
             isLoading: true,
-            hashtagsLoading: true,
+            profilesLoading: true,
             leagueLoading: true
         },
         activeTrades: [],
-        popularHashtags: [],
+        popularProfiles: [],
         globalLeagues: [],
         privateLeagues: [],
-        popularHashtag: null,
+        popularProfile: null,
         init: function ()
         {
             var dashboard = this;
             dashboard.control.isLoading = true;
-            dashboard.control.hashtagsLoading = true;
+            dashboard.control.profilesLoading = true;
             dashboard.control.leagueLoading = true;
 
 
             $http.get('/api/profiles/popular')
                 .success(function(data){
-                    dashboard.popularHashtags = data;
+                    dashboard.popularProfiles = data;
                     if (data.length > 0)
                     {
-                        dashboard.popularHashtag = data[0];
+                        dashboard.popularProfile = data[0];
                     }
-                    dashboard.control.hashtagsLoading = false;
+                    dashboard.control.profilesLoading = false;
                 });
 
             $http.get('/api/leagues/user/positions')
@@ -527,6 +487,51 @@ angular.module('appMain')
 });
 
 })();
+(function () {
+
+'use strict';
+
+angular.module('appMain')
+
+.controller('listController', function($scope, $http) {
+    $scope.list =
+    {
+    	control: {
+            isLoading: true,
+        },
+        paging: {
+            pageLength: 10,
+            currentPage: 1,
+            total: 50
+        },
+        profiles:[],
+        init: function ()
+        {
+            var list = this;
+            $http.get('/api/profiles/info')
+                .success(function(data){
+                    list.paging.total = data.total;
+                });
+
+            list.listHashtags('profile', list.paging.currentPage);
+        },
+        listHashtags: function(objectName, newPage)
+        {
+            var list = this;
+            list.control.isLoading = true;
+            list.paging.currentPage = newPage;
+
+            $http.get('/api/profiles/list?page=' + list.paging.currentPage + '&length=' + list.paging.pageLength)
+                .success(function(data){
+                    list.profiles = data;
+                    list.control.isLoading = false;
+                });
+        }
+	}
+});
+
+})();
+
 
 
 (function () {
@@ -535,31 +540,71 @@ angular.module('appMain')
 
 angular.module('appMain')
 
-.controller('hashtagShowController', function($scope, $http) {
-    $scope.hashtagShow =
+.controller('profileShowController', function($scope, $http) {
+    $scope.profileShow =
     {
     	control: {
     		isLoading: false
     	},
         id: null,
-        hashtag: null,
+        profile: null,
         prices: [],
     	profiles: null,
     	init: function (id)
     	{
-    		var hashtagShow = this;
-            hashtagShow.control.isLoading = true;
+    		var profileShow = this;
+            profileShow.control.isLoading = true;
 
-            hashtagShow.id = id;
-            $http.get('/api/profiles/id?id=' + hashtagShow.id)
+            profileShow.id = id;
+            $http.get('/api/profiles/id?id=' + profileShow.id)
                 .success(function(data){
-                    hashtagShow.hashtag = data;
-                    hashtagShow.control.isLoading = false;
+                    profileShow.profile = data;
+                    profileShow.control.isLoading = false;
                 });
 
 
 
     	},
+	}
+});
+
+})();
+
+(function () {
+
+'use strict';
+
+angular.module('appMain')
+
+.controller('searchController', function($scope, $http) {
+    $scope.search =
+    {
+    	control: {
+            isLoading: true
+        },
+        inputs: {
+            profile: ''
+        },
+        profiles:[],
+        init: function (profile)
+        {
+            var search = this;
+            search.inputs.profile = profile;
+            search.control.isLoading = true;
+
+            search.searchProfiles();
+        },
+        searchProfiles: function()
+        {
+            var search = this;
+            search.control.isLoading = true;
+
+            $http.get('/api/profiles/byname?tag=' + search.inputs.profile)
+                .success(function(data){
+                    search.profiles = data;
+                    search.control.isLoading = false;
+                });
+        }
 	}
 });
 
@@ -633,12 +678,12 @@ angular.module('appMain')
             isSubmitted: false
         },
         userPortfolios: null,
-        hashtag: {
+        profile: {
             portfolio: null,
-            hastag_id: 0,
+            profile_id: 0,
             shares_taken: 0,
             price: 0,
-            tag: ''
+            name: ''
         },
         validation: {
             portfolio: {
@@ -664,18 +709,18 @@ angular.module('appMain')
             if(buy.isValid())
             {
                 var postData = {
-                    'profile_id': buy.hashtag.hashtag_id,
-                    'shares_taken': buy.hashtag.shares_taken,
-                    'portfolio_id': buy.hashtag.portfolio
+                    'profile_id': buy.profile.profile_id,
+                    'shares_taken': buy.profile.shares_taken,
+                    'portfolio_id': buy.profile.portfolio
                 };
 
                 $http.post('/api/trades/create', postData)
                     .success(function(data){
                         if (data.success == true)
                         {
-                            selectedPortfolioService.boughtPortfolioValue(buy.hashtag.portfolio, buy.total);
+                            selectedPortfolioService.boughtPortfolioValue(buy.profile.portfolio, buy.total);
                             $('#buy-modal').modal('hide');
-                            pnotifyService.success('Trade Complete', 'Hashtag has been bought');
+                            pnotifyService.success('Trade Complete', 'Profile has been bought');
 
                             if(angular.isFunction(buyTagService.callback))
                             {
@@ -700,8 +745,8 @@ angular.module('appMain')
 
             var isValid = true;
 
-            buy.validation.shares_taken = validationService.isInteger(buy.hashtag.shares_taken);
-            buy.validation.portfolio = validationService.dropdownOption(buy.hashtag.portfolio);
+            buy.validation.shares_taken = validationService.isInteger(buy.profile.shares_taken);
+            buy.validation.portfolio = validationService.dropdownOption(buy.profile.portfolio);
 
             angular.forEach(buy.validation, function(validation)
             {
@@ -728,7 +773,7 @@ angular.module('appMain')
           function(newVal, oldVal) {
             if(newVal > 0)
             {
-               $scope.buy.hashtag.portfolio = newVal;
+               $scope.buy.profile.portfolio = newVal;
             }
 
         }, true);
@@ -737,30 +782,30 @@ angular.module('appMain')
            return buyTagService.id;
          },
           function(newVal, oldVal) {
-            $scope.buy.hashtag.hashtag_id = newVal;
-            $scope.buy.hashtag.shares_taken = 0;
+            $scope.buy.profile.profile_id = newVal;
+            $scope.buy.profile.shares_taken = 0;
         }, true);
 
     $scope.$watch(function () {
            return buyTagService.tag;
          },
           function(newVal, oldVal) {
-            $scope.buy.hashtag.tag = newVal;
+            $scope.buy.profile.tag = newVal;
         }, true);
 
     $scope.$watch(function () {
            return buyTagService.price;
          },
           function(newVal, oldVal) {
-            $scope.buy.hashtag.price = newVal;
+            $scope.buy.profile.price = newVal;
         }, true);
 
 
     $scope.$watch(function () {
-           return $scope.buy.hashtag.shares_taken;
+           return $scope.buy.profile.shares_taken;
          },
           function(newVal, oldVal) {
-            var price = Number($scope.buy.hashtag.price);
+            var price = Number($scope.buy.profile.price);
             if (typeof newVal == 'undefined')
             {
                 newVal = 1000;
@@ -790,7 +835,7 @@ angular.module('appMain')
             var sideNav = this;
             selectedPortfolioService.setPortfolioId(sideNav.portfolio.id);
         },
-        searchHashtags: function() {
+        searchProfiles: function() {
             var sideNav = this;
                 sideNav.invalidSearch = false;
 
@@ -938,51 +983,6 @@ angular.module('appMain')
         
 	};
 
-});
-
-})();
-
-(function () {
-
-'use strict';
-
-angular.module('appMain')
-
-.controller('listController', function($scope, $http) {
-    $scope.list =
-    {
-    	control: {
-            isLoading: true,
-        },
-        paging: {
-            pageLength: 10,
-            currentPage: 1,
-            total: 50
-        },
-        hashtags:[],
-        init: function ()
-        {
-            var list = this;
-            $http.get('/api/profiles/info')
-                .success(function(data){
-                    list.paging.total = data.total;
-                });
-
-            list.listHashtags('hashtag', list.paging.currentPage);
-        },
-        listHashtags: function(objectName, newPage)
-        {
-            var list = this;
-            list.control.isLoading = true;
-            list.paging.currentPage = newPage;
-
-            $http.get('/api/profiles/list?page=' + list.paging.currentPage + '&length=' + list.paging.pageLength)
-                .success(function(data){
-                    list.hashtags = data;
-                    list.control.isLoading = false;
-                });
-        }
-	}
 });
 
 })();
@@ -1163,19 +1163,19 @@ angular.module('appMain')
             scope: {
                 eventHandler: '&',
                 buttonSize: '@',
-                hashtagId: '@',
+                profileId: '@',
                 price: '@',
                 tag: '@'
             },
             link: function(scope, element, attrs, model) {
                scope.buy = function()
                 {
-                    buyTagService.setData(scope.hashtagId, scope.tag, scope.price);
+                    buyTagService.setData(scope.profileId, scope.tag, scope.price);
                     buyTagService.setCallback(scope.eventHandler);
                 }
             },
-            
-            
+
+
         };
     });
 
@@ -1237,13 +1237,13 @@ angular.module('appMain')
             restrict:'E',
             template: '<div id="graph_line" style="width:100%; height:300px;"></div>',
             scope: {
-                hashtagId: '@'
+                profileId: '@'
             },
             link: function(scope, element, attrs, model) {
-               attrs.$observe('hashtagId', function () {
-                 if (scope.hashtagId > 0)
+               attrs.$observe('profileId', function () {
+                 if (scope.profileId > 0)
                  {
-                   $http.get('/api/profiles/counts?id=' + scope.hashtagId)
+                   $http.get('/api/profiles/counts?id=' + scope.profileId)
                        .success(function(data){
                        new Morris.Area({
                            element: 'graph_line',

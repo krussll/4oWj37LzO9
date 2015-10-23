@@ -10,19 +10,19 @@ angular.module('appMain')
             scope: {
                 eventHandler: '&',
                 buttonSize: '@',
-                hashtagId: '@',
+                profileId: '@',
                 price: '@',
                 tag: '@'
             },
             link: function(scope, element, attrs, model) {
                scope.buy = function()
                 {
-                    buyTagService.setData(scope.hashtagId, scope.tag, scope.price);
+                    buyTagService.setData(scope.profileId, scope.tag, scope.price);
                     buyTagService.setCallback(scope.eventHandler);
                 }
             },
-            
-            
+
+
         };
     });
 

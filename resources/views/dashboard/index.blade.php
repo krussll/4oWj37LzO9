@@ -12,8 +12,6 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content" ng-class="{loadingsection: dashboard.control.isLoading}">
-
-
                   <div ng-show="dashboard.control.isLoading">
                     <img src="/cdn/ajax-loader.gif" />
                   </div>
@@ -57,13 +55,17 @@
             </div>
 
 
-            <div class="x_panel" ng-show="dashboard.popularHashtag">
-                <div class="x_title">
-                    <h2>Current Popular Profile Price History - {{dashboard.popularHashtag.tag}}</h2>
+            <div class="x_panel">
+                <div class="x_title" ng-hide="dashboard.popularProfile">
+                    <img src="/cdn/ajax-loader.gif" />
                     <div class="clearfix"></div>
                 </div>
-                <div class="x_content">
-                  <price-graph hashtag-id="{{dashboard.popularHashtag.id}}" />
+                <div class="x_title" ng-show="dashboard.popularProfile">
+                    <h2>Current Popular Profile Price History - {{dashboard.popularProfile.tag}}</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content" ng-show="dashboard.popularProfile">
+                  <price-graph profile-id="{{dashboard.popularProfile.id}}" />
                 </div>
             </div>
         </div>
@@ -75,7 +77,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content" ng-class="{loadingsection: dashboard.control.hashtagsLoading}">
-                  <div ng-repeat="profile in dashboard.popularHashtags" class="col-xs-12">
+                  <div ng-repeat="profile in dashboard.popularProfiles" class="col-xs-12">
                       <div class="tile-stats container">
                         <div class="row name-container">
                           <div class="col-xs-8">
@@ -91,7 +93,7 @@
                         </div>
                         <div class="row">
                           <div class="col-xs-4">
-                            <cdn-buy-button button-size="sm" hashtag-id="{{profile.id}}" tag="{{profile.name}}" price="{{profile.current_price}}" event-handler="dashboard.updateTrades()" />
+                            <cdn-buy-button button-size="sm" profile-id="{{profile.id}}" tag="{{profile.name}}" price="{{profile.current_price}}" event-handler="dashboard.updateTrades()" />
                           </div>
                           <div class="col-xs-8">
                               <div class="right">

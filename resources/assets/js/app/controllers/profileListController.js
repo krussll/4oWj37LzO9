@@ -15,7 +15,7 @@ angular.module('appMain')
             currentPage: 1,
             total: 50
         },
-        hashtags:[],
+        profiles:[],
         init: function ()
         {
             var list = this;
@@ -24,7 +24,7 @@ angular.module('appMain')
                     list.paging.total = data.total;
                 });
 
-            list.listHashtags('hashtag', list.paging.currentPage);
+            list.listHashtags('profile', list.paging.currentPage);
         },
         listHashtags: function(objectName, newPage)
         {
@@ -34,7 +34,7 @@ angular.module('appMain')
 
             $http.get('/api/profiles/list?page=' + list.paging.currentPage + '&length=' + list.paging.pageLength)
                 .success(function(data){
-                    list.hashtags = data;
+                    list.profiles = data;
                     list.control.isLoading = false;
                 });
         }

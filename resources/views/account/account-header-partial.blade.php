@@ -11,7 +11,7 @@
     </span>
   </div>
   <div class="col-md-4 col-sm-4 col-xs-12 form-group top_search">
-    <form ng-submit="sideNav.searchHashtags()" >
+    <form ng-submit="sideNav.searchProfiles()" >
       <div class="input-group" ng-class="{bad: sideNav.invalidSearch}">
           <input type="text" class="form-control" ng-model="sideNav.searchTerm" placeholder="Search for profiles">
           <span class="input-group-btn">

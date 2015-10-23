@@ -11,25 +11,25 @@ angular.module('appMain')
             isLoading: true
         },
         inputs: {
-            hashtag: ''
+            profile: ''
         },
-        hashtags:[],
-        init: function (hashtag)
+        profiles:[],
+        init: function (profile)
         {
             var search = this;
-            search.inputs.hashtag = hashtag;
+            search.inputs.profile = profile;
             search.control.isLoading = true;
 
-            search.searchHashtags();
+            search.searchProfiles();
         },
-        searchHashtags: function()
+        searchProfiles: function()
         {
             var search = this;
             search.control.isLoading = true;
 
-            $http.get('/api/profiles/byname?tag=' + search.inputs.hashtag)
+            $http.get('/api/profiles/byname?tag=' + search.inputs.profile)
                 .success(function(data){
-                    search.hashtags = data;
+                    search.profiles = data;
                     search.control.isLoading = false;
                 });
         }

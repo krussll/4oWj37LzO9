@@ -9,30 +9,30 @@ angular.module('appMain')
     {
     	control: {
             isLoading: true,
-            hashtagsLoading: true,
+            profilesLoading: true,
             leagueLoading: true
         },
         activeTrades: [],
-        popularHashtags: [],
+        popularProfiles: [],
         globalLeagues: [],
         privateLeagues: [],
-        popularHashtag: null,
+        popularProfile: null,
         init: function ()
         {
             var dashboard = this;
             dashboard.control.isLoading = true;
-            dashboard.control.hashtagsLoading = true;
+            dashboard.control.profilesLoading = true;
             dashboard.control.leagueLoading = true;
 
 
             $http.get('/api/profiles/popular')
                 .success(function(data){
-                    dashboard.popularHashtags = data;
+                    dashboard.popularProfiles = data;
                     if (data.length > 0)
                     {
-                        dashboard.popularHashtag = data[0];
+                        dashboard.popularProfile = data[0];
                     }
-                    dashboard.control.hashtagsLoading = false;
+                    dashboard.control.profilesLoading = false;
                 });
 
             $http.get('/api/leagues/user/positions')

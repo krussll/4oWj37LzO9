@@ -20,11 +20,11 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr ng-repeat="hashtag in search.hashtags">
-                      <td scope="row"><a href="/profile/{{hashtag.id}}" target="_blank">{{hashtag.name}}</a></td><td>{{hashtag.current_price | currency}}</td>
-                      <td><cdn-buy-button button-size="xs" hashtag-id="{{hashtag.id}}" tag="{{hashtag.name}}" price="{{hashtag.current_price}}" event-handler="" /></td>
+                    <tr ng-repeat="profile in search.profiles">
+                      <td scope="row"><a href="/profile/{{profile.id}}" target="_blank">{{profile.name}}</a></td><td>{{layout.consts.siteCurrency}}{{profile.current_price | number }}</td>
+                      <td><cdn-buy-button button-size="xs" hashtag-id="{{profile.id}}" tag="{{profile.name}}" price="{{profile.current_price}}" event-handler="" /></td>
                     </tr>
-                    <tr ng-show="search.hashtags.length == 0 && !search.control.isLoading">
+                    <tr ng-show="search.profiles.length == 0 && !search.control.isLoading">
                       <td class="no-record" colspan="3">No Profiles Found</td>
                     </tr>
                     <tr ng-show="search.control.isLoading">

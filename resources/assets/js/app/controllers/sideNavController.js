@@ -16,7 +16,7 @@ angular.module('appMain')
             var sideNav = this;
             selectedPortfolioService.setPortfolioId(sideNav.portfolio.id);
         },
-        searchHashtags: function() {
+        searchProfiles: function() {
             var sideNav = this;
                 sideNav.invalidSearch = false;
 

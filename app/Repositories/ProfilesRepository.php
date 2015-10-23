@@ -2,7 +2,6 @@
 namespace App\Repositories;
 
 use DB;
-use App\Hashtag;
 use App\Profile;
 use App\FollowerCount;
 use Carbon\Carbon;
