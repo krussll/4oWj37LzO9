@@ -44,7 +44,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Price
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <h4>{{layout.consts.siteCurrency}}{{buy.hashtag.price}}</h4>
+                <h4>{{layout.consts.siteCurrency}}{{buy.hashtag.price | number }}</h4>
             </div>
 
     </div>
@@ -56,7 +56,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Total Price
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <h4>${{buy.total}}</h4>
+                <h4>{{layout.consts.siteCurrency}}{{buy.total | number}}</h4>
             </div>
 
     </div>
