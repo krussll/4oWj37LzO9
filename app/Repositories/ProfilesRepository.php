@@ -48,8 +48,8 @@ class ProfilesRepository implements ProfilesRepositoryInterface
 
 		if ($hashtag->created_at > $date)
 		{
-			 array_unshift($prices, array('amount' => 0, 'created_at' => $hashtag->created_at->toDateTimeString()));
-			 array_unshift($prices, array('amount' => 0, 'created_at' => $date->toDateTimeString()));
+			 array_unshift($prices, array('price' => 0, 'created_at' => $hashtag->created_at->toDateTimeString()));
+			 array_unshift($prices, array('price' => 0, 'created_at' => $date->toDateTimeString()));
 		}
 
 		return $prices;

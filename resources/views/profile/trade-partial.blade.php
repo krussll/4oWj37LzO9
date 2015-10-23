@@ -31,7 +31,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Number of Shares <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="number" max="1000" id="number-shares" ng-model="buy.hashtag.shares_taken" class="form-control">
+                <input type="number" id="number-shares" ng-model="buy.hashtag.shares_taken" class="form-control">
             </div>
             <div class="alert" ng-hide="buy.validation.shares_taken.isValid">{{buy.validation.shares_taken.message}}</div>
     </div>
