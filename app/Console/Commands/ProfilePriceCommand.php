@@ -7,7 +7,7 @@ use App\ProfilePrice;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-class PriceProfiles extends Command
+class ProfilePriceCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -42,16 +42,12 @@ class PriceProfiles extends Command
     {
         $results = DB::select(
                 DB::raw("SELECT
+				  SUBSTRING_INDEX( GROUP_CONCAT(CAST(c.count AS CHAR) ORDER BY c.created_at DESC), ',', 1 ) as f,
                   (
                   	SUBSTRING_INDEX( GROUP_CONCAT(CAST(c.count AS CHAR) ORDER BY c.created_at DESC), ',', 1 ) -
                   	SUBSTRING_INDEX( GROUP_CONCAT(CAST(c.count AS CHAR) ORDER BY c.created_at), ',', 1 )
-                  ) as d,
-                  (
-                  	SUBSTRING_INDEX( GROUP_CONCAT(CAST(tc.count AS CHAR) ORDER BY tc.created_at DESC), ',', 1 ) -
-                  	SUBSTRING_INDEX( GROUP_CONCAT(CAST(tc.count AS CHAR) ORDER BY tc.created_at), ',', 1 )
-                  ) as tc,
-                  SUM(case when t.is_active = true then 1 else 0 end) as b,
-                  SUM(case when t.is_active = false then 1 else 0 end) as s,
+                  ) / SUBSTRING_INDEX( GROUP_CONCAT(CAST(c.count AS CHAR) ORDER BY c.created_at), ',', 1 ) as c,
+                  SUBSTRING_INDEX( GROUP_CONCAT(CAST(tc.count AS CHAR) ORDER BY tc.created_at), ',', 1 ) as tc,
                   p.id as id
 
                   FROM profiles p
@@ -68,11 +64,10 @@ class PriceProfiles extends Command
         foreach($results as $profile_data)
         {
                 $d = 1;
-                $q = 0;
+                $ec = 0.0005;
                 $price = 1;
 
-                $price = round((($profile_data->tc) + ($profile_data->d)) / $d);
-
+                $price = round((($profile_data->f / 1000) * (($profile_data->c - $ec) + 1)));
 
                 $profiles[$profile_data->id] = $price;
         }

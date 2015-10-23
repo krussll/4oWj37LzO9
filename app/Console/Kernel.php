@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel {
 		'App\Console\Commands\HashtagClearup',
 		'App\Console\Commands\UpdateHashtags',
 		'App\Console\Commands\ProfilePull',
-		'App\Console\Commands\PriceProfiles'
+		'App\Console\Commands\ProfilePriceCommand'
 	];
 
 	/**
