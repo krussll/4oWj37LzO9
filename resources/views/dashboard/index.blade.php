@@ -61,7 +61,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_title" ng-show="dashboard.popularProfile">
-                    <h2>Current Popular Profile Price History - {{dashboard.popularProfile.tag}}</h2>
+                    <h2>Current Popular Profile Price History - {{dashboard.popularProfile.name}}</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content" ng-show="dashboard.popularProfile">
