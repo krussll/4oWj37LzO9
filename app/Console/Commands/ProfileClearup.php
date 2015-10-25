@@ -12,14 +12,14 @@ use App\Repositories\TradesRepository as TradesRepository;
 use App\Repositories\UsersRepository as UsersRepository;
 use App\Repositories\PortfoliosRepository as PortfoliosRepository;
 
-class HashtagClearup extends Command
+class ProfileClearup extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'hashtag:clearup';
+    protected $signature = 'profile:clearup';
 
     /**
      * The console command description.
@@ -45,7 +45,8 @@ class HashtagClearup extends Command
      */
     public function handle()
     {
-        $results = DB::update( DB::raw("DELETE FROM hashtag_count WHERE created_at < DATE_SUB(CURDATE(), INTERVAL 5 DAY)"));
-        $results = DB::update( DB::raw("DELETE FROM hashtag_price WHERE created_at < DATE_SUB(CURDATE(), INTERVAL 5 DAY)"));
+        $results = DB::update( DB::raw("DELETE FROM follower_counts WHERE created_at < DATE_SUB(CURDATE(), INTERVAL 5 DAY)"));
+        $results = DB::update( DB::raw("DELETE FROM tweet_counts WHERE created_at < DATE_SUB(CURDATE(), INTERVAL 5 DAY)"));
+        $results = DB::update( DB::raw("DELETE FROM profile_current_prices WHERE created_at < DATE_SUB(CURDATE(), INTERVAL 1 DAY)"));
     }
 }

@@ -11,7 +11,7 @@ class Kernel extends ConsoleKernel {
 	 * @var array
 	 */
 	protected $commands = [
-		'App\Console\Commands\HashtagClearup',
+		'App\Console\Commands\ProfileClearup',
 		'App\Console\Commands\UpdateHashtags',
 		'App\Console\Commands\ProfilePull',
 		'App\Console\Commands\ProfilePriceCommand'
@@ -27,5 +27,6 @@ class Kernel extends ConsoleKernel {
 	{
 		$schedule->command('profile:pull')->everyThirtyMinutes();
 		$schedule->command('profile:price')->hourly();
+		$schedule->command('profile:clearup')->daily();
 	}
 }
