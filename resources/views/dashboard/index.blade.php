@@ -21,6 +21,7 @@
                             <div class="col-xs-8">
                               <div class="count">
                                 <a href="/profile/{{trade.profile.id}}">{{trade.profile.name}}</a>
+                                <span class="handle">({{trade.profile.handle}})</span>
                               </div>
                             </div>
                             <div class="col-xs-4">
@@ -38,13 +39,6 @@
                             <div class="col-xs-8">
                               <div class="right">
                                 <h3>{{layout.consts.siteCurrency}}{{trade.profile.current_price | number}}</h3>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-xs-12">
-                              <div class="right">
-                                <span ng-class="{'green': (trade.profile.current_price - trade.price_taken ) >= 0, 'red': (trade.profile.current_price - trade.price_taken ) < 0}"><h5>{{layout.consts.siteCurrency}}{{trade.price_taken | number }} ({{trade.change | percentageDifference:trade.price_taken:trade.profile.current_price  }})</h5></span>
                               </div>
                             </div>
                           </div>
@@ -83,6 +77,7 @@
                           <div class="col-xs-8">
                             <div class="count">
                               <a href="/profile/{{profile.id}}">{{profile.name}}</a>
+                              <span class="handle">({{profile.handle}})</span>
                             </div>
                           </div>
                           <div class="col-xs-4">
@@ -99,6 +94,13 @@
                               <div class="right">
                                 <h3>{{layout.consts.siteCurrency}}{{profile.current_price | number}}</h3>
                               </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <div class="right">
+                              <span ng-class="{'green': (profile.current_price - profile.historic_price ) >= 0, 'red': (profile.current_price - profile.historic_price ) < 0}"><h5>{{layout.consts.siteCurrency}}{{profile.historic_price | number }} ({{trade.change | percentageDifference:profile.historic_price:profile.current_price  }})</h5></span>
+                            </div>
                           </div>
                         </div>
                       </div>

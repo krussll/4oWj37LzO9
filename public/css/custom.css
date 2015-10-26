@@ -2271,7 +2271,7 @@ h4.graph_title {
 }
 
 .tile-stats .count {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -2282,6 +2282,11 @@ h4.graph_title {
     margin: 0;
     z-index: 5;
     padding: 0;
+}
+
+.tile-stats .count span.handle {
+    color: #BAB8B8;
+  font-size:14px;
 }
 
 .right {

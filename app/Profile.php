@@ -15,6 +15,7 @@ class Profile extends Model
      */
     protected $table = 'profiles';
     protected $hidden = ['prices', 'priceHistory'];
+    protected $appends = ['historic_price', 'current_price'];
 
     public function prices()
     {
@@ -31,6 +32,10 @@ class Profile extends Model
         return $this->hasMany('App\FollowerCount');
     }
 
+    public function getHandleAttribute($val)
+    {
+      return "@" . $val;
+    }
 
     public function getCurrentPriceAttribute($val)
     {
@@ -42,4 +47,13 @@ class Profile extends Model
       return $this->prices->last()->price;
     }
 
+    public function getHistoricPriceAttribute($val)
+    {
+      if ($this->prices->isEmpty())
+      {
+        return 0;
+      }
+
+      return $this->prices->first()->price;
+    }
 }

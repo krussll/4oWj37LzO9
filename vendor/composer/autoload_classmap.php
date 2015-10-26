@@ -585,6 +585,7 @@ return array(
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Resources/stubs/SessionHandlerInterface.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
+    'UpdateProfileTable' => $baseDir . '/database/migrations/2015_10_26_181250_update_profile_table.php',
     'aCssAtBlockEndToken' => $vendorDir . '/natxet/CssMin/src/CssMin.php',
     'aCssAtBlockStartToken' => $vendorDir . '/natxet/CssMin/src/CssMin.php',
     'aCssDeclarationToken' => $vendorDir . '/natxet/CssMin/src/CssMin.php',
