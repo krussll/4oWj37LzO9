@@ -21,7 +21,7 @@
                             <div class="col-xs-8">
                               <div class="count">
                                 <a href="/profile/{{trade.profile.id}}">{{trade.profile.name}}</a>
-                                <span class="handle">({{trade.profile.handle}})</span>
+                                <span class="handle">{{trade.profile.handle}}</span>
                               </div>
                             </div>
                             <div class="col-xs-4">
@@ -77,7 +77,7 @@
                           <div class="col-xs-8">
                             <div class="count">
                               <a href="/profile/{{profile.id}}">{{profile.name}}</a>
-                              <span class="handle">({{profile.handle}})</span>
+                              <span class="handle">{{profile.handle}}</span>
                             </div>
                           </div>
                           <div class="col-xs-4">
