@@ -77,7 +77,7 @@
                           <div class="col-xs-8">
                             <div class="count">
                               <a href="/profile/{{profile.id}}">{{profile.name}}</a>
-                              <span class="handle">{{profile.handle}}</span>
+                              <a href="/profile/{{profile.id}}"><span class="handle">{{profile.handle}}</span></a>
                             </div>
                           </div>
                           <div class="col-xs-4">
