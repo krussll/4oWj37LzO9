@@ -2290,6 +2290,7 @@ h4.graph_title {
 
 .tile-stats .count span.handle {
   color: #BAB8B8;
+  display: block;
   font-size:14px;
 }
 

@@ -26,7 +26,9 @@
                             </div>
                             <div class="col-xs-4">
                               <div class="right">
-                                <img src="{{trade.profile.image}}" />
+                                <a href="/profile/{{trade.profile.id}}">
+                                  <img src="{{trade.profile.image}}" />
+                                </a>
                               </div>
                             </div>
                           </div>
@@ -81,9 +83,9 @@
                             </div>
                           </div>
                           <div class="col-xs-4">
-                            <div class="right">
+                            <a href="/profile/{{profile.id}}">
                               <img src="{{profile.image}}" />
-                            </div>
+                            </a>
                           </div>
                         </div>
                         <div class="row">
