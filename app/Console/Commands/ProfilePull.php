@@ -56,14 +56,15 @@ class ProfilePull extends Command
 
       $addNewProfiles = false;
       $newprofiles = [];
-
+print_r($profiles);
       foreach($result->users as $member)
       {
         if($member->verified)
         {
           $screen_name = strtolower($member->screen_name);
           $image = $member->profile_image_url;
-          if (!array_key_exists($screen_name, $profiles))
+
+          if (!array_key_exists("@" . $screen_name, $profiles))
           {
             $addNewProfiles = true;
             echo "adding " . $screen_name . " - ";
@@ -72,6 +73,7 @@ class ProfilePull extends Command
           }
         }
       }
+
 
       if($addNewProfiles)
       {
@@ -90,7 +92,7 @@ class ProfilePull extends Command
       foreach($result->users as $member)
       {
         $screen_name = strtolower($member->screen_name);
-        if (array_key_exists($screen_name, $profiles))
+        if (array_key_exists("@" . $screen_name, $profiles))
         {
           $profileId = $profiles[$screen_name];
           $followerCounts[] = array('profile_id' => $profileId, 'count' => $member->followers_count, 'created_at' => $now, 'updated_at' => $now);

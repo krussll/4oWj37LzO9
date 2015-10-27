@@ -12,9 +12,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content" ng-class="{loadingsection: dashboard.control.isLoading}">
-                  <div ng-show="dashboard.control.isLoading">
-                    <img src="/cdn/ajax-loader.gif" />
-                  </div>
+
                   <table class="table table-striped responsive-utilities">
                     <thead>
                     <tr>
@@ -27,43 +25,20 @@
                     </thead>
                     <tr ng-repeat="trade in dashboard.activeTrades">
                       <td>
+                        <a href="/profile/{{trade.profile.id}}">
+                          <img src="{{trade.profile.image}}" />
+                        </a>
                         <a href="/profile/{{trade.profile.id}}">{{trade.profile.name}}</a>
                         <a href="/profile/{{trade.profile.id}}"><span class="handle">{{trade.profile.handle}}</span></a></td>
                       <td class="hidden-xs">{{trade.shares_taken}}</td>
-                      <td class="hidden-xs">{{layout.consts.siteCurrency}}{{trade.price_taken | number }}</td>
-                      <td><span ng-class="{'green': (trade.profile.current_price - trade.price_taken ) >= 0, 'red': (trade.profile.current_price - trade.price_taken ) < 0}"><h5>{{layout.consts.siteCurrency}}{{trade.profile.current_price | number }} ({{trade.change | percentageDifference:trade.price_taken:trade.profile.current_price  }})</h5></span></td>
+                      <td class="hidden-xs">{{layout.consts.siteCurrency}}{{trade.price_taken | number:2 }}</td>
+                      <td><span ng-class="{'green': (trade.profile.current_price - trade.price_taken ) >= 0, 'red': (trade.profile.current_price - trade.price_taken ) < 0}"><h5>{{layout.consts.siteCurrency}}{{trade.profile.current_price | number:2 }} ({{trade.change | percentageDifference:trade.price_taken:trade.profile.current_price  }})</h5></span></td>
                       <td><cdn-sell-button button-size="xs" trade-id="{{trade.id}}" event-handler="dashboard.updateTrades()" /></td>
                     </tr>
                   </table>
-                    <div ng-repeat="trade in dashboard.activeTrades" class="col-md-3 col-xs-12">
-                        <div class="tile-stats container">
-                          <div class="row name-container">
-                            <div class="col-xs-8">
-
-                            </div>
-                            <div class="col-xs-4">
-                              <div class="right">
-                                <a href="/profile/{{trade.profile.id}}">
-                                  <img src="{{trade.profile.image}}" />
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-xs-4">
-                              <div>
-                                <cdn-sell-button button-size="sm" trade-id="{{trade.id}}" event-handler="dashboard.updateTrades()" />
-                              </div>
-                            </div>
-                            <div class="col-xs-8">
-                              <div class="right">
-                                <h3>{{layout.consts.siteCurrency}}{{trade.profile.current_price | number}}</h3>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-
+                  <div ng-show="dashboard.control.isLoading">
+                    <img src="/cdn/ajax-loader.gif" />
+                  </div>
                 </div>
             </div>
 
@@ -100,7 +75,7 @@
                             </div>
                           </div>
                           <div class="col-xs-4">
-                            <a href="/profile/{{profile.id}}">
+                            <a href="/profile/{{profile.id}}" class="right">
                               <img src="{{profile.image}}" />
                             </a>
                           </div>
@@ -111,14 +86,14 @@
                           </div>
                           <div class="col-xs-8">
                               <div class="right">
-                                <h3>{{layout.consts.siteCurrency}}{{profile.current_price | number}}</h3>
+                                <h3>{{layout.consts.siteCurrency}}{{profile.current_price | number:2}}</h3>
                               </div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-xs-12">
                             <div class="right">
-                              <span ng-class="{'green': (profile.current_price - profile.historic_price ) >= 0, 'red': (profile.current_price - profile.historic_price ) < 0}"><h5>{{layout.consts.siteCurrency}}{{profile.historic_price | number }} ({{trade.change | percentageDifference:profile.historic_price:profile.current_price  }})</h5></span>
+                              <span ng-class="{'green': (profile.current_price - profile.historic_price ) >= 0, 'red': (profile.current_price - profile.historic_price ) < 0}"><h5>{{profile.current_price - profile.historic_price | number:2}} ({{trade.change | percentageDifference:profile.historic_price:profile.current_price  }})</h5></span>
                             </div>
                           </div>
                         </div>
