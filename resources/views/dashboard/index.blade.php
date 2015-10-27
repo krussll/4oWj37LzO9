@@ -93,7 +93,8 @@
                         <div class="row">
                           <div class="col-xs-12">
                             <div class="right">
-                              <span ng-class="{'green': (profile.current_price - profile.historic_price ) >= 0, 'red': (profile.current_price - profile.historic_price ) < 0}"><h5>{{profile.current_price - profile.historic_price | number:2}} ({{trade.change | percentageDifference:profile.historic_price:profile.current_price  }})</h5></span>
+                              <span ng-class="{'green': (profile.current_price - profile.historic_price ) >= 0, 'red': (profile.current_price - profile.historic_price ) < 0}">
+                                <h5><i ng-hide="(profile.current_price - profile.historic_price ) >= 0" class="fa fa-caret-down"></i><i ng-hide="(profile.current_price - profile.historic_price ) < 0" class="fa fa-caret-up"></i> {{profile.current_price - profile.historic_price | number:2}} ({{trade.change | percentageDifference:profile.historic_price:profile.current_price  }})</h5></span>
                             </div>
                           </div>
                         </div>

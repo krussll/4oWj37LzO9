@@ -56,7 +56,7 @@ class ProfilePull extends Command
 
       $addNewProfiles = false;
       $newprofiles = [];
-print_r($profiles);
+
       foreach($result->users as $member)
       {
         if($member->verified)
@@ -94,7 +94,7 @@ print_r($profiles);
         $screen_name = strtolower($member->screen_name);
         if (array_key_exists("@" . $screen_name, $profiles))
         {
-          $profileId = $profiles[$screen_name];
+          $profileId = $profiles["@" . $screen_name];
           $followerCounts[] = array('profile_id' => $profileId, 'count' => $member->followers_count, 'created_at' => $now, 'updated_at' => $now);
           $tweetCounts[] = array('profile_id' => $profileId, 'count' => $member->statuses_count, 'created_at' => $now, 'updated_at' => $now);
         }
