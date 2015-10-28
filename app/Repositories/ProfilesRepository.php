@@ -29,7 +29,7 @@ class ProfilesRepository implements ProfilesRepositoryInterface
 	{
 		$date = new Carbon;
         $date->subHours(1);
-		return Profile::where('is_active', true)->take($limit)->get();
+		return Profile::where('is_active', true)->orderBy('created_at', 'DESC')->take($limit)->get();
 	}
 
 	public function GetProfilePrices($id)
