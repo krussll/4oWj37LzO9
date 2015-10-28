@@ -79,7 +79,10 @@
                       <td scope="row">{{league.position}}</td><td><a href="/league/{{league.id}}">{{league.name | titlecase}}</a></td>
                     </tr>
                     <tr ng-show="leagues.globalLeagues.length == 0 && !leagues.control.isLoading">
-                      <td class="no-record" colspan="3">No Active Trades</td>
+                      <td class="no-record" colspan="2">No Global Leagues</td>
+                    </tr>
+                    <tr ng-show="leagues.control.isLoading">
+                      <td class="no-record" colspan="2"><img src="/cdn/ajax-loader.gif" /></td>
                     </tr>
                   </tbody>
                   </table>
@@ -97,7 +100,10 @@
                       <td scope="row">{{league.position}}</td><td><a href="/league/{{league.id}}">{{league.name | titlecase}}</a></td>
                     </tr>
                     <tr ng-show="leagues.privateLeagues.length == 0 && !leagues.control.isLoading">
-                      <td class="no-record" colspan="3">No Private Leagues</td>
+                      <td class="no-record" colspan="2">No Private Leagues</td>
+                    </tr>
+                    <tr ng-show="leagues.control.isLoading">
+                      <td class="no-record" colspan="2"><img src="/cdn/ajax-loader.gif" /></td>
                     </tr>
                   </tbody>
                   </table>

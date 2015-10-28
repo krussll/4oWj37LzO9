@@ -103,7 +103,6 @@
                 </div>
             </div>
 
-
             <div class="x_panel">
                 <div class="x_title">
                     <h2>Your Leagues</h2>

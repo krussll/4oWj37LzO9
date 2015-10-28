@@ -42,12 +42,13 @@ class ProfilePriceCommand extends Command
     {
         $results = DB::select(
                 DB::raw("SELECT
-				  SUBSTRING_INDEX( GROUP_CONCAT(CAST(c.count AS CHAR) ORDER BY c.created_at DESC), ',', 1 ) as f,
+				          SUBSTRING_INDEX( GROUP_CONCAT(CAST(c.count AS CHAR) ORDER BY c.created_at DESC), ',', 1 ) as f,
                   (
                   	SUBSTRING_INDEX( GROUP_CONCAT(CAST(c.count AS CHAR) ORDER BY c.created_at DESC), ',', 1 ) -
                   	SUBSTRING_INDEX( GROUP_CONCAT(CAST(c.count AS CHAR) ORDER BY c.created_at), ',', 1 )
                   ) / SUBSTRING_INDEX( GROUP_CONCAT(CAST(c.count AS CHAR) ORDER BY c.created_at), ',', 1 ) as c,
-                  SUBSTRING_INDEX( GROUP_CONCAT(CAST(tc.count AS CHAR) ORDER BY tc.created_at), ',', 1 ) as tc,
+                  SUBSTRING_INDEX( GROUP_CONCAT(CAST(tc.count AS CHAR) ORDER BY tc.created_at DESC), ',', 1 ) -
+                  SUBSTRING_INDEX( GROUP_CONCAT(CAST(tc.count AS CHAR) ORDER BY tc.created_at), ',', 1 )as tc,
                   p.id as id
 
                   FROM profiles p
@@ -57,7 +58,7 @@ class ProfilePriceCommand extends Command
                   GROUP BY p.id"
                 )
             );
-
+echo "got data";
         $divider = 1;
 
         $profiles = [];
@@ -65,19 +66,22 @@ class ProfilePriceCommand extends Command
         {
                 $d = 1;
                 $ec = 0.0005;
+                $et = 0.004;
                 $price = 1;
 
-                $price = round((($profile_data->f / 1000) * (($profile_data->c - $ec) + 1)));
+
+                $price = round((($profile_data->f / 1000000) * (((($profile_data->c - $ec) * 100) + (($profile_data->tc / 1000) - $et)) + 1)), 2);
 
                 $profiles[$profile_data->id] = $price;
         }
+        echo "got prices";
 
         foreach(array_chunk($profiles, 2000, true) as $chunk)
         {
           $inserts = [];
             foreach ($chunk as $id => $price)
             {
-              echo $price . " - ";
+
                 $inserts[] = array('price' => $price, 'profile_id' => $id, 'created_at' => new \DateTime, 'updated_at' => new \DateTime);
             }
 
