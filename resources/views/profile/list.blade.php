@@ -36,7 +36,7 @@
                     page="list.paging.currentPage"
                     page-size="list.paging.pageLength"
                     total="list.paging.total"
-                    paging-action="list.listHashtags('hashtag', page)">
+                    paging-action="list.listProfiles('profile', page)">
                   </div>
                 </div>
             </div>

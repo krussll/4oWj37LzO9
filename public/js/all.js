@@ -513,9 +513,9 @@ angular.module('appMain')
                     list.paging.total = data.total;
                 });
 
-            list.listHashtags('profile', list.paging.currentPage);
+            list.listProfiles('profile', list.paging.currentPage);
         },
-        listHashtags: function(objectName, newPage)
+        listProfiles: function(objectName, newPage)
         {
             var list = this;
             list.control.isLoading = true;

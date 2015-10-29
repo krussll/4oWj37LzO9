@@ -59,7 +59,7 @@ class ProfilesRepository implements ProfilesRepositoryInterface
 		$skip = 0;
 		if($page > 1)
 		{
-			$skip = ($page--) * $length;
+			$skip = ($page - 1) * $length;
 		}
 
 		return Profile::where('is_active', true)->take($length)->skip($skip)->orderBy('current_price', 'DESC')->get();
