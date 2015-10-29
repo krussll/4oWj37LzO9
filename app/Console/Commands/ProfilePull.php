@@ -69,7 +69,7 @@ class ProfilePull extends Command
             $addNewProfiles = true;
             echo "adding " . $screen_name . " - ";
 
-            $newprofiles[] = array('name' => $member->name, 'handle' => $screen_name, 'current_price' => 0, 'created_at' => $now, 'updated_at' => $now);
+            $newprofiles[] = array('name' => $member->name, 'handle' => $screen_name, 'image' => $image, 'current_price' => 0, 'created_at' => $now, 'updated_at' => $now);
           }
         }
       }
