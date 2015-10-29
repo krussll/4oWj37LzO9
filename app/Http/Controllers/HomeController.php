@@ -31,13 +31,7 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		echo "here";
-		if (Auth::user() != null)
-    	{
-    		//return redirect()->action('DashboardController@index');
-    	}
-
-		return view('welcome');
+		return view('home.index');
 	}
 
 }

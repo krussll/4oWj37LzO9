@@ -5,7 +5,7 @@
 angular.module('appMain')
 
 .controller('settingsController', function($scope, $http, pnotifyService, validationService) {
-    $scope.settings = 
+    $scope.settings =
     {
     	control: {
             isLoading: true
@@ -58,13 +58,12 @@ angular.module('appMain')
         changePassword: function()
         {
             var settings = this;
-            
+
             if(settings.changePasswordIsValid())
             {
                 $http.post('api/users/password/change', settings.passwordInputs)
                 .success( function(data)
                         {
-                            console.log(data);
                             if (data.success == true)
                             {
                                 pnotifyService.success('Update Complete', 'Your details have been updated');
@@ -78,7 +77,7 @@ angular.module('appMain')
                         }
                     );
             }
-            
+
         },
         changeName: function()
         {
@@ -98,14 +97,14 @@ angular.module('appMain')
                                 pnotifyService.success('Update Complete', 'Your details have been updated');
                             }
                         }
-                    );  
+                    );
             }
         },
         changeNameIsValid: function()
         {
             var settings = this;
             var isValid = true;
-            
+
             settings.nameValidation.firstname = validationService.shortDescription(settings.nameInputs.firstname);
             settings.nameValidation.surname = validationService.shortDescription(settings.nameInputs.surname);
 
@@ -123,7 +122,7 @@ angular.module('appMain')
         {
             var settings = this;
             var isValid = true;
-            
+
             settings.passwordValidation.currentPassword = validationService.password(settings.passwordInputs.currentPassword);
             settings.passwordValidation.newPassword = validationService.password(settings.passwordInputs.newPassword);
 
@@ -148,7 +147,7 @@ angular.module('appMain')
             });
 
             return isValid;
-        }        
+        }
 	}
 });
 

@@ -339,7 +339,7 @@ angular.module('appMain')
 angular.module('appMain')
 
 .controller('settingsController', function($scope, $http, pnotifyService, validationService) {
-    $scope.settings = 
+    $scope.settings =
     {
     	control: {
             isLoading: true
@@ -392,13 +392,12 @@ angular.module('appMain')
         changePassword: function()
         {
             var settings = this;
-            
+
             if(settings.changePasswordIsValid())
             {
                 $http.post('api/users/password/change', settings.passwordInputs)
                 .success( function(data)
                         {
-                            console.log(data);
                             if (data.success == true)
                             {
                                 pnotifyService.success('Update Complete', 'Your details have been updated');
@@ -412,7 +411,7 @@ angular.module('appMain')
                         }
                     );
             }
-            
+
         },
         changeName: function()
         {
@@ -432,14 +431,14 @@ angular.module('appMain')
                                 pnotifyService.success('Update Complete', 'Your details have been updated');
                             }
                         }
-                    );  
+                    );
             }
         },
         changeNameIsValid: function()
         {
             var settings = this;
             var isValid = true;
-            
+
             settings.nameValidation.firstname = validationService.shortDescription(settings.nameInputs.firstname);
             settings.nameValidation.surname = validationService.shortDescription(settings.nameInputs.surname);
 
@@ -457,7 +456,7 @@ angular.module('appMain')
         {
             var settings = this;
             var isValid = true;
-            
+
             settings.passwordValidation.currentPassword = validationService.password(settings.passwordInputs.currentPassword);
             settings.passwordValidation.newPassword = validationService.password(settings.passwordInputs.newPassword);
 
@@ -482,11 +481,12 @@ angular.module('appMain')
             });
 
             return isValid;
-        }        
+        }
 	}
 });
 
 })();
+
 (function () {
 
 'use strict';
@@ -1744,24 +1744,24 @@ angular.module('appMain')
 
         this.EMAIL_REGEXP = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         this.PASSWORD_REGEXP = /^[a-zA-Z0-9]{7,}$/;
-        this.SHORTDESCRIPTION = /^[ a-zA-Z0-9]{3,}$/;
+        this.SHORTDESCRIPTION = /^[a-zA-Z0-9]{3,}$/;
 
         this.shortDescription = function(description)
         {
             var isValid = description.match(this.SHORTDESCRIPTION) != null;
-            return { isValid: isValid, message: isValid ? '' : 'Please enter a value'};           
+            return { isValid: isValid, message: isValid ? '' : 'Please enter a value'};
         }
 
         this.email = function(email)
         {
             var isValid = email.match(this.EMAIL_REGEXP) != null;
-            return { isValid: isValid, message: isValid ? '' : 'Please enter an email'};        
+            return { isValid: isValid, message: isValid ? '' : 'Please enter an email'};
         }
 
         this.password = function(password)
         {
             var isValid = password.match(this.PASSWORD_REGEXP) != null;
-            return { isValid: isValid, message: isValid ? '' : 'Not a valid password'};           
+            return { isValid: isValid, message: isValid ? '' : 'Not a valid password'};
         }
 
         this.isInteger = function(val)

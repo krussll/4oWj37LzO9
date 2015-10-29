@@ -22,7 +22,7 @@
                   <tbody>
                     <tr ng-repeat="profile in list.profiles">
                       <td scope="row"><a target="_blank" href="/profile/{{profile.id}}">{{profile.name}}</a></td><td>{{layout.consts.siteCurrency}}{{profile.current_price | number:2 }}</td>
-                      <td><cdn-buy-button button-size="xs" hashtag-id="{{profile.id}}" tag="{{profile.name}}" price="{{profile.current_price}}" event-handler="" /></td>
+                      <td><cdn-buy-button button-size="xs" profile-id="{{profile.id}}" tag="{{profile.name}}" price="{{profile.current_price}}" event-handler="" /></td>
                     </tr>
                     <tr ng-show="list.hashtags.length == 0 && !list.control.isLoading">
                       <td class="no-record" colspan="3">No profiles found</td>
