@@ -16,8 +16,10 @@ class ProfilesRepository implements ProfilesRepositoryInterface
 
 	public function GetProfilesByNameLike($tag)
 	{
-
-		return Profile::where('handle', 'like', '%' . $tag . '%')->orwhere('name', 'like', '%' . $tag . '%')->where('is_active', true)->get();
+		return Profile::where(function($query) use ($tag){
+                 $query->where('handle', 'like', '%' . $tag . '%');
+								 $query->orwhere('name', 'like', '%' . $tag . '%');
+             })->where('is_active', true)->get();
 	}
 
 	public function GetProfileById($id)

@@ -51,7 +51,7 @@ echo "get data";
                   p.id as id
 
                   FROM profiles p
-                  	LEFT JOIN follower_counts c ON p.id = c.profile_id AND c.created_at > DATE_SUB(CURDATE(), INTERVAL 1 DAY)
+                  	LEFT JOIN follower_counts c ON p.id = c.profile_id AND c.created_at > (NOW() - INTERVAL 1 DAY)
                   GROUP BY p.id"
                 )
             );
@@ -63,7 +63,7 @@ echo "get data";
                   p.id as id
 
                   FROM profiles p
-                  	LEFT JOIN tweet_counts tc ON p.id = tc.profile_id AND tc.created_at > DATE_SUB(CURDATE(), INTERVAL 4 DAY)
+                  	LEFT JOIN tweet_counts tc ON p.id = tc.profile_id AND tc.created_at > (NOW() - INTERVAL 4 DAY)
                   GROUP BY p.id"
                 )
             );
@@ -73,7 +73,7 @@ echo "get data";
                   p.id as id
 
                   FROM profiles p
-                  	LEFT JOIN trades t ON p.id = t.profile_id AND t.created_at > DATE_SUB(CURDATE(), INTERVAL 4 DAY)
+                  	LEFT JOIN trades t ON p.id = t.profile_id AND t.created_at > (NOW() - INTERVAL 4 DAY)
                   GROUP BY p.id"
                 )
             );
