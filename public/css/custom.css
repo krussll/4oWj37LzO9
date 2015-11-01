@@ -3125,6 +3125,7 @@ select.parsley-error {
 /* *********  /form design  **************************** */
 /* *********  calender dropdown  **************************** */
 .loadingsection {
+  opacity: 0.4;
   color: #CCC !important;
 }
 

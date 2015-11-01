@@ -11,7 +11,7 @@ angular.module('appMain')
             isLoading: true,
         },
         paging: {
-            pageLength: 10,
+            pageLength: 12,
             currentPage: 1,
             total: 50
         },
